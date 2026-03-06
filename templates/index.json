@@ -1,1 +1,757 @@
-{"sections":{"1751295991cc9b83a1":{"type":"apps","disabled":true,"settings":{"include_margins":true}},"17618323849beb1457":{"type":"_blocks","blocks":{"ai_gen_block_f51e8a9_9Y6BiL":{"type":"ai_gen_block_f51e8a9","settings":{"background_type":"image","background_image_desktop":"shopify:\/\/shop_images\/SeoulGlowLabOpening-03.png","background_image_mobile":"shopify:\/\/shop_images\/SeoulGlowLabOpening-46.png","video_url_desktop":"","video_url_mobile":"","background_style":"cover","content_box_background":"#ffffff","content_box_opacity":60,"content_box_padding":40,"content_box_radius":6,"hero_height_desktop":750,"content_max_width":950,"content_vertical_alignment_desktop":"flex-end","content_horizontal_alignment_desktop":"center","text_alignment_desktop":"center","hero_height_mobile":800,"content_vertical_alignment_mobile":"flex-end","content_horizontal_alignment_mobile":"center","text_alignment_mobile":"center","caption":"","caption_font":"anonymous_pro_n4","caption_color":"#ffffff","caption_font_size":14,"caption_text_transform":"uppercase","title":"Seoul You Need For That Glow","title_font":"roboto_condensed_n4","title_color":"#000000","title_font_size":44,"subtitle":"","subtitle_font":"anonymous_pro_n4","subtitle_color":"#ffffff","subtitle_font_size":24,"description":"Experience the art and science of Korean skincare. Thoughtfully curated formulas & rituals designed to help you glow with intention, every day.","description_font":"anonymous_pro_n4","description_color":"#121212","description_font_size":16,"show_countdown":false,"countdown_date":"","countdown_font":"roboto_condensed_n4","countdown_color":"#ffffff","countdown_number_size":48,"countdown_label_size":12,"button_text":"BOOK SKIN ANALYSIS SESSION","button_link":"shopify:\/\/products\/skin-analysis-session-in-person","button_font":"anonymous_pro_n4","button_background_color":"#212a2f","button_text_color":"#ffffff","button_hover_background_color":"#000000","button_hover_text_color":"#ffffff","button_border_color":"#121212","button_hover_border_color":"#000000","button_border_width":0,"button_font_size":14,"button_padding_vertical":8,"button_padding_horizontal":20,"button_border_radius":0},"blocks":{}}},"block_order":["ai_gen_block_f51e8a9_9Y6BiL"],"settings":{}},"pagefly_section_cbBqEc":{"type":"pagefly-section","disabled":true,"name":"PageFly Section","settings":{"section_id":"pf-0b692657"}},"tpt_feature_collection_2_kMJMHy":{"type":"tpt-feature-collection-2","blocks":{"tab_GyEYxj":{"type":"tab","settings":{"tab_name":"Combination Skin","collection":"combination-skin"}},"tab_GrXLe7":{"type":"tab","settings":{"tab_name":"Dry Skin","collection":"sunscreens"}},"tab_akyjQD":{"type":"tab","settings":{"tab_name":"Normal Skin","collection":"serums"}},"tab_EQkken":{"type":"tab","settings":{"tab_name":"Oily Skin","collection":"toners"}},"tab_Abd4hw":{"type":"tab","settings":{"tab_name":"Sensitive Skin","collection":"treatments"}}},"block_order":["tab_GyEYxj","tab_GrXLe7","tab_akyjQD","tab_EQkken","tab_Abd4hw"],"disabled":true,"custom_css":[".active .tpt-tab-item-button {background-color: #f0f8ff00 !important; color: #1c1c1c !important; font-size: 12.141px; font-weight: 700; line-height: 20px; text-transform: uppercase; font-family: \"Roboto Condensed\"; padding: 0 !important;}","span.tpt-tab-item-button {border: none !important; color: #000 !important; font-size: 12.141px !important; font-weight: 500; line-height: 20px; text-transform: uppercase; font-family: \"Roboto Condensed\"; padding: 0 !important;}"],"name":"Tpt-Feature collection #2","settings":{"heading":"Seoul You Need For That Glow","heading_size":"h2","sub_heading":"","description":"","alignment":"center","top_button_label":"","top_button_link":"","image_ratio":70,"show_secondary_image":true,"products_limit":4,"desktop_column":4,"tablet_column":3,"mobile_column":2,"bottom_button_label":"","bottom_button_link":"https:\/\/www.seoulglowlab.com\/collections\/all","section_full_width":true,"section_max_width":1600,"content_full_width":false,"content_max_width":1440,"padding_desktop":0,"padding_tablet_mobile":0,"margin_desktop":60,"margin_tablet_mobile":40,"background_color":"#ffffff","background_gradient_color":"","title_color":"#000000","foreground_color":"#000000","button_background_color":"#000000","button_text_color":"#ffffff","outline_button_color":"#000000","section_lazyload":false}},"skincare_collection_grid_zAEL3F":{"type":"Skincare-Collection-Grid","blocks":{"collection_rbp9cd":{"type":"collection","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/div.png","title":"Hydration Heroes","text":"Plump, dewy skin starts here. Best-selling hydrating essences and water creams.","link_label":"Shop Now","link":"","bg_color":"#ffffff"}},"collection_zTQEBw":{"type":"collection","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/div_1.png","title":"Clean & Conscious","text":"No harsh chemicals, no compromises. EWG-verified and cruelty-free formulas.","link_label":"Shop Now","link":"","bg_color":"#ffffff"}},"collection_xTfnFG":{"type":"collection","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/div_2.png","title":"SPF Staples","text":"Lightweight, invisible, and powerful. Your everyday sun protection upgrade.","link_label":"Shop Now","link":"","bg_color":"#ffffff"}},"collection_FJybBq":{"type":"collection","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/div_2.png","title":"Barrier Protectors","text":"Strengthen your skin’s natural defenses while maintaining optimal hydration.","link_label":"Shop Now","link":"","bg_color":"#ffffff"}},"collection_CcNQzT":{"type":"collection","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/div_2.png","title":"Brightening Boost","text":"Fade dark spots and reveal radiant skin with vitamin-rich, gentle brighteners.","link_label":"Shop Now","link":"","bg_color":"#ffffff"}}},"block_order":["collection_rbp9cd","collection_zTQEBw","collection_xTfnFG","collection_FJybBq","collection_CcNQzT"],"disabled":true,"custom_css":[".skincare-section .subtitle {color: #000; font-family: \"Anonymous Pro\"; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px; letter-spacing: 1.5px; text-transform: uppercase;}",".skincare-section h2 {color: #2d2d2d; font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",".skincare-column h3 {margin-top: 0;}",".skincare-columns {gap: 0px;}",".skincare-column {padding: 14px;}"],"name":"Skincare 3 Column","settings":{"heading":"Complete Care in One Bundle","subheading":"Simplify your routine with powerful product combinations made for healthy, glowing skin.","text_alignment":"center","box_alignment":"left","background_color":"#ffffff","dynamic_colors":"#EFF6FF,#EFF6FF,#EFF6FF","padding_top":40,"padding_bottom":20,"max_blocks":6}},"psb_product_product_01_C6gwVU":{"type":"psb-product-product-01","blocks":{"product_G8gb67":{"type":"Product","settings":{"product":"hydration-heroes","slide_description":"Deep hydration & barrier repair for a plump, glowing complexion"}},"product_GzGAJQ":{"type":"Product","settings":{"product":"clean-conscious","slide_description":"A radiance-boosting routine for dull, uneven skin"}},"product_7GEGkY":{"type":"Product","settings":{"product":"spf-staples","slide_description":"For sensitive, irritated skin that needs TLC"}},"product_tFipw7":{"type":"Product","settings":{"product":"hydration-heroes-1","slide_description":"A science-backed routine for firm, youthful skin"}},"product_i4m7BA":{"type":"Product","settings":{"product":"brightening-boost","slide_description":"A breakout-fighting, pore-refining routine"}},"product_98Lpxd":{"type":"Product","settings":{"product":"no-fuss-no-fung","slide_description":"Get glowing from cleanse to seal."}}},"block_order":["product_G8gb67","product_GzGAJQ","product_7GEGkY","product_tFipw7","product_i4m7BA","product_98Lpxd"],"disabled":true,"name":"⚡︎PSB: Product 01","settings":{"container_width":"psb-container","inherit_fonts":false,"enable_boxshadow":true,"heading_tag":"h4","slide_desc_font_size":16,"background_color":"rgba(0,0,0,0)","slide_bg_color":"#f5f5f5","slide_info_color":"#ffffff","slide_title_color":"#212a2f","slide_desc_color":"#212a2f","slider_per_view":3,"section_padding_top":0,"section_padding_bottom":60,"section_padding_top_mobile":0,"section_padding_bottom_mobile":50}},"glow_essentials_bundle_zeXXfA":{"type":"glow-essentials-bundle","blocks":{"list_item_LQhBrM":{"type":"list_item","settings":{"item_text":"Step 1: Round Lab Cleansing Water – Removes sunscreen & makeup without irritation"}},"list_item_hLy99p":{"type":"list_item","settings":{"item_text":"Step 2: COSRX Low pH Good Morning Cleanser – A gentle, non-stripping cleanse"}},"list_item_4EGMjw":{"type":"list_item","settings":{"item_text":"Toner: Eqqualberry Swimming Pool Toner, hydrates, brightens & reduces irritation"}},"list_item_HVytPC":{"type":"list_item","settings":{"item_text":"Serum: Anua TXA 10% Serum – Brightens skin without aggravating fungal acne (contains tranexamic acid, which is safe for fungal acne when formulated without esters or oils)"}},"list_item_AYWj78":{"type":"list_item","settings":{"item_text":"Exfoliator: Dr. G Brightening Peeling Gel – Safe, non-irritating exfoliation"}},"list_item_cfwiyn":{"type":"list_item","settings":{"item_text":"Moisturizer: Purito B5 Panthenol Re-Barrier Cream – Fungal acne-safe hydration"}},"list_item_rdrLVN":{"type":"list_item","settings":{"item_text":"Sunscreen: Isntree Onion Newpair Sunscreen – Calms inflammation while providing sun protection"}}},"block_order":["list_item_LQhBrM","list_item_hLy99p","list_item_4EGMjw","list_item_HVytPC","list_item_AYWj78","list_item_cfwiyn","list_item_rdrLVN"],"disabled":true,"name":"Glow Bundle","settings":{"badge_text":"","discount_text":"","heading":"No-Fuss, No-Fung","description":"Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost.","original_price":"","discount_price":"","button_label":"Buy Now","button_link":"https:\/\/www.seoulglowlab.com\/products\/no-fuss-no-fung","image":"shopify:\/\/shop_images\/434.png","background_gradient":"linear-gradient(135deg, rgba(231, 240, 253, 1), rgba(242, 246, 251, 1) 100%)","border_radius":20,"image_border_radius":16,"button_border_radius":8}},"tpt_image_with_text_6tatWD":{"type":"tpt-image-with-text","blocks":{"heading_G7FWpT":{"type":"heading","settings":{"heading":"Glow Essentials Beauty Bundle","heading_size":"h1"}},"caption_3Nfgpw":{"type":"caption","settings":{"caption":"Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost","text_style":"caption-with-letter-spacing","text_size":"medium"}},"text_imYtLT":{"type":"text","settings":{"text":"<h4><strong>What's Inside:<\/strong><\/h4><ul><li>Soft Cloud Cleansing  –  A gentle, pH-balanced Foam<\/li><li>HydraMist Toner –  Refreshing and alcohol-free with birch<\/li><li>Glow Drops Serum –  Lightweight daily serum packed with<\/li><li>DewySkin Moisturizer –  Fast-absorbing cream with<\/li><li>Sun Veil SPF 50+ PA++++ –  Invisible finish broad-spectrum<\/li><\/ul>","text_style":"caption-with-letter-spacing"}},"button_LzE3NL":{"type":"button","settings":{"button_label":"Button label","button_link":""}}},"block_order":["heading_G7FWpT","caption_3Nfgpw","text_imYtLT","button_LzE3NL"],"disabled":true,"custom_css":[".tpt-section_container.gradient {background: linear-gradient(90deg, #cfdfff 0%, #fafcff 100%);}"],"name":"Tpt - Image with Text #1","settings":{"map_embed":"","heading_color":"#000000","paragraph_color":"#000000","button_background_color":"#000000","button_text_color":"#ffffff","outline_button_color":"#000000","border_radius":0,"image_border_radius":16,"button_border_radius":8,"height":"adapt","desktop_image_width":"medium","layout":"text_first","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_full_width":true,"section_max_width":1600,"content_full_width":false,"content_max_width":1440,"padding_desktop":60,"padding_tablet_mobile":40,"margin_desktop":60,"margin_tablet_mobile":40,"section_lazyload":false}},"skincare_collection_grid_NaLFkD":{"type":"Skincare-Collection-Grid","blocks":{"collection_MRwzQD":{"type":"collection","settings":{"image":"shopify:\/\/shop_images\/img_1_ca9e5eef-8758-4dfa-98a8-a7404b66420f.png","title":"Free Gifts","text":"Buy any $60+ from Soko Glam and get a free deluxe sample trio.","link_label":"Shop Now","link":"","bg_color":"#eff6ff"}},"collection_WPEYT6":{"type":"collection","settings":{"image":"shopify:\/\/shop_images\/img_2.png","title":"Your Summer Cool-Down","text":"Refresh and revitalize with cooling mists and gel moisturizers.","link_label":"Cool Now","link":"","bg_color":"#f0fdf4"}},"collection_L8EXcD":{"type":"collection","settings":{"image":"shopify:\/\/shop_images\/img_3.png","title":"Glow Secrets This Summer","text":"Discover the serums and essences that give you that glass skin finish.","link_label":"Get Glowing","link":"","bg_color":"#fefce8"}}},"block_order":["collection_MRwzQD","collection_WPEYT6","collection_L8EXcD"],"disabled":true,"custom_css":[".skincare-section .subtitle {color: #000; font-family: \"Anonymous Pro\"; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px; letter-spacing: 1.5px; text-transform: uppercase;}",".skincare-section h2 {color: #2d2d2d; font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",".skincare-column h3 {margin-top: 0;}"],"name":"Skincare 3 Column","settings":{"heading":"SKINCARE SPOTLIGHT","subheading":"Here's why we have over 40K five-star reviews","text_alignment":"center","box_alignment":"left","background_color":"#ffffff","dynamic_colors":"#fef9f3,#f3f7fe,#f5f5f5","padding_top":40,"padding_bottom":40,"max_blocks":6}},"1756477549867c59bc":{"type":"apps","blocks":{"instafeed_app_block_H7AFcp":{"type":"shopify:\/\/apps\/instafeed\/blocks\/app-block\/c447db20-095d-4a10-9725-b5977662c9d5","settings":{"title":"Instagram Feed","title_color":"#000000","title_size_v2":0,"alignment":"center","instafeed_margin_top":0,"instafeed_margin_bottom":0,"instafeed_margin_sides":0,"show_instagram_link":true,"link_alignment":"left","link_color":"#000000","background_color":"","feed_id":"","html_area":""}}},"block_order":["instafeed_app_block_H7AFcp"],"settings":{"include_margins":true}},"psb_reviews_reviews_01_UtDqHp":{"type":"psb-reviews-reviews-01","blocks":{"review_FJDXxN":{"type":"Review","settings":{"review_image":"shopify:\/\/shop_images\/image_2_9.png","review_stars":"4","review_text":"<p>I’ve been loving milky toners\/essences! So I had to try this one which I’m glad I did because I ended up loving it! It’s the perfect amount of thickness & creaminess. It’s perfect because it works for makeup prep. I use this every time I do my makeup! Definitely a must have for me now!<\/p>","review_name":"Daisy O","position":"Haruharu Wonder Black Rice Probiotics Essence","url_product":"shopify:\/\/products\/haruharu-wonder-black-rice-probiotics-barrier-essence"}},"review_WfmtXP":{"type":"Review","settings":{"review_image":"shopify:\/\/shop_images\/IMG-20250820-WA0243.jpg","review_stars":"5","review_text":"<p>Katie recommended the best products for my skin!! After using them my face felt so soft, hydrated and firm. My favorite was these ampoule drops- I use them morning and night and they give my skin the best glow. Can’t recommend Katie & her products recommendations enough 🙌🏻❤️<\/p>","review_name":"Julia G","position":"Skin1004 Madagascar Centella Ampoule","url_product":"shopify:\/\/products\/skin1004-madagascar-centella-asiatica-100-ampoule"}},"review_4b7GEx":{"type":"Review","settings":{"review_image":"shopify:\/\/shop_images\/Anastasia.jpg","review_stars":"5","review_text":"<p>I sometimes get redness around my nose & this serum always gets rid of my redness! It also doesn’t have a scent which I love. It’s such a great addition to my routine!<\/p>","review_name":"Anastasia P","position":"Purito Wonderful Releaf Centella Serum (Unscented)","url_product":"shopify:\/\/products\/purito-wonderful-releaf-centella-serum-unscented"}},"review_zABzV4":{"type":"Review","settings":{"review_image":"shopify:\/\/shop_images\/Rigo.jpg","review_stars":"5","review_text":"<p>I really like the texture of this moisturizer. Lightweight & leaves my skin feeling smooth and hydrated!<\/p>","review_name":"Rigo H","position":"Mixsoon Bean Cream","url_product":"shopify:\/\/products\/mixsoon-bean-cream"}}},"block_order":["review_FJDXxN","review_WfmtXP","review_4b7GEx","review_zABzV4"],"custom_css":["h1.psb-utilities-heading__heading.psb-rte {font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",".psb-utilities-heading__subheading.psb-rte.psb-block-space {padding-top: 25px; font-family: Arial; font-size: 11.922px; font-style: normal; font-weight: 400; line-height: 20px; \/* 167.759% *\/ letter-spacing: 1.5px; text-transform: uppercase;}",".psb-relative.psb-block-space {padding-top: 30px;}"],"name":"⚡︎PSB: Reviews 01","settings":{"container_width":"psb-container","heading":"<p>REAL PEOPLE, REAL REVIEWS<\/p>","heading_tag":"h1","subheading":"<p>Glowing Reviews from Real People with Real Results<\/p>","heading_color":"#2d2d2d","subheading_color":"#000000","enable_star":true,"border_radius":8,"slider_per_view":3,"enable_loop":false,"enable_autoplay":true,"enable_pagination":true,"enable_navigation":false,"pagination_type":"bullets","background_color":"#f9fafb","swiper_control_color":"#57301b","review-background-color":"#ffffff","stars-color":"#ffa500","text_color":"#374151","border_color":"#ffffff","text_align":"center","section_padding_top":50,"section_padding_bottom":50,"text_align_mobile":"center","section_padding_top_mobile":35,"section_padding_bottom_mobile":35}},"1756477716387dfee1":{"type":"apps","blocks":{"gsc_instagram_feed_instafeed_eCcyiw":{"type":"shopify:\/\/apps\/gsc-instagram-feed\/blocks\/instafeed\/96970b1b-b770-454f-b16b-51f47e1aa4ed","settings":{"widget_id":"GSC-FaZTtSZdYupsSsu"}}},"block_order":["gsc_instagram_feed_instafeed_eCcyiw"],"settings":{"include_margins":true}},"tpt_email_signup_1_MNxHYy":{"type":"tpt-email-signup-1","blocks":{"heading_RRpgrA":{"type":"heading","settings":{"heading":"Join the Glow List","heading_size":"h2"}},"paragraph_EeVyDM":{"type":"paragraph","settings":{"text":"<p>Be the first to hear about product drops, seasonal skincare routines, and insider promos.<\/p>"}},"email_form_EQePV3":{"type":"email_form","settings":{"button_label":"Subscribe","input_label":"Email"}}},"block_order":["heading_RRpgrA","paragraph_EeVyDM","email_form_EQePV3"],"name":"Tpt - Email signup #1","settings":{"image":"shopify:\/\/shop_images\/section_3.png","mobile_image":"shopify:\/\/shop_images\/section_3.png","heading_color":"#ffffff","paragraph_color":"#ffffff","button_background_color":"#ffffff","button_text_color":"#000000","outline_button_color":"#ffffff","outline_input_color":"#ffffff","success_message":"Thanks for subscribing","section_full_width":true,"section_max_width":1600,"content_full_width":false,"content_max_width":1440,"padding_desktop":136,"padding_tablet_mobile":79,"margin_desktop":60,"margin_tablet_mobile":40,"section_lazyload":false}}},"order":["1751295991cc9b83a1","17618323849beb1457","pagefly_section_cbBqEc","tpt_feature_collection_2_kMJMHy","skincare_collection_grid_zAEL3F","psb_product_product_01_C6gwVU","glow_essentials_bundle_zeXXfA","tpt_image_with_text_6tatWD","skincare_collection_grid_NaLFkD","1756477549867c59bc","psb_reviews_reviews_01_UtDqHp","1756477716387dfee1","tpt_email_signup_1_MNxHYy"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1751295991cc9b83a1": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17618323849beb1457": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f51e8a9_9Y6BiL": {
+          "type": "ai_gen_block_f51e8a9",
+          "settings": {
+            "background_type": "image",
+            "background_image_desktop": "shopify://shop_images/SeoulGlowLabOpening-03.png",
+            "background_image_mobile": "shopify://shop_images/SeoulGlowLabOpening-46.png",
+            "video_url_desktop": "",
+            "video_url_mobile": "",
+            "background_style": "cover",
+            "content_box_background": "#ffffff",
+            "content_box_opacity": 60,
+            "content_box_padding": 40,
+            "content_box_radius": 6,
+            "hero_height_desktop": 750,
+            "content_max_width": 950,
+            "content_vertical_alignment_desktop": "flex-end",
+            "content_horizontal_alignment_desktop": "center",
+            "text_alignment_desktop": "center",
+            "hero_height_mobile": 800,
+            "content_vertical_alignment_mobile": "flex-end",
+            "content_horizontal_alignment_mobile": "center",
+            "text_alignment_mobile": "center",
+            "caption": "",
+            "caption_font": "anonymous_pro_n4",
+            "caption_color": "#ffffff",
+            "caption_font_size": 14,
+            "caption_text_transform": "uppercase",
+            "title": "Seoul You Need For That Glow",
+            "title_font": "roboto_condensed_n4",
+            "title_color": "#000000",
+            "title_font_size": 44,
+            "subtitle": "",
+            "subtitle_font": "anonymous_pro_n4",
+            "subtitle_color": "#ffffff",
+            "subtitle_font_size": 24,
+            "description": "Experience the art and science of Korean skincare. Thoughtfully curated formulas & rituals designed to help you glow with intention, every day.",
+            "description_font": "anonymous_pro_n4",
+            "description_color": "#121212",
+            "description_font_size": 16,
+            "show_countdown": false,
+            "countdown_date": "",
+            "countdown_font": "roboto_condensed_n4",
+            "countdown_color": "#ffffff",
+            "countdown_number_size": 48,
+            "countdown_label_size": 12,
+            "button_text": "BOOK SKIN ANALYSIS SESSION",
+            "button_link": "shopify://products/skin-analysis-session-in-person",
+            "button_font": "anonymous_pro_n4",
+            "button_background_color": "#212a2f",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#000000",
+            "button_hover_text_color": "#ffffff",
+            "button_border_color": "#121212",
+            "button_hover_border_color": "#000000",
+            "button_border_width": 0,
+            "button_font_size": 14,
+            "button_padding_vertical": 8,
+            "button_padding_horizontal": 20,
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f51e8a9_9Y6BiL"
+      ],
+      "settings": {}
+    },
+    "pagefly_section_cbBqEc": {
+      "type": "pagefly-section",
+      "disabled": true,
+      "name": "PageFly Section",
+      "settings": {
+        "section_id": "pf-0b692657"
+      }
+    },
+    "tpt_feature_collection_2_kMJMHy": {
+      "type": "tpt-feature-collection-2",
+      "blocks": {
+        "tab_GyEYxj": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Combination Skin",
+            "collection": "combination-skin"
+          }
+        },
+        "tab_GrXLe7": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Dry Skin",
+            "collection": "sunscreens"
+          }
+        },
+        "tab_akyjQD": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Normal Skin",
+            "collection": "serums"
+          }
+        },
+        "tab_EQkken": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Oily Skin",
+            "collection": "toners"
+          }
+        },
+        "tab_Abd4hw": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Sensitive Skin",
+            "collection": "treatments"
+          }
+        }
+      },
+      "block_order": [
+        "tab_GyEYxj",
+        "tab_GrXLe7",
+        "tab_akyjQD",
+        "tab_EQkken",
+        "tab_Abd4hw"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".active .tpt-tab-item-button {background-color: #f0f8ff00 !important; color: #1c1c1c !important; font-size: 12.141px; font-weight: 700; line-height: 20px; text-transform: uppercase; font-family: \"Roboto Condensed\"; padding: 0 !important;}",
+        "span.tpt-tab-item-button {border: none !important; color: #000 !important; font-size: 12.141px !important; font-weight: 500; line-height: 20px; text-transform: uppercase; font-family: \"Roboto Condensed\"; padding: 0 !important;}"
+      ],
+      "name": "Tpt-Feature collection #2",
+      "settings": {
+        "heading": "Seoul You Need For That Glow",
+        "heading_size": "h2",
+        "sub_heading": "",
+        "description": "",
+        "alignment": "center",
+        "top_button_label": "",
+        "top_button_link": "",
+        "image_ratio": 70,
+        "show_secondary_image": true,
+        "products_limit": 4,
+        "desktop_column": 4,
+        "tablet_column": 3,
+        "mobile_column": 2,
+        "bottom_button_label": "",
+        "bottom_button_link": "https://www.seoulglowlab.com/collections/all",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 0,
+        "padding_tablet_mobile": 0,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "background_color": "#ffffff",
+        "background_gradient_color": "",
+        "title_color": "#000000",
+        "foreground_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "outline_button_color": "#000000",
+        "section_lazyload": false
+      }
+    },
+    "skincare_collection_grid_zAEL3F": {
+      "type": "Skincare-Collection-Grid",
+      "blocks": {
+        "collection_rbp9cd": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/div.png",
+            "title": "Hydration Heroes",
+            "text": "Plump, dewy skin starts here. Best-selling hydrating essences and water creams.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        },
+        "collection_zTQEBw": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/div_1.png",
+            "title": "Clean & Conscious",
+            "text": "No harsh chemicals, no compromises. EWG-verified and cruelty-free formulas.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        },
+        "collection_xTfnFG": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/div_2.png",
+            "title": "SPF Staples",
+            "text": "Lightweight, invisible, and powerful. Your everyday sun protection upgrade.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        },
+        "collection_FJybBq": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/div_2.png",
+            "title": "Barrier Protectors",
+            "text": "Strengthen your skin’s natural defenses while maintaining optimal hydration.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        },
+        "collection_CcNQzT": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/div_2.png",
+            "title": "Brightening Boost",
+            "text": "Fade dark spots and reveal radiant skin with vitamin-rich, gentle brighteners.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "collection_rbp9cd",
+        "collection_zTQEBw",
+        "collection_xTfnFG",
+        "collection_FJybBq",
+        "collection_CcNQzT"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".skincare-section .subtitle {color: #000; font-family: \"Anonymous Pro\"; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px; letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".skincare-section h2 {color: #2d2d2d; font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".skincare-column h3 {margin-top: 0;}",
+        ".skincare-columns {gap: 0px;}",
+        ".skincare-column {padding: 14px;}"
+      ],
+      "name": "Skincare 3 Column",
+      "settings": {
+        "heading": "Complete Care in One Bundle",
+        "subheading": "Simplify your routine with powerful product combinations made for healthy, glowing skin.",
+        "text_alignment": "center",
+        "box_alignment": "left",
+        "background_color": "#ffffff",
+        "dynamic_colors": "#EFF6FF,#EFF6FF,#EFF6FF",
+        "padding_top": 40,
+        "padding_bottom": 20,
+        "max_blocks": 6
+      }
+    },
+    "psb_product_product_01_C6gwVU": {
+      "type": "psb-product-product-01",
+      "blocks": {
+        "product_G8gb67": {
+          "type": "Product",
+          "settings": {
+            "product": "hydration-heroes",
+            "slide_description": "Deep hydration & barrier repair for a plump, glowing complexion"
+          }
+        },
+        "product_GzGAJQ": {
+          "type": "Product",
+          "settings": {
+            "product": "clean-conscious",
+            "slide_description": "A radiance-boosting routine for dull, uneven skin"
+          }
+        },
+        "product_7GEGkY": {
+          "type": "Product",
+          "settings": {
+            "product": "spf-staples",
+            "slide_description": "For sensitive, irritated skin that needs TLC"
+          }
+        },
+        "product_tFipw7": {
+          "type": "Product",
+          "settings": {
+            "product": "hydration-heroes-1",
+            "slide_description": "A science-backed routine for firm, youthful skin"
+          }
+        },
+        "product_i4m7BA": {
+          "type": "Product",
+          "settings": {
+            "product": "brightening-boost",
+            "slide_description": "A breakout-fighting, pore-refining routine"
+          }
+        },
+        "product_98Lpxd": {
+          "type": "Product",
+          "settings": {
+            "product": "no-fuss-no-fung",
+            "slide_description": "Get glowing from cleanse to seal."
+          }
+        }
+      },
+      "block_order": [
+        "product_G8gb67",
+        "product_GzGAJQ",
+        "product_7GEGkY",
+        "product_tFipw7",
+        "product_i4m7BA",
+        "product_98Lpxd"
+      ],
+      "disabled": true,
+      "name": "⚡︎PSB: Product 01",
+      "settings": {
+        "container_width": "psb-container",
+        "inherit_fonts": false,
+        "enable_boxshadow": true,
+        "heading_tag": "h4",
+        "slide_desc_font_size": 16,
+        "background_color": "rgba(0,0,0,0)",
+        "slide_bg_color": "#f5f5f5",
+        "slide_info_color": "#ffffff",
+        "slide_title_color": "#212a2f",
+        "slide_desc_color": "#212a2f",
+        "slider_per_view": 3,
+        "section_padding_top": 0,
+        "section_padding_bottom": 60,
+        "section_padding_top_mobile": 0,
+        "section_padding_bottom_mobile": 50
+      }
+    },
+    "glow_essentials_bundle_zeXXfA": {
+      "type": "glow-essentials-bundle",
+      "blocks": {
+        "list_item_LQhBrM": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Step 1: Round Lab Cleansing Water – Removes sunscreen & makeup without irritation"
+          }
+        },
+        "list_item_hLy99p": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Step 2: COSRX Low pH Good Morning Cleanser – A gentle, non-stripping cleanse"
+          }
+        },
+        "list_item_4EGMjw": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Toner: Eqqualberry Swimming Pool Toner, hydrates, brightens & reduces irritation"
+          }
+        },
+        "list_item_HVytPC": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Serum: Anua TXA 10% Serum – Brightens skin without aggravating fungal acne (contains tranexamic acid, which is safe for fungal acne when formulated without esters or oils)"
+          }
+        },
+        "list_item_AYWj78": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Exfoliator: Dr. G Brightening Peeling Gel – Safe, non-irritating exfoliation"
+          }
+        },
+        "list_item_cfwiyn": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Moisturizer: Purito B5 Panthenol Re-Barrier Cream – Fungal acne-safe hydration"
+          }
+        },
+        "list_item_rdrLVN": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Sunscreen: Isntree Onion Newpair Sunscreen – Calms inflammation while providing sun protection"
+          }
+        }
+      },
+      "block_order": [
+        "list_item_LQhBrM",
+        "list_item_hLy99p",
+        "list_item_4EGMjw",
+        "list_item_HVytPC",
+        "list_item_AYWj78",
+        "list_item_cfwiyn",
+        "list_item_rdrLVN"
+      ],
+      "disabled": true,
+      "name": "Glow Bundle",
+      "settings": {
+        "badge_text": "",
+        "discount_text": "",
+        "heading": "No-Fuss, No-Fung",
+        "description": "Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost.",
+        "original_price": "",
+        "discount_price": "",
+        "button_label": "Buy Now",
+        "button_link": "https://www.seoulglowlab.com/products/no-fuss-no-fung",
+        "image": "shopify://shop_images/434.png",
+        "background_gradient": "linear-gradient(135deg, rgba(231, 240, 253, 1), rgba(242, 246, 251, 1) 100%)",
+        "border_radius": 20,
+        "image_border_radius": 16,
+        "button_border_radius": 8
+      }
+    },
+    "tpt_image_with_text_6tatWD": {
+      "type": "tpt-image-with-text",
+      "blocks": {
+        "heading_G7FWpT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Glow Essentials Beauty Bundle",
+            "heading_size": "h1"
+          }
+        },
+        "caption_3Nfgpw": {
+          "type": "caption",
+          "settings": {
+            "caption": "Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "text_imYtLT": {
+          "type": "text",
+          "settings": {
+            "text": "<h4><strong>What's Inside:</strong></h4><ul><li>Soft Cloud Cleansing  –  A gentle, pH-balanced Foam</li><li>HydraMist Toner –  Refreshing and alcohol-free with birch</li><li>Glow Drops Serum –  Lightweight daily serum packed with</li><li>DewySkin Moisturizer –  Fast-absorbing cream with</li><li>Sun Veil SPF 50+ PA++++ –  Invisible finish broad-spectrum</li></ul>",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "button_LzE3NL": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_G7FWpT",
+        "caption_3Nfgpw",
+        "text_imYtLT",
+        "button_LzE3NL"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".tpt-section_container.gradient {background: linear-gradient(90deg, #cfdfff 0%, #fafcff 100%);}"
+      ],
+      "name": "Tpt - Image with Text #1",
+      "settings": {
+        "map_embed": "",
+        "heading_color": "#000000",
+        "paragraph_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "outline_button_color": "#000000",
+        "border_radius": 0,
+        "image_border_radius": 16,
+        "button_border_radius": 8,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 60,
+        "padding_tablet_mobile": 40,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "section_lazyload": false
+      }
+    },
+    "skincare_collection_grid_NaLFkD": {
+      "type": "Skincare-Collection-Grid",
+      "blocks": {
+        "collection_MRwzQD": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/img_1_ca9e5eef-8758-4dfa-98a8-a7404b66420f.png",
+            "title": "Free Gifts",
+            "text": "Buy any $60+ from Soko Glam and get a free deluxe sample trio.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#eff6ff"
+          }
+        },
+        "collection_WPEYT6": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/img_2.png",
+            "title": "Your Summer Cool-Down",
+            "text": "Refresh and revitalize with cooling mists and gel moisturizers.",
+            "link_label": "Cool Now",
+            "link": "",
+            "bg_color": "#f0fdf4"
+          }
+        },
+        "collection_L8EXcD": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify://shop_images/img_3.png",
+            "title": "Glow Secrets This Summer",
+            "text": "Discover the serums and essences that give you that glass skin finish.",
+            "link_label": "Get Glowing",
+            "link": "",
+            "bg_color": "#fefce8"
+          }
+        }
+      },
+      "block_order": [
+        "collection_MRwzQD",
+        "collection_WPEYT6",
+        "collection_L8EXcD"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".skincare-section .subtitle {color: #000; font-family: \"Anonymous Pro\"; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px; letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".skincare-section h2 {color: #2d2d2d; font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".skincare-column h3 {margin-top: 0;}"
+      ],
+      "name": "Skincare 3 Column",
+      "settings": {
+        "heading": "SKINCARE SPOTLIGHT",
+        "subheading": "Here's why we have over 40K five-star reviews",
+        "text_alignment": "center",
+        "box_alignment": "left",
+        "background_color": "#ffffff",
+        "dynamic_colors": "#fef9f3,#f3f7fe,#f5f5f5",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "max_blocks": 6
+      }
+    },
+    "1756477549867c59bc": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_H7AFcp": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "Instagram Feed",
+            "title_color": "#000000",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": true,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_H7AFcp"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "psb_reviews_reviews_01_UtDqHp": {
+      "type": "psb-reviews-reviews-01",
+      "blocks": {
+        "review_FJDXxN": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify://shop_images/image_2_9.png",
+            "review_stars": "4",
+            "review_text": "<p>I’ve been loving milky toners/essences! So I had to try this one which I’m glad I did because I ended up loving it! It’s the perfect amount of thickness & creaminess. It’s perfect because it works for makeup prep. I use this every time I do my makeup! Definitely a must have for me now!</p>",
+            "review_name": "Daisy O",
+            "position": "Haruharu Wonder Black Rice Probiotics Essence",
+            "url_product": "shopify://products/haruharu-wonder-black-rice-probiotics-barrier-essence"
+          }
+        },
+        "review_WfmtXP": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify://shop_images/IMG-20250820-WA0243.jpg",
+            "review_stars": "5",
+            "review_text": "<p>Katie recommended the best products for my skin!! After using them my face felt so soft, hydrated and firm. My favorite was these ampoule drops- I use them morning and night and they give my skin the best glow. Can’t recommend Katie & her products recommendations enough 🙌🏻❤️</p>",
+            "review_name": "Julia G",
+            "position": "Skin1004 Madagascar Centella Ampoule",
+            "url_product": "shopify://products/skin1004-madagascar-centella-asiatica-100-ampoule"
+          }
+        },
+        "review_4b7GEx": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify://shop_images/Anastasia.jpg",
+            "review_stars": "5",
+            "review_text": "<p>I sometimes get redness around my nose & this serum always gets rid of my redness! It also doesn’t have a scent which I love. It’s such a great addition to my routine!</p>",
+            "review_name": "Anastasia P",
+            "position": "Purito Wonderful Releaf Centella Serum (Unscented)",
+            "url_product": "shopify://products/purito-wonderful-releaf-centella-serum-unscented"
+          }
+        },
+        "review_zABzV4": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify://shop_images/Rigo.jpg",
+            "review_stars": "5",
+            "review_text": "<p>I really like the texture of this moisturizer. Lightweight & leaves my skin feeling smooth and hydrated!</p>",
+            "review_name": "Rigo H",
+            "position": "Mixsoon Bean Cream",
+            "url_product": "shopify://products/mixsoon-bean-cream"
+          }
+        }
+      },
+      "block_order": [
+        "review_FJDXxN",
+        "review_WfmtXP",
+        "review_4b7GEx",
+        "review_zABzV4"
+      ],
+      "custom_css": [
+        "h1.psb-utilities-heading__heading.psb-rte {font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".psb-utilities-heading__subheading.psb-rte.psb-block-space {padding-top: 25px; font-family: Arial; font-size: 11.922px; font-style: normal; font-weight: 400; line-height: 20px; /* 167.759% */ letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".psb-relative.psb-block-space {padding-top: 30px;}"
+      ],
+      "name": "⚡︎PSB: Reviews 01",
+      "settings": {
+        "container_width": "psb-container",
+        "heading": "<p>REAL PEOPLE, REAL REVIEWS</p>",
+        "heading_tag": "h1",
+        "subheading": "<p>Glowing Reviews from Real People with Real Results</p>",
+        "heading_color": "#2d2d2d",
+        "subheading_color": "#000000",
+        "enable_star": true,
+        "border_radius": 8,
+        "slider_per_view": 3,
+        "enable_loop": false,
+        "enable_autoplay": true,
+        "enable_pagination": true,
+        "enable_navigation": false,
+        "pagination_type": "bullets",
+        "background_color": "#f9fafb",
+        "swiper_control_color": "#57301b",
+        "review-background-color": "#ffffff",
+        "stars-color": "#ffa500",
+        "text_color": "#374151",
+        "border_color": "#ffffff",
+        "text_align": "center",
+        "section_padding_top": 50,
+        "section_padding_bottom": 50,
+        "text_align_mobile": "center",
+        "section_padding_top_mobile": 35,
+        "section_padding_bottom_mobile": 35
+      }
+    },
+    "1756477716387dfee1": {
+      "type": "apps",
+      "blocks": {
+        "gsc_instagram_feed_instafeed_eCcyiw": {
+          "type": "shopify://apps/gsc-instagram-feed/blocks/instafeed/96970b1b-b770-454f-b16b-51f47e1aa4ed",
+          "settings": {
+            "widget_id": "GSC-FaZTtSZdYupsSsu"
+          }
+        }
+      },
+      "block_order": [
+        "gsc_instagram_feed_instafeed_eCcyiw"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "tpt_email_signup_1_MNxHYy": {
+      "type": "tpt-email-signup-1",
+      "blocks": {
+        "heading_RRpgrA": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the Glow List",
+            "heading_size": "h2"
+          }
+        },
+        "paragraph_EeVyDM": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to hear about product drops, seasonal skincare routines, and insider promos.</p>"
+          }
+        },
+        "email_form_EQePV3": {
+          "type": "email_form",
+          "settings": {
+            "button_label": "Subscribe",
+            "input_label": "Email"
+          }
+        }
+      },
+      "block_order": [
+        "heading_RRpgrA",
+        "paragraph_EeVyDM",
+        "email_form_EQePV3"
+      ],
+      "name": "Tpt - Email signup #1",
+      "settings": {
+        "image": "shopify://shop_images/section_3.png",
+        "mobile_image": "shopify://shop_images/section_3.png",
+        "heading_color": "#121212",
+        "paragraph_color": "#121212",
+        "button_background_color": "#bebebe",
+        "button_text_color": "#000000",
+        "outline_button_color": "#212a2f",
+        "outline_input_color": "#121212",
+        "success_message": "Thanks for subscribing",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 136,
+        "padding_tablet_mobile": 79,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "section_lazyload": false
+      }
+    }
+  },
+  "order": [
+    "1751295991cc9b83a1",
+    "17618323849beb1457",
+    "pagefly_section_cbBqEc",
+    "tpt_feature_collection_2_kMJMHy",
+    "skincare_collection_grid_zAEL3F",
+    "psb_product_product_01_C6gwVU",
+    "glow_essentials_bundle_zeXXfA",
+    "tpt_image_with_text_6tatWD",
+    "skincare_collection_grid_NaLFkD",
+    "1756477549867c59bc",
+    "psb_reviews_reviews_01_UtDqHp",
+    "1756477716387dfee1",
+    "tpt_email_signup_1_MNxHYy"
+  ]
+}
