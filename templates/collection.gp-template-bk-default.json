@@ -1,1 +1,220 @@
-{"order":["banner","tpt_email_signup_5_dpQPej","product-grid"],"sections":{"banner":{"disabled":true,"settings":{"color_scheme":"scheme-1","show_collection_description":true,"show_collection_image":false},"type":"main-collection-banner"},"product-grid":{"settings":{"color_scheme":"scheme-1","columns_desktop":4,"columns_mobile":"1","enable_filtering":true,"enable_sorting":true,"filter_type":"horizontal","image_ratio":"adapt","image_shape":"default","padding_bottom":36,"padding_top":36,"products_per_page":16,"quick_add":"none","show_rating":false,"show_secondary_image":false,"show_vendor":false},"type":"main-collection-product-grid"},"tpt_email_signup_5_dpQPej":{"block_order":["heading_VmzDQn","paragraph_X7XbAn"],"blocks":{"heading_VmzDQn":{"settings":{"heading":"SHOP ALL PRODUCTS","heading_size":"h2"},"type":"heading"},"paragraph_X7XbAn":{"settings":{"text":"\u003cp\u003eDiscover our complete collection of curated K-beauty skincare products. From cleansers to serums, find everything you need for your perfect routine.\u003c/p\u003e"},"type":"paragraph"}},"name":"Tpt - Email signup #5","settings":{"button_background_color":"#000000","button_text_color":"#ffffff","content_full_width":false,"content_max_width":1440,"heading_color":"#000000","image":"shopify://shop_images/section_1.png","layout":"text_first","margin_desktop":0,"margin_tablet_mobile":0,"mobile_layout":"image_first","outline_button_color":"#000000","outline_input_color":"#000000","padding_desktop":136,"padding_tablet_mobile":79,"paragraph_color":"#000000","section_full_width":true,"section_lazyload":false,"section_max_width":1600,"success_message":"Thanks for subscribing"},"type":"tpt-email-signup-5"}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "blocks_gPLzH6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f51e8a9_8t3mtf": {
+          "type": "ai_gen_block_f51e8a9",
+          "settings": {
+            "background_type": "image",
+            "background_image_desktop": "shopify://shop_images/seoul_lab.jpg",
+            "background_image_mobile": "shopify://shop_images/seoul_lab.jpg",
+            "video_url_desktop": "",
+            "video_url_mobile": "",
+            "background_style": "cover",
+            "content_box_background": "#ffffff",
+            "content_box_opacity": 100,
+            "content_box_padding": 30,
+            "content_box_radius": 2,
+            "hero_height_desktop": 450,
+            "content_max_width": 400,
+            "content_vertical_alignment_desktop": "flex-end",
+            "content_horizontal_alignment_desktop": "flex-start",
+            "text_alignment_desktop": "right",
+            "hero_height_mobile": 300,
+            "content_vertical_alignment_mobile": "flex-end",
+            "content_horizontal_alignment_mobile": "center",
+            "text_alignment_mobile": "center",
+            "caption": "",
+            "caption_font": "anonymous_pro_n4",
+            "caption_color": "#ffffff",
+            "caption_font_size": 14,
+            "caption_text_transform": "uppercase",
+            "title": "{{ closest.collection.title }}",
+            "title_font": "roboto_condensed_n8",
+            "title_color": "#121212",
+            "title_font_size": 22,
+            "subtitle": "",
+            "subtitle_font": "anonymous_pro_n4",
+            "subtitle_color": "#ffffff",
+            "subtitle_font_size": 24,
+            "description": "",
+            "description_font": "anonymous_pro_n4",
+            "description_color": "#121212",
+            "description_font_size": 18,
+            "show_countdown": false,
+            "countdown_date": "",
+            "countdown_font": "roboto_condensed_n4",
+            "countdown_color": "#ffffff",
+            "countdown_number_size": 48,
+            "countdown_label_size": 12,
+            "button_text": "",
+            "button_link": "",
+            "button_font": "anonymous_pro_n4",
+            "button_background_color": "#121212",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#000000",
+            "button_hover_text_color": "#ffffff",
+            "button_border_color": "#121212",
+            "button_hover_border_color": "#000000",
+            "button_border_width": 2,
+            "button_font_size": 17,
+            "button_padding_vertical": 10,
+            "button_padding_horizontal": 40,
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f51e8a9_8t3mtf"
+      ],
+      "custom_css": [
+        ".ai-hero-title-au3hrystpu09maedwaaigenblockf51e8a98t3mtf {padding: 1rem; border: black 2px solid; border-radius: 6px; text-transform: uppercase;}"
+      ],
+      "settings": {}
+    },
+    "tpt_email_signup_5_dpQPej": {
+      "type": "tpt-email-signup-5",
+      "blocks": {
+        "heading_VmzDQn": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ collection.title }}",
+            "heading_size": "h2"
+          }
+        },
+        "paragraph_X7XbAn": {
+          "type": "paragraph",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Discover our complete collection of curated K-beauty skincare products. From cleansers to serums, find everything you need for your perfect routine.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_VmzDQn",
+        "paragraph_X7XbAn"
+      ],
+      "disabled": true,
+      "name": "Tpt - Email signup #5",
+      "settings": {
+        "image": "shopify://shop_images/seoul_lab.jpg",
+        "mobile_image": "shopify://shop_images/seoul_lab_0c54d739-8507-4be5-9a13-fd41069b3b49.jpg",
+        "layout": "text_first",
+        "mobile_layout": "image_first",
+        "heading_color": "#000000",
+        "paragraph_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "outline_button_color": "#000000",
+        "outline_input_color": "#000000",
+        "success_message": "Thanks for subscribing",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 136,
+        "padding_tablet_mobile": 79,
+        "margin_desktop": 0,
+        "margin_tablet_mobile": 0,
+        "section_lazyload": false
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "tpt_email_signup_1_ip6wt7": {
+      "type": "tpt-email-signup-1",
+      "blocks": {
+        "heading_zJdKbD": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the Glow List",
+            "heading_size": "h2"
+          }
+        },
+        "paragraph_FawgVF": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to hear about product drops, seasonal skincare routines, and insider promos.</p>"
+          }
+        },
+        "email_form_aWwfRy": {
+          "type": "email_form",
+          "settings": {
+            "button_label": "Subscribe",
+            "input_label": "Email"
+          }
+        }
+      },
+      "block_order": [
+        "heading_zJdKbD",
+        "paragraph_FawgVF",
+        "email_form_aWwfRy"
+      ],
+      "name": "Tpt - Email signup #1",
+      "settings": {
+        "image": "shopify://shop_images/section_3.png",
+        "heading_color": "#ffffff",
+        "paragraph_color": "#ffffff",
+        "button_background_color": "#ffffff",
+        "button_text_color": "#000000",
+        "outline_button_color": "#ffffff",
+        "outline_input_color": "#ffffff",
+        "success_message": "Thanks for subscribing",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 136,
+        "padding_tablet_mobile": 79,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "section_lazyload": false
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "blocks_gPLzH6",
+    "tpt_email_signup_5_dpQPej",
+    "product-grid",
+    "tpt_email_signup_1_ip6wt7"
+  ]
+}
