@@ -34,6 +34,10 @@
           "type": "price",
           "settings": {}
         },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -52,10 +56,6 @@
             "picker_type": "dropdown",
             "swatch_shape": "none"
           }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
         },
         "icon_with_text_9TAnRD": {
           "type": "icon-with-text",
@@ -115,10 +115,10 @@
         "vendor",
         "title",
         "price",
+        "quantity_selector",
         "buy_buttons",
         "description",
         "variant_picker",
-        "quantity_selector",
         "icon_with_text_9TAnRD",
         "collapsible_tab_CzxEAR",
         "collapsible_tab_8kED7H",
