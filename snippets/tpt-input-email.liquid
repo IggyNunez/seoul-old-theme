@@ -1,0 +1,17 @@
+<div class="tpt-grid_item tpt-field" style="--input-width: {{ block.settings.input_width }}%">
+  <label class="tpt-label" for="input-{{ block.id }}">
+    {{ block.settings.input_label }}
+  </label>
+  <input
+    id="input-{{ block.id }}"
+    class="tpt-input_text"
+    type="email"
+    autocomplete="email"
+    name="contact[email]"
+    placeholder="{{ block.settings.input_placeholder }}"
+     {% if block.settings.input_required %}required{% endif %}
+  >
+  {%- if block.settings.input_note != blank -%}
+    <div class="tpt-input__note">{{ block.settings.input_note }}</div>
+  {%- endif -%}
+</div>

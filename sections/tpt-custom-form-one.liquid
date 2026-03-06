@@ -1,0 +1,1138 @@
+{% comment %} Section layout style {% endcomment %}
+{{ 'tpt-section.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Section configuration {% endcomment %}
+{%- render 'tpt-section-setting', section: section -%}
+
+{%- if section.index and section.settings.section_lazyload -%}
+  <tpt-section-lazyload data-url="?section_id={{ section.id }}">
+    <div data-lazyload-element></div>
+    <span class="tpt-section_loader"></span>
+  </tpt-section-lazyload>
+{%- else -%}
+  {{ 'tpt-grid.css' | asset_url | stylesheet_tag }}
+  {{ 'tpt-custom-form-one.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'tpt-group-checkbox.js' | asset_url }}" defer="defer"></script>
+
+  <div class="tpt-section_container">
+    <div class="tpt-section_content">
+      {% comment %} Section header {% endcomment %}
+      {%- render 'tpt-section-header', section: section -%}
+
+      <div class="tpt-section-body">
+        {% comment %} Section body {% endcomment %}
+
+        <div
+          class="tpt-form_one tpt-section__foreground--color{% if section.settings.form_background %} tpt-form_one-background{% endif %}"
+          style="--form-background:{{ section.settings.form_background_color }}; --form-background-opacity:{{ section.settings.background_opacity }}"
+        >
+          {%- liquid
+            assign contact_form_class = 'tpt-form_one-contact'
+            assign id = section.id
+          -%}
+
+          {%- form 'contact', id: id, class: contact_form_class -%}
+            {%- if form.posted_successfully? -%}
+              <div class="tpt-form__message">
+                <h2 class="tpt-form__message-title h5">
+                  {{ 'templates.contact.form.post_success' | t }}
+                </h2>
+              </div>
+            {%- elsif form.errors -%}
+              <div class="tpt-form__message">
+                <h2 class="tpt-form__message-title h5" role="alert">
+                  {{ 'templates.contact.form.error_heading' | t }}
+                </h2>
+              </div>
+
+              <ul class="tpt-form__message-list" role="list">
+                <li>
+                  {{ form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email }}
+                </li>
+              </ul>
+            {%- endif -%}
+
+            <div class="tpt-form__wrapper tpt-grid">
+              {%- for block in section.blocks -%}
+                {% case block.type %}
+                  {%- when 'text' -%}
+                    {%- render 'tpt-input-text', block: block -%}
+
+                  {%- when 'email' -%}
+                    {%- render 'tpt-input-email', block: block -%}
+
+                  {%- when 'textarea' -%}
+                    {%- render 'tpt-input-textarea', block: block -%}
+
+                  {%- when 'select' -%}
+                    {%- render 'tpt-input-select', block: block -%}
+
+                  {%- when 'checkbox' -%}
+                    {%- render 'tpt-input-checkbox', block: block -%}
+
+                  {%- when 'radiobox' -%}
+                    {%- render 'tpt-input-radiobox', block: block -%}
+
+                  {%- when 'description' -%}
+                    {%- if block.settings.description != blank -%}
+                      <div
+                        class="tpt-grid_item tpt-field tpt-field__description"
+                        style="--input-width: {{ block.settings.input_width }}%"
+                      >
+                        {{ block.settings.description }}
+                      </div>
+                    {%- endif -%}
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+
+            <div class="tpt-field__button">
+              <button type="submit" class="tpt-button tpt-button__primary">
+                <span>{{ section.settings.submit_button_label }}</span>
+              </button>
+            </div>
+          {%- endform -%}
+        </div>
+        {% comment %} End section body {% endcomment %}
+      </div>
+    </div>
+  </div>
+{%- endif -%}{%- unless content_for_header contains 'tapita-section-script-tags' -%}{% style %}#shopify-section-{{ section.id }}{display: none !important;}{% endstyle %}{%- endunless -%}
+{%- unless content_for_header contains 'tapita-section-script-tags' -%}{% style %}#shopify-section-{{ section.id }}{display: none !important;}{% endstyle %}{%- endunless -%}
+{% schema %}
+{
+  "name": "Tpt - Custom form #1",
+  "tag": "section",
+  "class": "section tpt-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Custom form",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "Small"
+        },
+        {
+          "value": "h2",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "sub_heading",
+      "label": "Sub-heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "header",
+      "content": "Section body"
+    },
+    {
+      "type": "checkbox",
+      "id": "form_background",
+      "label": "Show form background",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "form_background_color",
+      "label": "Form background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity",
+      "min": 5,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Background opacity",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "submit_button_label",
+      "label": "Submit button label",
+      "default": "Submit"
+    },
+
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_full_width",
+      "label": "Section full width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "min": 1200,
+      "max": 1900,
+      "step": 20,
+      "unit": "px",
+      "label": "Section max width",
+      "default": 1600
+    },
+    {
+      "type": "checkbox",
+      "id": "content_full_width",
+      "label": "Content full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 800,
+      "max": 1900,
+      "step": 20,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding desktop",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_tablet_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding tablet, mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_tablet_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin tablet, mobile",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Section color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient_color",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "foreground_color",
+      "label": "Foreground",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "outline_input_color",
+      "label": "Input outline",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "input_button_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Input, button radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section optimize"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_lazyload",
+      "label": "Section lazyload",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "select",
+          "id": "input_type",
+          "label": "Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "number",
+              "label": "Number"
+            },
+            {
+              "value": "tel",
+              "label": "Phone"
+            },
+            {
+              "value": "date",
+              "label": "Date"
+            },
+            {
+              "value": "time",
+              "label": "Time"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "label": "Label",
+          "default": "Input label"
+        },
+        {
+          "type": "text",
+          "id": "input_placeholder",
+          "label": "Placeholder",
+          "info": "No effect on type date and time"
+        },
+        {
+          "type": "text",
+          "id": "input_note",
+          "label": "Note"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "email",
+      "name": "Email",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "label": "Label",
+          "default": "Input label"
+        },
+        {
+          "type": "text",
+          "id": "input_placeholder",
+          "label": "Placeholder"
+        },
+        {
+          "type": "text",
+          "id": "input_note",
+          "label": "Note"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Textarea",
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "label": "Label",
+          "default": "Input label"
+        },
+        {
+          "type": "text",
+          "id": "input_placeholder",
+          "label": "Placeholder"
+        },
+        {
+          "type": "text",
+          "id": "input_note",
+          "label": "Note"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_required",
+          "label": "Required",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "name": "Select",
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "label": "Label",
+          "default": "Input label"
+        },
+        {
+          "type": "text",
+          "id": "input_note",
+          "label": "Note"
+        },
+        {
+          "type": "text",
+          "id": "option_1",
+          "label": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "option_2",
+          "label": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "option_3",
+          "label": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "option_4",
+          "label": "Option 4"
+        },
+        {
+          "type": "text",
+          "id": "option_5",
+          "label": "Option 5"
+        },
+        {
+          "type": "text",
+          "id": "option_6",
+          "label": "Option 6"
+        },
+        {
+          "type": "text",
+          "id": "option_7",
+          "label": "Option 7"
+        },
+        {
+          "type": "text",
+          "id": "option_8",
+          "label": "Option 8"
+        },
+        {
+          "type": "text",
+          "id": "option_9",
+          "label": "Option 9"
+        },
+        {
+          "type": "text",
+          "id": "option_10",
+          "label": "Option 10"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "name": "Checkbox",
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "checkbox",
+          "id": "input_required",
+          "label": "Required",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "label": "Label",
+          "default": "Input label"
+        },
+        {
+          "type": "text",
+          "id": "input_note",
+          "label": "Note"
+        },
+        {
+          "type": "checkbox",
+          "id": "display_inline",
+          "label": "Display inline",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "option_1",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_1_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "option_2",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_2_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "option_3",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_3_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 4"
+        },
+        {
+          "type": "text",
+          "id": "option_4",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_4_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 5"
+        },
+        {
+          "type": "text",
+          "id": "option_5",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_5_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 6"
+        },
+        {
+          "type": "text",
+          "id": "option_6",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_6_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 7"
+        },
+        {
+          "type": "text",
+          "id": "option_7",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_7_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 8"
+        },
+        {
+          "type": "text",
+          "id": "option_8",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_8_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 9"
+        },
+        {
+          "type": "text",
+          "id": "option_9",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_9_checked",
+          "label": "Checked",
+          "default": false
+        },
+
+        {
+          "type": "header",
+          "content": "Option 10"
+        },
+        {
+          "type": "text",
+          "id": "option_10",
+          "label": "Value"
+        },
+        {
+          "type": "checkbox",
+          "id": "option_10_checked",
+          "label": "Checked",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "radiobox",
+      "name": "Radiobox",
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "label": "Label",
+          "default": "Input label"
+        },
+        {
+          "type": "text",
+          "id": "input_note",
+          "label": "Note"
+        },
+        {
+          "type": "checkbox",
+          "id": "display_inline",
+          "label": "Display inline",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Option 1"
+        },
+        {
+          "type": "text",
+          "id": "option_1",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 2"
+        },
+        {
+          "type": "text",
+          "id": "option_2",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 3"
+        },
+        {
+          "type": "text",
+          "id": "option_3",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 4"
+        },
+        {
+          "type": "text",
+          "id": "option_4",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 5"
+        },
+        {
+          "type": "text",
+          "id": "option_5",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 6"
+        },
+        {
+          "type": "text",
+          "id": "option_6",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 7"
+        },
+        {
+          "type": "text",
+          "id": "option_7",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 8"
+        },
+        {
+          "type": "text",
+          "id": "option_8",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 9"
+        },
+        {
+          "type": "text",
+          "id": "option_9",
+          "label": "Value"
+        },
+
+        {
+          "type": "header",
+          "content": "Option 10"
+        },
+        {
+          "type": "text",
+          "id": "option_10",
+          "label": "Value"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "settings": [
+        {
+          "type": "range",
+          "id": "input_width",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Width",
+          "default": 100
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tpt - Custom form #1",
+      "settings": {
+        "heading": "GET 15% DISCOUNT",
+        "heading_size": "h2",
+        "sub_heading": "",
+        "description": "",
+        "alignment": "center",
+        "form_background": true,
+        "form_background_color": "#ffffff",
+        "background_opacity": 60,
+        "submit_button_label": "Submit",
+        "background_image": "",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 800,
+        "padding_desktop": 100,
+        "padding_tablet_mobile": 40,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "background_color": "#eeeeee",
+        "background_gradient_color": "",
+        "foreground_color": "#000000",
+        "title_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "outline_input_color": "#000000",
+        "input_button_radius": 0,
+        "section_lazyload": false
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "input_width": 25,
+            "input_type": "text",
+            "input_label": "First name",
+            "input_placeholder": "",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "input_width": 25,
+            "input_type": "text",
+            "input_label": "Last name",
+            "input_placeholder": "",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "email",
+          "settings": {
+            "input_width": 25,
+            "input_label": "Email",
+            "input_placeholder": "",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "input_width": 25,
+            "input_type": "tel",
+            "input_label": "Phone number",
+            "input_placeholder": "",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "input_width": 50,
+            "input_type": "date",
+            "input_label": "Purchase date",
+            "input_placeholder": "",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "input_width": 50,
+            "input_type": "time",
+            "input_label": "Purchase time",
+            "input_placeholder": "",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "select",
+          "settings": {
+            "input_width": 50,
+            "input_label": "Shipping method",
+            "input_note": "",
+            "option_1": "Free shipping",
+            "option_2": "DHL",
+            "option_3": "",
+            "option_4": "",
+            "option_5": "",
+            "option_6": "",
+            "option_7": "",
+            "option_8": "",
+            "option_9": "",
+            "option_10": ""
+          }
+        },
+        {
+          "type": "select",
+          "settings": {
+            "input_width": 50,
+            "input_label": "Payment method",
+            "input_note": "",
+            "option_1": "COD",
+            "option_2": "Paypal",
+            "option_3": "Mastercard",
+            "option_4": "",
+            "option_5": "",
+            "option_6": "",
+            "option_7": "",
+            "option_8": "",
+            "option_9": "",
+            "option_10": ""
+          }
+        },
+        {
+          "type": "checkbox",
+          "settings": {
+            "input_width": 100,
+            "input_label": "Categories",
+            "input_note": "",
+            "display_inline": true,
+            "option_1": "Fashion",
+            "option_1_checked": true,
+            "option_2": "Electronic",
+            "option_2_checked": true,
+            "option_3": "Furniture",
+            "option_3_checked": true,
+            "option_4": "Home & decor",
+            "option_4_checked": true,
+            "option_5": "Accessories",
+            "option_5_checked": true,
+            "option_6": "",
+            "option_6_checked": true,
+            "option_7": "",
+            "option_7_checked": true,
+            "option_8": "",
+            "option_8_checked": true,
+            "option_9": "",
+            "option_9_checked": true,
+            "option_10": "",
+            "option_10_checked": true
+          }
+        },
+        {
+          "type": "radiobox",
+          "settings": {
+            "input_width": 100,
+            "input_label": "Size",
+            "input_note": "",
+            "display_inline": true,
+            "option_1": "S",
+            "option_2": "M",
+            "option_3": "L",
+            "option_4": "XL",
+            "option_5": "XXL",
+            "option_6": "",
+            "option_7": "",
+            "option_8": "",
+            "option_9": "",
+            "option_10": ""
+          }
+        },
+        {
+          "type": "radiobox",
+          "settings": {
+            "input_width": 100,
+            "input_label": "Color",
+            "input_note": "",
+            "display_inline": true,
+            "option_1": "Black",
+            "option_2": "Blue",
+            "option_3": "Red",
+            "option_4": "",
+            "option_5": "",
+            "option_6": "",
+            "option_7": "",
+            "option_8": "",
+            "option_9": "",
+            "option_10": ""
+          }
+        },
+        {
+          "type": "textarea",
+          "settings": {
+            "input_width": 100,
+            "input_label": "Order note",
+            "input_placeholder": "Type some text",
+            "input_note": ""
+          }
+        },
+        {
+          "type": "description",
+          "settings": {
+            "input_width": 100,
+            "description": "<p>By submitting your email, you agree to receive marketing emails.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}  
+{% endschema %}

@@ -1,0 +1,206 @@
+<div
+  class="tpt-grid_item tpt-field tpt-field__checkbox{% if block.settings.display_inline %} tpt-options__inline{% endif %}"
+  style="--input-width: {{ block.settings.input_width }}%"
+>
+  <label class="tpt-label" for="{{ block.id }}-checkbox-main">
+    {{ block.settings.input_label }}
+  </label>
+
+  {%- if block.settings.input_note != blank -%}
+    <div class="tpt-input__note">{{ block.settings.input_note }}</div>
+  {%- endif -%}
+
+  <tpt-checkbox-options>
+    <div class="tpt-input__options" tpt-group-checkbox>
+      {%- if block.settings.option_1 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-1"
+            {% if block.settings.option_1_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_1 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-1" class="tpt-options__label">
+            {{- block.settings.option_1 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_2 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-2"
+            {% if block.settings.option_2_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_2 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-2" class="tpt-options__label">
+            {{- block.settings.option_2 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_3 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-3"
+            {% if block.settings.option_3_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_3 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-3" class="tpt-options__label">
+            {{- block.settings.option_3 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_4 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-4"
+            {% if block.settings.option_4_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_4 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-4" class="tpt-options__label">
+            {{- block.settings.option_4 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_5 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-5"
+            {% if block.settings.option_5_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_5 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-5" class="tpt-options__label">
+            {{- block.settings.option_5 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_6 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-6"
+            {% if block.settings.option_6_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_6 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-6" class="tpt-options__label">
+            {{- block.settings.option_6 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_7 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-7"
+            {% if block.settings.option_7_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_7 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-7" class="tpt-options__label">
+            {{- block.settings.option_7 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_8 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-8"
+            {% if block.settings.option_8_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_8 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-8" class="tpt-options__label">
+            {{- block.settings.option_8 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_9 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-9"
+            {% if block.settings.option_9_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_9 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-9" class="tpt-options__label">
+            {{- block.settings.option_9 -}}
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- if block.settings.option_10 != blank -%}
+        <div class="tpt-options-item">
+          <input
+            id="{{ block.id }}-10"
+            {% if block.settings.option_10_checked %}
+              checked
+            {% endif %}
+            type="checkbox"
+            value="{{ block.settings.option_10 }}"
+            class="tpt-checkbox"
+            name="contact[{{ block.settings.input_label }}][]"
+          >
+          <label for="{{ block.id }}-10" class="tpt-options__label">
+            {{- block.settings.option_10 -}}
+          </label>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <input
+      id="{{ block.id }}-checkbox-main"
+      type="checkbox"
+      name="contact[{{ block.settings.input_label }}]"
+      value=""
+      {% if block.settings.input_required %}required{% endif %}
+      main-checkbox
+      class="tpt-main-checkbox"
+    >
+  </tpt-checkbox-options>
+</div>

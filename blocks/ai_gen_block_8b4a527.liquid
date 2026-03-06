@@ -1,0 +1,422 @@
+{% doc %}
+  @prompt
+    create a bautifyl ourstory top banner section that wil ltake mobiel and desktop backgroung has title and description taht matches our brand and it should fade beautifully and have a very beauty inspired asthetics, that matche sour glow lab feel, it should allow me to fade the overlay and feel organic, it should have all color options for text and title sizes, it should it should include beautiful fade in animation, overlay seems not work, can you switch to an overlay but boxed around teh content only and i can still fade it
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-story-banner-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    min-height: {{ block.settings.banner_height_desktop }}px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-story-banner__background-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .ai-story-banner__background-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-story-banner__background-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f0eb 0%, #e8ddd4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-story-banner__background-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+    opacity: 0.3;
+  }
+
+  .ai-story-banner__content-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 3;
+    max-width: {{ block.settings.content_max_width }}px;
+    padding: 60px 50px;
+    text-align: {{ block.settings.text_alignment }};
+    opacity: 0;
+    transform: translateY(30px);
+    animation: ai-story-banner-fade-in-{{ ai_gen_id }} 1.2s ease-out forwards;
+    animation-delay: 0.3s;
+    background-color: {{ block.settings.overlay_color }};
+    opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+    backdrop-filter: blur(10px);
+    border-radius: {{ block.settings.box_border_radius }}px;
+  }
+
+  .ai-story-banner__content-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+  }
+
+  @keyframes ai-story-banner-fade-in-{{ ai_gen_id }} {
+    to {
+      opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};
+      transform: translateY(0);
+    }
+  }
+
+  .ai-story-banner__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.spacing_between }}px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ai-story-banner-text-fade-in-{{ ai_gen_id }} 1s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+
+  .ai-story-banner__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.description_color }};
+    margin: 0;
+    line-height: 1.6;
+    max-width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: ai-story-banner-text-fade-in-{{ ai_gen_id }} 1s ease-out forwards;
+    animation-delay: 0.7s;
+  }
+
+  @keyframes ai-story-banner-text-fade-in-{{ ai_gen_id }} {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ai-story-banner__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+    z-index: 4;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-story-banner-{{ ai_gen_id }} {
+      min-height: {{ block.settings.banner_height_mobile }}px;
+    }
+
+    .ai-story-banner__background-image-desktop-{{ ai_gen_id }} {
+      display: none;
+    }
+
+    .ai-story-banner__title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.7);
+    }
+
+    .ai-story-banner__description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.description_size }}px * 0.9);
+    }
+
+    .ai-story-banner__content-wrapper-{{ ai_gen_id }} {
+      padding: 40px 30px;
+      margin: 0 16px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-story-banner__background-image-mobile-{{ ai_gen_id }} {
+      display: none;
+    }
+  }
+{% endstyle %}
+
+<our-story-banner-{{ ai_gen_id }}
+  class="ai-story-banner-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-story-banner__background-{{ ai_gen_id }}">
+    {% if block.settings.background_image_desktop or block.settings.background_image_mobile %}
+      {% if block.settings.background_image_desktop %}
+        <img
+          src="{{ block.settings.background_image_desktop | image_url: width: 2000 }}"
+          alt="{{ block.settings.background_image_desktop.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.background_image_desktop.width }}"
+          height="{{ block.settings.background_image_desktop.height }}"
+          class="ai-story-banner__background-image-{{ ai_gen_id }} ai-story-banner__background-image-desktop-{{ ai_gen_id }}"
+        >
+      {% endif %}
+      {% if block.settings.background_image_mobile %}
+        <img
+          src="{{ block.settings.background_image_mobile | image_url: width: 1000 }}"
+          alt="{{ block.settings.background_image_mobile.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.background_image_mobile.width }}"
+          height="{{ block.settings.background_image_mobile.height }}"
+          class="ai-story-banner__background-image-{{ ai_gen_id }} ai-story-banner__background-image-mobile-{{ ai_gen_id }}"
+        >
+      {% endif %}
+    {% else %}
+      <div class="ai-story-banner__background-placeholder-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-story-banner__content-wrapper-{{ ai_gen_id }}">
+    <div class="ai-story-banner__content-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h1 class="ai-story-banner__title-{{ ai_gen_id }}">
+          {{ block.settings.title }}
+        </h1>
+      {% endif %}
+
+      {% if block.settings.description != blank %}
+        <div class="ai-story-banner__description-{{ ai_gen_id }}">
+          {{ block.settings.description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% unless block.settings.background_image_desktop or block.settings.background_image_mobile %}
+    <div class="ai-story-banner__empty-state-{{ ai_gen_id }}">
+      Add your background images to bring your story to life
+    </div>
+  {% endunless %}
+</our-story-banner-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class OurStoryBanner{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupIntersectionObserver();
+      }
+
+      setupIntersectionObserver() {
+        const options = {
+          threshold: 0.1,
+          rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, options);
+
+        observer.observe(this);
+      }
+    }
+
+    customElements.define('our-story-banner-{{ ai_gen_id }}', OurStoryBanner{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Our story banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Story"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover the journey behind Seoul Glow Lab, where Korean beauty traditions meet modern skincare innovation. Every product is crafted with care to bring you radiant, healthy skin.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Background images"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Desktop background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Mobile background"
+    },
+    {
+      "type": "header",
+      "content": "Content box overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Box background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Box opacity",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "box_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Box corner radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Title style"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Size",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Description style"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Content box max width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "spacing_between",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between title and description",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "min": 300,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "label": "Desktop height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "min": 300,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile height",
+      "default": 500
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our story banner"
+    }
+  ]
+}
+{% endschema %}

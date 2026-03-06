@@ -1,0 +1,668 @@
+
+{% comment %} Section layout style {% endcomment %}
+{{ 'tpt-section.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Section configuration {% endcomment %}
+{%- render 'tpt-section-setting', section: section -%}
+
+{%- if section.index and section.settings.section_lazyload -%}
+  <script src="{{ 'tpt-section-lazyload.js' | asset_url }}" defer="defer"></script>
+
+  <tpt-section-lazyload data-url="?section_id={{ section.id }}">
+    <div data-lazyload-element></div>
+    <span class="tpt-section_loader"></span>
+  </tpt-section-lazyload>
+{%- else -%}
+  {% style %}
+     #TptEmail5wrapper--{{ section.id }} {
+       margin: 0;
+       display: block;
+       background-color: {{ section.settings.background_color }};
+     }
+     #TptEmail5wrapper--{{ section.id }} .tpt-email-signup-6-container {
+       background: transparent;
+       margin-left: auto;
+       margin-right: auto;
+     }
+     .tpt-email-signup-6 {
+       max-width: 810px;
+       margin-left: auto;
+       margin-right: auto;
+       padding: 46px 15px 26px;
+       background-color: {{ section.settings.form_background_color }};
+     }
+     @media screen and (min-width: 750px) {
+       .tpt-email-signup-6 {
+         padding: 73px 120px 43px;
+       }
+     }
+     .tpt-email-signup-6-container h2 {
+       margin-block-start: 0;
+       margin-block-end: 0.3em;
+       font-size: 2.4rem;
+       font-style: normal;
+       font-weight: 600;
+       line-height: normal;
+     }
+     .tpt-email-signup-6-container .tpt-newsletter__heading {
+    color: var(--heading-color);
+       font-size: 2.4rem;
+       text-align: center;
+     }
+     @media screen and (min-width: 750px) {
+       .tpt-email-signup-6-container .tpt-newsletter__heading {
+         font-size: 4.2rem;
+       }
+     }
+     .tpt-email-signup-6-container .tpt-newsletter__subheading {
+       margin-block-end: 1.83em;
+       font-size: 1.4rem;
+       font-style: normal;
+       font-weight: 400;
+       line-height: normal;
+       margin-inline: 0;
+        color: var(--paragraph-color);
+       text-align: center;
+     }
+     @media screen and (min-width: 750px) {
+       .tpt-email-signup-6-container .tpt-newsletter__subheading {
+         font-size: 1.6rem;
+       }
+     }
+     .tpt-email-signup-6-container .tpt-newsletter-form-6__button{
+      color: var(--button-text-color);
+      border: none;
+       background-color: var(--button-background-color);
+       border: 1px solid var(--outline-button-color);
+       border-left: none;
+       padding: 0 15px;
+       height: 54px;
+       min-width: unset;
+     }
+
+     .tpt-email-signup-6-container .tpt-field-newsletter {
+       position: relative;
+       width: 100%;
+       max-width: 492px;
+       display: flex;
+     }
+     .tpt-newsletter-form-6__field-wrapper {
+       width: 100%;
+       display: flex;
+       justify-content: center;
+     }
+
+     .tpt-newsletter-form-6__message{
+      width: 100%;
+      text-align: center;
+      font-size: 100%;
+      margin: 1rem 0 0;
+      color: var(--paragraph-color);
+      font-weight: 400;
+     }
+
+     @media screen and (max-width: 767px) {
+       .tpt-email-signup-6-container label.tpt-field-newsletter__label {
+         top: 12px;
+       }
+     }
+
+     @media screen and (min-width: 750px) {
+       #TptEmail5wrapper--{{ section.id }} {
+         {%- if section.settings.image != blank -%}
+           background-image: url('{{ section.settings.image | image_url: width: 1500 }}');
+         {%- endif -%}
+       }
+       .tpt-email-signup-6-container h2 {
+         font-size: 4.2rem;
+       }
+       .tpt-email-signup-6-container .tpt-newsletter__subheading {
+         font-size: 1.4rem;
+       }
+     }
+     .tpt-email-signup-6-container .newsletter__form_container form {
+       margin-inline: 0;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: start;
+       width: 100%;
+       position: relative;
+       margin-bottom: 32px;
+     }
+     .tpt-email-signup-6-container .newsletter__form_container form .tpt-field-newsletter input {
+      background-color: transparent;
+      color: var(--outline-input-color);
+      border: 1px solid var(--outline-input-color);
+      height: 54px;
+      border-right: none;
+      width: 100%;
+      box-shadow: none !important;
+      outline: none !important;
+      padding: 0 15px;
+      font-size: 100%;
+     }
+
+     .tpt-email-signup-6-container .newsletter__form_container form .tpt-field-newsletter input::placeholder {
+      color: var(--outline-input-color);
+      opacity: 1;
+     }
+
+     .tpt-signup-social-items {
+       display: flex;
+       justify-content: center;
+       list-style: none;
+       padding: 0;
+     }
+     .tpt-signup-social-items li:not(:last-of-type) {
+       margin-inline-end: 24px;
+     }
+     @media screen and (max-width: 767px) {
+       .tpt-email-signup-6-container .newsletter__form_container form {
+         margin-bottom: 24px;
+       }
+       .tpt-signup-social-items li:not(:last-of-type) {
+         margin-inline-end: 16px;
+       }
+     }
+
+    @media screen and (max-width: 749px) {
+      #TptEmail5wrapper--{{ section.id }} {
+         {%- if section.settings.mobile_image != blank -%}
+           background-image: url('{{ section.settings.mobile_image | image_url: width: 1500 }}');
+         {%- endif -%}
+       }
+
+    }
+
+     .tpt-signup-social-items svg path {
+       fill: {{ section.settings.social_icon_color }};
+     }
+  {% endstyle %}
+  <div
+    id="TptEmail5wrapper--{{ section.id }}"
+    class="desktop-{{ section.settings.layout }} mobile-{{ section.settings.mobile_layout }}"
+  >
+    <div
+      class="tpt-section_container tpt-email-signup-6-container gradient"
+      id="TptNewsletter1Container--{{ section.id }}"
+    >
+      <div class="tpt-section_content page-width">
+        {% comment %} Section header {% endcomment %}
+        {%- render 'tpt-section-header', section: section -%}
+
+        <div class="tpt-section-body">
+          {% comment %} Section body {% endcomment %}
+
+          <div
+            class="tpt-email-signup-6 tpt-email-signup-6--{{ section.settings.content_layout }} "
+            style="
+              --heading-color: {{ section.settings.heading_color }}; --paragraph-color: {{ section.settings.paragraph_color }};
+              --button-background-color: {{ section.settings.button_background_color }}; --button-text-color: {{ section.settings.button_text_color }};
+              --outline-button-color: {{ section.settings.outline_button_color }}; --outline-input-color: {{ section.settings.outline_input_color }};
+            "
+          >
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'heading' -%}
+                  <h2
+                    class="tpt-newsletter__heading inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {{ block.shopify_attributes }}
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {{ block.settings.heading }}
+                  </h2>
+                {%- when 'paragraph' -%}
+                  <div
+                    class="tpt-newsletter__subheading rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {{ block.shopify_attributes }}
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {{ block.settings.text }}
+                  </div>
+                {%- when 'email_form' -%}
+                  <div {{ block.shopify_attributes }} class="newsletter__form_container">
+                    {% form 'customer', class: 'tpt-newsletter-form-6' %}
+                      <input type="hidden" name="contact[tags]" value="newsletter">
+                      <div
+                        class="tpt-newsletter-form-6__field-wrapper{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                        {% if settings.animations_reveal_on_scroll %}
+                          data-cascade
+                          style="--animation-order: {{ forloop.index }};"
+                        {% endif %}
+                      >
+                        <div class="tpt-field-newsletter">
+                          <input
+                            id="NewsletterForm--{{ section.id }}"
+                            type="email"
+                            name="contact[email]"
+                            class="tpt-field-newsletter__input"
+                            value="{{ form.email }}"
+                            aria-required="true"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            autocomplete="email"
+                            {% if form.errors %}
+                              autofocus
+                              aria-invalid="true"
+                              aria-describedby="Newsletter-error--{{ section.id }}"
+                            {% elsif form.posted_successfully? %}
+                              aria-describedby="Newsletter-success--{{ section.id }}"
+                            {% endif %}
+                            placeholder="{{ block.settings.input_label }}"
+                            required
+                          >
+
+                          <button
+                            type="submit"
+                            class="tpt-newsletter-form-6__button"
+                            name="commit"
+                            id="Subscribe"
+                            aria-label="{{ block.settings.button_label }}"
+                          >
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M4 12H20M20 12L13 5M20 12L13 19" stroke="{{ section.settings.button_text_color }}" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </button>
+                        </div>
+                        {%- if form.errors -%}
+                          <small
+                            class="tpt-newsletter-form-6__message"
+                            id="Newsletter-error--{{ section.id }}"
+                          >
+                            {{- form.errors.translated_fields.email | capitalize }}
+                            {{ form.errors.messages.email -}}
+                          </small>
+                        {%- endif -%}
+                      </div>
+                      {%- if form.posted_successfully? -%}
+                        <h6
+                          class="tpt-newsletter-form-6__message tpt-newsletter-form-6__message--success"
+                          id="Newsletter-success--{{ section.id }}"
+                          tabindex="-1"
+                          autofocus
+                        >
+                          {{- section.settings.success_message }}
+                        </h6>
+                      {%- endif -%}
+                    {% endform %}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+            <ul class="tpt-signup-social-items" role="list">
+              {%- if section.settings.social_facebook_link != blank -%}
+                <li class="tpt-email-signup-list-social__item">
+                  <a href="{{ settings.social_facebook_link }}" class="tpt-signup-social" rel="nofollow">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g >
+                      <path  d="M29.3337 15.9998C29.3337 8.63984 23.3603 2.6665 16.0003 2.6665C8.64033 2.6665 2.66699 8.63984 2.66699 15.9998C2.66699 22.4532 7.25366 27.8265 13.3337 29.0665V19.9998H10.667V15.9998H13.3337V12.6665C13.3337 10.0932 15.427 7.99984 18.0003 7.99984H21.3337V11.9998H18.667C17.9337 11.9998 17.3337 12.5998 17.3337 13.3332V15.9998H21.3337V19.9998H17.3337V29.2665C24.067 28.5998 29.3337 22.9198 29.3337 15.9998Z" fill="black"/>
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if section.settings.social_instagram_link != blank -%}
+                <li class="tpt-email-signup-list-social__item">
+                  <a href="{{ section.settings.social_instagram_link }}" class="tpt-signup-social" rel="nofollow">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g id="mdi:instagram">
+                      <path  d="M10.4003 2.6665H21.6003C25.867 2.6665 29.3337 6.13317 29.3337 10.3998V21.5998C29.3337 23.6508 28.5189 25.6178 27.0686 27.0681C25.6183 28.5184 23.6513 29.3332 21.6003 29.3332H10.4003C6.13366 29.3332 2.66699 25.8665 2.66699 21.5998V10.3998C2.66699 8.34883 3.48175 6.38183 4.93203 4.93154C6.38231 3.48126 8.34932 2.6665 10.4003 2.6665ZM10.1337 5.33317C8.86062 5.33317 7.63972 5.83888 6.73955 6.73906C5.83937 7.63923 5.33366 8.86013 5.33366 10.1332V21.8665C5.33366 24.5198 7.48033 26.6665 10.1337 26.6665H21.867C23.14 26.6665 24.3609 26.1608 25.2611 25.2606C26.1613 24.3604 26.667 23.1395 26.667 21.8665V10.1332C26.667 7.47984 24.5203 5.33317 21.867 5.33317H10.1337ZM23.0003 7.33317C23.4424 7.33317 23.8663 7.50877 24.1788 7.82133C24.4914 8.13389 24.667 8.55781 24.667 8.99984C24.667 9.44186 24.4914 9.86579 24.1788 10.1783C23.8663 10.4909 23.4424 10.6665 23.0003 10.6665C22.5583 10.6665 22.1344 10.4909 21.8218 10.1783C21.5093 9.86579 21.3337 9.44186 21.3337 8.99984C21.3337 8.55781 21.5093 8.13389 21.8218 7.82133C22.1344 7.50877 22.5583 7.33317 23.0003 7.33317ZM16.0003 9.33317C17.7684 9.33317 19.4641 10.0355 20.7144 11.2858C21.9646 12.536 22.667 14.2317 22.667 15.9998C22.667 17.7679 21.9646 19.4636 20.7144 20.7139C19.4641 21.9641 17.7684 22.6665 16.0003 22.6665C14.2322 22.6665 12.5365 21.9641 11.2863 20.7139C10.036 19.4636 9.33366 17.7679 9.33366 15.9998C9.33366 14.2317 10.036 12.536 11.2863 11.2858C12.5365 10.0355 14.2322 9.33317 16.0003 9.33317ZM16.0003 11.9998C14.9395 11.9998 13.922 12.4213 13.1719 13.1714C12.4218 13.9216 12.0003 14.939 12.0003 15.9998C12.0003 17.0607 12.4218 18.0781 13.1719 18.8283C13.922 19.5784 14.9395 19.9998 16.0003 19.9998C17.0612 19.9998 18.0786 19.5784 18.8288 18.8283C19.5789 18.0781 20.0003 17.0607 20.0003 15.9998C20.0003 14.939 19.5789 13.9216 18.8288 13.1714C18.0786 12.4213 17.0612 11.9998 16.0003 11.9998Z" fill="black"/>
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if section.settings.social_twitter_link != blank -%}
+                <li class="tpt-email-signup-list-social__item">
+                  <a href="{{ settings.social_twitter_link }}" class="tpt-signup-social" rel="nofollow">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_140_922)">
+                      <g >
+                      <g >
+                      <mask id="mask0_140_922" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                      <g >
+                      <path  d="M0 0H32V32H0V0Z" fill="white"/>
+                      </g>
+                      </mask>
+                      <g >
+                      <g >
+                      <path d="M23.667 4H27.7565L18.8232 14.2362L29.3337 28.1676H21.1051L14.6556 19.72L7.28414 28.1676H3.1908L12.7451 17.2152L2.66699 4.0019H11.1051L16.926 11.7219L23.667 4ZM22.2289 25.7143H24.4956L9.86699 6.32571H7.43652L22.2289 25.7143Z" fill="black"/>
+                      </g>
+                      </g>
+                      </g>
+                      </g>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_140_922">
+                      <rect width="32" height="32" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if section.settings.social_pinterest_link != blank -%}
+                <li class="tpt-email-signup-list-social__item">
+                  <a href="{{ settings.social_pinterest_link }}" class="tpt-signup-social" rel="nofollow">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g id="mdi:pinterest">
+                      <path id="Vector" d="M12.0537 28.7198C13.3337 29.1065 14.627 29.3332 16.0003 29.3332C19.5365 29.3332 22.9279 27.9284 25.4284 25.4279C27.9289 22.9274 29.3337 19.5361 29.3337 15.9998C29.3337 14.2489 28.9888 12.5151 28.3187 10.8974C27.6487 9.27972 26.6665 7.80986 25.4284 6.57175C24.1903 5.33363 22.7204 4.35151 21.1028 3.68144C19.4851 3.01138 17.7513 2.6665 16.0003 2.6665C14.2494 2.6665 12.5156 3.01138 10.8979 3.68144C9.2802 4.35151 7.81035 5.33363 6.57223 6.57175C4.07175 9.07223 2.66699 12.4636 2.66699 15.9998C2.66699 21.6665 6.22699 26.5332 11.2537 28.4532C11.1337 27.4132 11.0137 25.6932 11.2537 24.5065L12.787 17.9198C12.787 17.9198 12.4003 17.1465 12.4003 15.9198C12.4003 14.0798 13.547 12.7065 14.8537 12.7065C16.0003 12.7065 16.5337 13.5465 16.5337 14.6265C16.5337 15.7732 15.7737 17.4132 15.387 18.9865C15.1603 20.2932 16.0803 21.4398 17.4137 21.4398C19.787 21.4398 21.627 18.9065 21.627 15.3332C21.627 12.1332 19.3337 9.9465 16.0403 9.9465C12.2803 9.9465 10.067 12.7465 10.067 15.6932C10.067 16.8398 10.4403 17.9998 11.0537 18.7598C11.1737 18.8398 11.1737 18.9465 11.1337 19.1465L10.747 20.5998C10.747 20.8265 10.6003 20.9065 10.3737 20.7465C8.66699 19.9998 7.68033 17.5732 7.68033 15.6132C7.68033 11.3998 10.667 7.57317 16.427 7.57317C21.0137 7.57317 24.587 10.8665 24.587 15.2398C24.587 19.8265 21.747 23.5065 17.6803 23.5065C16.387 23.5065 15.1203 22.8132 14.667 21.9998L13.7737 25.1598C13.467 26.3065 12.627 27.8398 12.0537 28.7598V28.7198Z" fill="black"/>
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+              {%- endif -%}
+            </ul>
+          </div>
+        </div>
+        {% comment %} End section body {% endcomment %}
+      </div>
+    </div>
+  </div>
+{%- endif -%}{%- unless content_for_header contains 'tapita-section-script-tags' -%}{% style %}#shopify-section-{{ section.id }}{display: none !important;}{% endstyle %}{%- endunless -%}
+{% schema %}
+{
+  "name": "Tpt - Email signup #6",
+  "tag": "section",
+  "class": "section tpt-section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "text_first",
+          "label": "Text first"
+        }
+      ],
+      "default": "text_first",
+      "label": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "text_first",
+          "label": "Text first"
+        }
+      ],
+      "default": "image_first",
+      "label": "Mobile layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "form_background_color",
+      "label": "Form Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "paragraph_color",
+      "label": "Paragraph color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_color",
+      "label": "Outline button",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "outline_input_color",
+      "label": "Outline input",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "social_icon_color",
+      "label": "Social icons color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "default": "Thanks for subscribing",
+      "label": "Success Message"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_full_width",
+      "label": "Section full width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "min": 1200,
+      "max": 1900,
+      "step": 20,
+      "unit": "px",
+      "label": "Section max width",
+      "default": 1600
+    },
+    {
+      "type": "checkbox",
+      "id": "content_full_width",
+      "label": "Content full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 800,
+      "max": 1900,
+      "step": 20,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding desktop",
+      "default": 136
+    },
+    {
+      "type": "range",
+      "id": "padding_tablet_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding tablet, mobile",
+      "default": 79
+    },
+    {
+      "type": "range",
+      "id": "margin_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_tablet_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin tablet, mobile",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "section_lazyload",
+      "label": "Section lazyload",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "social_facebook_link",
+      "label": "Facebook Link"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram_link",
+      "label": "Instagram Link"
+    },
+    {
+      "type": "text",
+      "id": "social_twitter_link",
+      "label": "X Link"
+    },
+    {
+      "type": "text",
+      "id": "social_pinterest_link",
+      "label": "Pinterest Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Sign Up To Our Newsletter",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            }
+          ],
+          "default": "h2",
+          "label": "Heading size"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Subcribe today to receive promotions before anyone else!</p>",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "email_form",
+      "name": "Email form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "input_label",
+          "default": "Enter your email",
+          "label": "Input label"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tpt - Email signup #6",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "paragraph"
+        },
+        {
+          "type": "email_form"
+        }
+      ]
+    }
+  ]
+} 
+{% endschema %}

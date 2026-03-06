@@ -1,0 +1,31 @@
+{% layout none %}
+<div id="wishlist-container" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px;"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  const container = document.getElementById('wishlist-container');
+
+  if (wishlist.length === 0) {
+    container.innerHTML = '<p>Your wishlist is empty.</p>';
+    return;
+  }
+
+  wishlist.forEach(handle => {
+    fetch(`/products/${handle}.js`)
+      .then(response => response.json())
+      .then(product => {
+        const productCard = document.createElement('div');
+        productCard.style.width = '200px';
+        productCard.innerHTML = `
+          <a href="/products/${product.handle}">
+            <img src="${product.images[0]}" alt="${product.title}" style="width: 100%; height: auto;">
+            <p>${product.title}</p>
+            <p>${Shopify.formatMoney(product.price)}</p>
+          </a>
+        `;
+        container.appendChild(productCard);
+      });
+  });
+});
+</script>

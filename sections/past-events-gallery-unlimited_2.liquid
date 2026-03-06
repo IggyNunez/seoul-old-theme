@@ -1,0 +1,495 @@
+{% assign ai_gen_id = section.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-events-gallery-{{ ai_gen_id }} {
+    padding: 40px 20px;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .ai-events-gallery__container-{{ ai_gen_id }} {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-events-gallery__header-{{ ai_gen_id }} {
+    text-align: {{ section.settings.text_alignment }};
+    margin-bottom: 40px;
+  }
+
+  .ai-events-gallery__title-{{ ai_gen_id }} {
+    font-size: {{ section.settings.title_size }}px;
+    color: {{ section.settings.title_color }};
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .ai-events-gallery__subtitle-{{ ai_gen_id }} {
+    font-size: {{ section.settings.subtitle_size }}px;
+    color: {{ section.settings.subtitle_color }};
+    margin: 0 0 16px;
+  }
+
+  .ai-events-gallery__description-{{ ai_gen_id }} {
+    font-size: {{ section.settings.description_size }}px;
+    color: {{ section.settings.description_color }};
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ai-events-gallery__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    gap: {{ section.settings.gap }}px;
+    margin-bottom: 40px;
+  }
+
+  .ai-events-gallery__item-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ section.settings.image_radius }}px;
+    background-color: #f4f4f4;
+    aspect-ratio: {{ section.settings.aspect_ratio }};
+  }
+
+  .ai-events-gallery__image-wrapper-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .ai-events-gallery__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-events-gallery__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-events-gallery__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-events-gallery__overlay-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .ai-events-gallery__item-{{ ai_gen_id }}:hover .ai-events-gallery__overlay-{{ ai_gen_id }} {
+    transform: translateY(0);
+  }
+
+  .ai-events-gallery__event-title-{{ ai_gen_id }} {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .ai-events-gallery__footer-{{ ai_gen_id }} {
+    text-align: center;
+  }
+
+  .ai-events-gallery__footer-text-{{ ai_gen_id }} {
+    font-size: {{ section.settings.footer_text_size }}px;
+    color: {{ section.settings.footer_text_color }};
+    margin: 0;
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-events-gallery__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-events-gallery__title-{{ ai_gen_id }} {
+      font-size: calc({{ section.settings.title_size }}px * 0.8);
+    }
+
+    .ai-events-gallery__subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ section.settings.subtitle_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-events-gallery-{{ ai_gen_id }} {
+      padding: 30px 16px;
+    }
+
+    .ai-events-gallery__header-{{ ai_gen_id }} {
+      margin-bottom: 30px;
+    }
+
+    .ai-events-gallery__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+      gap: {{ section.settings.gap_mobile }}px;
+    }
+
+    .ai-events-gallery__title-{{ ai_gen_id }} {
+      font-size: calc({{ section.settings.title_size }}px * 0.7);
+    }
+
+    .ai-events-gallery__subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ section.settings.subtitle_size }}px * 0.85);
+    }
+
+    .ai-events-gallery__description-{{ ai_gen_id }} {
+      font-size: calc({{ section.settings.description_size }}px * 0.9);
+    }
+
+    .ai-events-gallery__overlay-{{ ai_gen_id }} {
+      transform: translateY(0);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 16px;
+    }
+
+    .ai-events-gallery__event-title-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-events-gallery-{{ ai_gen_id }}" {{ section.shopify_attributes }}>
+  <div class="ai-events-gallery__container-{{ ai_gen_id }}">
+    {% if section.settings.title != blank or section.settings.subtitle != blank or section.settings.description != blank %}
+      <div class="ai-events-gallery__header-{{ ai_gen_id }}">
+        {% if section.settings.title != blank %}
+          <h2 class="ai-events-gallery__title-{{ ai_gen_id }}">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <div class="ai-events-gallery__subtitle-{{ ai_gen_id }}">{{ section.settings.subtitle }}</div>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <div class="ai-events-gallery__description-{{ ai_gen_id }}">{{ section.settings.description }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-events-gallery__grid-{{ ai_gen_id }}">
+      {% for event_block in section.blocks %}
+        {% if event_block.settings.event_image != blank or event_block.settings.event_title != blank %}
+          <div class="ai-events-gallery__item-{{ ai_gen_id }}" {{ event_block.shopify_attributes }}>
+            <div class="ai-events-gallery__image-wrapper-{{ ai_gen_id }}">
+              {% if event_block.settings.event_image != blank %}
+                <img
+                  src="{{ event_block.settings.event_image | image_url: width: 800 }}"
+                  alt="{{ event_block.settings.event_title | escape }}"
+                  loading="lazy"
+                  width="800"
+                  height="800"
+                  class="ai-events-gallery__image-{{ ai_gen_id }}"
+                >
+              {% else %}
+                <div class="ai-events-gallery__placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+              {% if event_block.settings.event_title != blank %}
+                <div class="ai-events-gallery__overlay-{{ ai_gen_id }}">
+                  <h3 class="ai-events-gallery__event-title-{{ ai_gen_id }}">{{ event_block.settings.event_title }}</h3>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.footer_text != blank %}
+      <div class="ai-events-gallery__footer-{{ ai_gen_id }}">
+        <p class="ai-events-gallery__footer-text-{{ ai_gen_id }}">{{ section.settings.footer_text }}</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Past events gallery",
+  "class": "section-events-gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Past Events"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Celebrating memorable moments"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>More to come</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "More events coming soon"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap between images",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap on mobile",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "4/3",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "16/9",
+          "label": "Wide (16:9)"
+        },
+        {
+          "value": "3/4",
+          "label": "Portrait (3:4)"
+        }
+      ],
+      "default": "4/3"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Image corner radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Footer text",
+      "default": "#999999"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "footer_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Footer text size",
+      "default": 14
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Event",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "event_image",
+          "label": "Event image"
+        },
+        {
+          "type": "text",
+          "id": "event_title",
+          "label": "Event title",
+          "default": "Event name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Past events gallery",
+      "blocks": [
+        {
+          "type": "event",
+          "settings": {
+            "event_title": "Summer Glow Workshop"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "event_title": "K-Beauty Masterclass"
+          }
+        },
+        {
+          "type": "event",
+          "settings": {
+            "event_title": "Skincare Launch Party"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

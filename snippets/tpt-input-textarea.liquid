@@ -1,0 +1,16 @@
+<div class="tpt-grid_item tpt-field" style="--input-width: {{ block.settings.input_width }}%">
+  <label class="tpt-label">{{ block.settings.input_label }}</label>
+
+  <textarea
+    id="input-{{ block.id }}"
+    class="tpt-input_text tpt-input__textarea"
+    name="contact[{{ block.settings.input_label }}]"
+    rows="5"
+    cols="80"
+    {% if block.settings.input_required %}required{% endif %}
+    placeholder="{{- block.settings.input_placeholder -}}"
+  ></textarea>
+  {%- if block.settings.input_note != blank -%}
+    <div class="tpt-input__note">{{ block.settings.input_note }}</div>
+  {%- endif -%}
+</div>

@@ -1,0 +1,192 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "description",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "psb_reviews_reviews_01_kmhmR4": {
+      "type": "psb-reviews-reviews-01",
+      "blocks": {
+        "review_wDXgmY": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        },
+        "review_b83CXV": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        },
+        "review_9e3796": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        },
+        "review_7iBNNt": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_wDXgmY",
+        "review_b83CXV",
+        "review_9e3796",
+        "review_7iBNNt"
+      ],
+      "custom_css": [
+        "h1.psb-utilities-heading__heading.psb-rte {font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".psb-utilities-heading__subheading.psb-rte.psb-block-space {padding-top: 25px; font-family: Arial; font-size: 11.922px; font-style: normal; font-weight: 400; line-height: 20px; \/* 167.759% *\/ letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".psb-relative.psb-block-space {padding-top: 30px;}"
+      ],
+      "name": "⚡︎PSB: Reviews 01",
+      "settings": {
+        "container_width": "psb-container",
+        "heading": "<p>REAL PEOPLE, REAL REVIEWS<\/p>",
+        "heading_tag": "h1",
+        "subheading": "<p>Here's why we have over 40K five-star reviews<\/p>",
+        "heading_color": "#2d2d2d",
+        "subheading_color": "#000000",
+        "enable_star": true,
+        "border_radius": 8,
+        "slider_per_view": 3,
+        "enable_loop": false,
+        "enable_autoplay": false,
+        "enable_pagination": false,
+        "enable_navigation": false,
+        "pagination_type": "fraction",
+        "background_color": "#fff1dc",
+        "swiper_control_color": "#57301b",
+        "review-background-color": "#ffffff",
+        "stars-color": "#ffa500",
+        "text_color": "#374151",
+        "border_color": "#ffffff",
+        "text_align": "center",
+        "section_padding_top": 50,
+        "section_padding_bottom": 50,
+        "text_align_mobile": "center",
+        "section_padding_top_mobile": 35,
+        "section_padding_bottom_mobile": 35
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "custom_css": [],
+      "settings": {
+        "heading": "You May Also Like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "psb_reviews_reviews_01_kmhmR4",
+    "related-products"
+  ]
+}

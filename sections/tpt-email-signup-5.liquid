@@ -1,0 +1,539 @@
+{% comment %} Section layout style {% endcomment %}
+{{ 'tpt-section.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Section configuration {% endcomment %}
+{%- render 'tpt-section-setting', section: section -%}
+
+{%- if section.index and section.settings.section_lazyload -%}
+  <script src="{{ 'tpt-section-lazyload.js' | asset_url }}" defer="defer"></script>
+
+  <tpt-section-lazyload data-url="?section_id={{ section.id }}">
+    <div data-lazyload-element></div>
+    <span class="tpt-section_loader"></span>
+  </tpt-section-lazyload>
+{%- else -%}
+  {% style %}
+     #TptEmail5wrapper--{{ section.id }} {
+       margin: 0;
+       display: block;
+       background-position: center;
+       background-size: cover;
+       min-height: 332px;
+       {%- if section.settings.mobile_image != blank -%}
+         background-image: url('{{ section.settings.mobile_image | image_url: width: 900 }}');
+       {%- else -%}
+         background-image: url('https://cdn.shopify.com/s/files/1/0597/3783/3627/files/email-signup-5.jpg?v=1723798396');
+       {%- endif -%}
+     }
+     @media screen and (min-width: 1280px) {
+       #TptEmail5wrapper--{{ section.id }} {
+       }
+     }
+     #TptEmail5wrapper--{{ section.id }} .tpt-email-signup-5-container {
+       background: transparent;
+       margin-left: auto;
+       margin-right: auto;
+     }
+     .tpt-email-signup-5 {
+       max-width: 810px;
+       margin-left: auto;
+       margin-right: auto;
+       padding: 46px 10px;
+       background-color: rgba(255, 255, 255, 0.5);
+     }
+     @media screen and (min-width: 750px) {
+       .tpt-email-signup-5 {
+         padding: 73px 90px;
+       }
+     }
+     .tpt-email-signup-5-container h2 {
+       margin-block-start: 0;
+       margin-block-end: 0.3em;
+       font-size: 2.4rem;
+       font-style: normal;
+       font-weight: 600;
+       line-height: normal;
+     }
+     .tpt-email-signup-5-container .tpt-newsletter__heading {
+    color: var(--heading-color);
+       font-size: 2.4rem;
+       text-align: center;
+     }
+     @media screen and (min-width: 750px) {
+       .tpt-email-signup-5-container .tpt-newsletter__heading {
+         font-size: 4.2rem;
+       }
+     }
+     .tpt-email-signup-5-container .tpt-newsletter__subheading {
+       margin-block-end: 1.83em;
+       font-size: 1.4rem;
+       font-style: normal;
+       font-weight: 400;
+       line-height: normal;
+       margin-inline: 0;
+    color: var(--paragraph-color);
+       text-align: center;
+     }
+     @media screen and (min-width: 750px) {
+       .tpt-email-signup-5-container .tpt-newsletter__subheading {
+         font-size: 1.6rem;
+       }
+     }
+     .tpt-email-signup-5-container .tpt-newsletter-form-5__button{
+      color: var(--button-text-color);
+      background-color: var(--button-background-color);
+      border-color: var(--outline-button-color);
+      margin-top: 16px;
+      width: 100%;
+      padding: 15px;
+      border: none !important;
+      height: 54px;
+      font-size: 100%;
+      cursor: pointer;
+     }
+
+     .tpt-newsletter-form-5__message{
+      margin: 1rem 0 0;
+      display: block;
+      text-align: center;
+      font-size: 100%;
+      width: 100%;
+      color: var(--paragraph-color);
+      font-weight: 400;
+     }
+
+     .tpt-email-signup-5-container .tpt-field-newsletter {
+       position: relative;
+       width: 100%;
+       max-width: 492px;
+       display: flex;
+       flex-wrap: wrap;
+     }
+     .tpt-newsletter-form-5__field-wrapper {
+       width: 100%;
+       display: flex;
+       justify-content: center;
+     }
+
+     @media screen and (min-width: 750px) {
+       #TptEmail5wrapper--{{ section.id }} {
+         {%- if section.settings.image != blank -%}
+           background-image: url('{{ section.settings.image | image_url: width: 1500 }}');
+         {%- else -%}
+           background-image: url('https://cdn.shopify.com/s/files/1/0597/3783/3627/files/email-signup-5.jpg?v=1723798396');
+         {%- endif -%}
+       }
+       .tpt-email-signup-5-container h2 {
+         font-size: 4.2rem;
+       }
+       .tpt-email-signup-5-container .tpt-newsletter__subheading {
+         font-size: 1.4rem;
+       }
+     }
+     .tpt-email-signup-5-container .newsletter__form_container form {
+       margin-inline: 0;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: start;
+       width: 100%;
+       position: relative;
+     }
+     .tpt-email-signup-5-container .newsletter__form_container form .tpt-field-newsletter input {
+      width: 100%;
+      background-color: transparent;
+      color: var(--outline-input-color);
+      border-color: var(--outline-input-color);
+      border-width: 1px;
+      height: 54px;
+      outline: none !important;
+      box-shadow: none !important;
+      font-size: 100%;
+      padding: 0 15px;
+     }
+
+     .tpt-email-signup-5-container .newsletter__form_container form .tpt-field-newsletter input::placeholder{
+      color: var(--outline-input-color);
+      opacity: 1;
+     }
+  {% endstyle %}
+  <div
+    id="TptEmail5wrapper--{{ section.id }}"
+    class="desktop-{{ section.settings.layout }} mobile-{{ section.settings.mobile_layout }}"
+  >
+    <div
+      class="tpt-section_container tpt-email-signup-5-container gradient"
+      id="TptNewsletter1Container--{{ section.id }}"
+    >
+      <div class="tpt-section_content page-width">
+        <div class="tpt-section-body">
+          {% comment %} Section body {% endcomment %}
+
+          <div
+            class="tpt-email-signup-5 tpt-email-signup-5--{{ section.settings.content_layout }} "
+            style="
+              --heading-color: {{ section.settings.heading_color }}; --paragraph-color: {{ section.settings.paragraph_color }};
+              --button-background-color: {{ section.settings.button_background_color }}; --button-text-color: {{ section.settings.button_text_color }};
+              --outline-button-color: {{ section.settings.outline_button_color }}; --outline-input-color: {{ section.settings.outline_input_color }};
+            "
+          >
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {% render block %}
+                {%- when 'heading' -%}
+                  <h2
+                    class="tpt-newsletter__heading inline-richtext {{ block.settings.heading_size }}"
+                    {{ block.shopify_attributes }}
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {{ block.settings.heading }}
+                  </h2>
+                {%- when 'paragraph' -%}
+                  <div
+                    class="tpt-newsletter__subheading rte"
+                    {{ block.shopify_attributes }}
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {{ block.settings.text }}
+                  </div>
+                {%- when 'email_form' -%}
+                  <div {{ block.shopify_attributes }} class="newsletter__form_container">
+                    {% form 'customer', class: 'tpt-newsletter-form-5' %}
+                      <input type="hidden" name="contact[tags]" value="newsletter">
+                      <div
+                        class="tpt-newsletter-form-5__field-wrapper"
+                        {% if settings.animations_reveal_on_scroll %}
+                          data-cascade
+                          style="--animation-order: {{ forloop.index }};"
+                        {% endif %}
+                      >
+                        <div class="tpt-field-newsletter">
+                          <input
+                            id="NewsletterForm--{{ section.id }}"
+                            type="email"
+                            name="contact[email]"
+                            class="tpt-field-newsletter__input"
+                            value="{{ form.email }}"
+                            aria-required="true"
+                            autocorrect="off"
+                            autocapitalize="off"
+                            autocomplete="email"
+                            {% if form.errors %}
+                              autofocus
+                              aria-invalid="true"
+                              aria-describedby="Newsletter-error--{{ section.id }}"
+                            {% elsif form.posted_successfully? %}
+                              aria-describedby="Newsletter-success--{{ section.id }}"
+                            {% endif %}
+                            placeholder="{{ block.settings.input_label }}"
+                            required
+                          >
+
+                          <button
+                            type="submit"
+                            class="tpt-newsletter-form-5__button"
+                            name="commit"
+                            id="Subscribe"
+                            aria-label="{{ block.settings.button_label }}"
+                          >
+                            {{ block.settings.button_label }}
+                          </button>
+                        </div>
+                        {%- if form.errors -%}
+                          <small
+                            class="tpt-newsletter-form-5__message"
+                            id="Newsletter-error--{{ section.id }}"
+                          >
+                            {{- form.errors.translated_fields.email | capitalize }}
+                            {{ form.errors.messages.email -}}
+                          </small>
+                        {%- endif -%}
+                      </div>
+                      {%- if form.posted_successfully? -%}
+                        <h6
+                          class="tpt-newsletter-form-5__message tpt-newsletter-form-5__message--success"
+                          id="Newsletter-success--{{ section.id }}"
+                          tabindex="-1"
+                          autofocus
+                        >
+                          {{- section.settings.success_message }}
+                        </h6>
+                      {%- endif -%}
+                    {% endform %}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        </div>
+        {% comment %} End section body {% endcomment %}
+      </div>
+    </div>
+  </div>
+{%- endif -%}{%- unless content_for_header contains 'tapita-section-script-tags' -%}{% style %}#shopify-section-{{ section.id }}{display: none !important;}{% endstyle %}{%- endunless -%}
+{% schema %}
+{
+  "name": "Tpt - Email signup #5",
+  "tag": "section",
+  "class": "section tpt-section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "text_first",
+          "label": "Text first"
+        }
+      ],
+      "default": "text_first",
+      "label": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "Image first"
+        },
+        {
+          "value": "text_first",
+          "label": "Text first"
+        }
+      ],
+      "default": "image_first",
+      "label": "Mobile layout"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "paragraph_color",
+      "label": "Paragraph color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "outline_button_color",
+      "label": "Outline button",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "outline_input_color",
+      "label": "Outline input",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "default": "Thanks for subscribing",
+      "label": "Success Message"
+    },
+    {
+      "type": "checkbox",
+      "id": "section_full_width",
+      "label": "Section full width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "min": 1200,
+      "max": 1900,
+      "step": 20,
+      "unit": "px",
+      "label": "Section max width",
+      "default": 1600
+    },
+    {
+      "type": "checkbox",
+      "id": "content_full_width",
+      "label": "Content full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 800,
+      "max": 1900,
+      "step": 20,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1440
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding desktop",
+      "default": 136
+    },
+    {
+      "type": "range",
+      "id": "padding_tablet_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding tablet, mobile",
+      "default": 79
+    },
+    {
+      "type": "range",
+      "id": "margin_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin desktop",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "margin_tablet_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Margin tablet, mobile",
+      "default": 40
+    },
+    {
+      "type": "checkbox",
+      "id": "section_lazyload",
+      "label": "Section lazyload",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Sign Up To Our Newsletter",
+          "label": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h3",
+              "label": "Small"
+            },
+            {
+              "value": "h2",
+              "label": "Medium"
+            },
+            {
+              "value": "h1",
+              "label": "Large"
+            }
+          ],
+          "default": "h2",
+          "label": "Heading size"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Subcribe today to receive promotions before anyone else!</p>",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "email_form",
+      "name": "Email form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Subcribe",
+          "label": "Button label"
+        },
+        {
+          "type": "text",
+          "id": "input_label",
+          "default": "Enter your email",
+          "label": "Input label"
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tpt - Email signup #5",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "paragraph"
+        },
+        {
+          "type": "email_form"
+        }
+      ]
+    }
+  ]
+} 
+{% endschema %}

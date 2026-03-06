@@ -1,0 +1,838 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-feature-{{ ai_gen_id }} {
+    background-color: {{ block.settings.section_bg_color }};
+    padding: {{ block.settings.section_padding }}px 20px;
+    overflow-x: hidden;
+  }
+
+  .ai-product-feature-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.section_width }}px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: {% if block.settings.gallery_position == 'left' %}1fr 1fr{% else %}1fr 1fr{% endif %};
+    gap: 60px;
+    align-items: start;
+    box-sizing: border-box;
+    padding: 0 20px;
+  }
+
+  {% if block.settings.gallery_position == 'right' %}
+    .ai-product-gallery-{{ ai_gen_id }} {
+      order: 2;
+    }
+    .ai-product-info-{{ ai_gen_id }} {
+      order: 1;
+    }
+  {% endif %}
+
+  .ai-product-gallery-{{ ai_gen_id }} {
+    position: relative;
+    min-width: 0;
+  }
+
+  .ai-product-main-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    margin-bottom: 16px;
+  }
+
+  .ai-product-main-image-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .ai-product-main-image-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-product-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: {{ block.settings.arrow_bg_color }};
+    color: {{ block.settings.arrow_icon_color }};
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-product-arrow-{{ ai_gen_id }}:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-product-arrow-{{ ai_gen_id }}:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .ai-product-arrow-prev-{{ ai_gen_id }} {
+    left: 16px;
+  }
+
+  .ai-product-arrow-next-{{ ai_gen_id }} {
+    right: 16px;
+  }
+
+  .ai-product-thumbnails-{{ ai_gen_id }} {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 0;
+    scrollbar-width: thin;
+    scrollbar-color: {{ block.settings.thumbnail_active_border }} transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-product-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .ai-product-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .ai-product-thumbnails-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+    background-color: {{ block.settings.thumbnail_active_border }};
+    border-radius: 3px;
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: {{ block.settings.thumbnail_border_radius }}px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    transform: scale(1);
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }}:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }}.active {
+    border-color: {{ block.settings.thumbnail_active_border }};
+    transform: scale(1.05);
+  }
+
+  .ai-product-thumbnail-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+  }
+
+  .ai-product-info-{{ ai_gen_id }} {
+    position: sticky;
+    top: 20px;
+    min-width: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ai-product-caption-{{ ai_gen_id }} {
+    color: {{ block.settings.caption_color }};
+    font-size: {{ block.settings.caption_size }}px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ai-product-title-{{ ai_gen_id }} {
+    color: {{ block.settings.title_color }};
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .ai-product-reviews-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ai-product-stars-{{ ai_gen_id }} {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .ai-product-star-{{ ai_gen_id }} {
+    color: {{ block.settings.star_color }};
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .ai-product-review-count-{{ ai_gen_id }} {
+    color: {{ block.settings.review_text_color }};
+    font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ai-product-price-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .ai-product-price-{{ ai_gen_id }} {
+    color: {{ block.settings.price_color }};
+    font-size: {{ block.settings.price_size }}px;
+    font-weight: 700;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ai-product-compare-price-{{ ai_gen_id }} {
+    color: {{ block.settings.compare_price_color }};
+    font-size: calc({{ block.settings.price_size }}px * 0.75);
+    font-weight: 400;
+    text-decoration: line-through;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ai-product-sale-badge-{{ ai_gen_id }} {
+    background-color: {{ block.settings.sale_badge_bg_color }};
+    color: {{ block.settings.sale_badge_text_color }};
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-product-description-{{ ai_gen_id }} {
+    color: {{ block.settings.description_color }};
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .ai-product-cta-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    padding: 16px 40px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    text-decoration: none;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+
+  .ai-product-cta-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-product-cta-{{ ai_gen_id }}:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-product-placeholder-{{ ai_gen_id }} {
+    background-color: #f4f4f4;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-product-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-product-feature-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding }}px 16px;
+    }
+
+    .ai-product-feature-container-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 0 12px;
+    }
+
+    .ai-product-gallery-{{ ai_gen_id }},
+    .ai-product-info-{{ ai_gen_id }} {
+      order: 0;
+    }
+
+    .ai-product-info-{{ ai_gen_id }} {
+      position: static;
+    }
+
+    .ai-product-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-product-arrow-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-product-arrow-prev-{{ ai_gen_id }} {
+      left: 8px;
+    }
+
+    .ai-product-arrow-next-{{ ai_gen_id }} {
+      right: 8px;
+    }
+
+    .ai-product-cta-{{ ai_gen_id }} {
+      width: 100%;
+      padding: 14px 24px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-product-feature-{{ ai_gen_id }} {
+      padding: calc({{ block.settings.section_padding }}px * 0.8) 12px;
+    }
+
+    .ai-product-feature-container-{{ ai_gen_id }} {
+      padding: 0 8px;
+    }
+
+    .ai-product-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.7);
+    }
+
+    .ai-product-thumbnails-{{ ai_gen_id }} {
+      gap: 8px;
+    }
+
+    .ai-product-thumbnail-{{ ai_gen_id }} {
+      width: 60px;
+      height: 60px;
+    }
+
+    .ai-product-price-wrapper-{{ ai_gen_id }} {
+      gap: 8px;
+    }
+
+    .ai-product-price-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.price_size }}px * 0.85);
+    }
+
+    .ai-product-compare-price-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.price_size }}px * 0.6);
+    }
+  }
+{% endstyle %}
+
+<product-feature-{{ ai_gen_id }} class="ai-product-feature-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-product-feature-container-{{ ai_gen_id }}">
+    <div class="ai-product-gallery-{{ ai_gen_id }}">
+      <div class="ai-product-main-image-wrapper-{{ ai_gen_id }}">
+        {% if product.images.size > 0 %}
+          {% for image in product.images limit: 5 %}
+            <img
+              src="{{ image | image_url: width: 1000 }}"
+              alt="{{ image.alt | escape }}"
+              class="ai-product-main-image-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}"
+              loading="lazy"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              data-index="{{ forloop.index0 }}"
+            >
+          {% endfor %}
+
+          {% if product.images.size > 1 %}
+            <button class="ai-product-arrow-{{ ai_gen_id }} ai-product-arrow-prev-{{ ai_gen_id }}" aria-label="Previous image">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button class="ai-product-arrow-{{ ai_gen_id }} ai-product-arrow-next-{{ ai_gen_id }}" aria-label="Next image">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          {% endif %}
+        {% else %}
+          <div class="ai-product-placeholder-{{ ai_gen_id }}">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if product.images.size > 1 %}
+        <div class="ai-product-thumbnails-{{ ai_gen_id }}">
+          {% for image in product.images limit: 5 %}
+            <div class="ai-product-thumbnail-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
+              <img
+                src="{{ image | image_url: width: 200 }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+                width="80"
+                height="80"
+              >
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-product-info-{{ ai_gen_id }}">
+      {% if block.settings.caption != blank %}
+        <div class="ai-product-caption-{{ ai_gen_id }}">{{ block.settings.caption }}</div>
+      {% endif %}
+
+      <h2 class="ai-product-title-{{ ai_gen_id }}">
+        {% if product.title != blank %}
+          {{ product.title }}
+        {% else %}
+          Product Title
+        {% endif %}
+      </h2>
+
+      <div class="ai-product-reviews-{{ ai_gen_id }}">
+        <div class="ai-product-stars-{{ ai_gen_id }}">
+          {% for i in (1..5) %}
+            <svg class="ai-product-star-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          {% endfor %}
+        </div>
+        <span class="ai-product-review-count-{{ ai_gen_id }}">{{ block.settings.review_count }}</span>
+      </div>
+
+      <div class="ai-product-price-wrapper-{{ ai_gen_id }}">
+        {% if product.price %}
+          <span class="ai-product-price-{{ ai_gen_id }}">{{ product.price | money }}</span>
+          {% if product.compare_at_price > product.price %}
+            <span class="ai-product-compare-price-{{ ai_gen_id }}">{{ product.compare_at_price | money }}</span>
+            {% if block.settings.show_sale_badge %}
+              {% assign savings = product.compare_at_price | minus: product.price %}
+              {% assign savings_percent = savings | times: 100.0 | divided_by: product.compare_at_price | round %}
+              <span class="ai-product-sale-badge-{{ ai_gen_id }}">{{ block.settings.sale_badge_text | replace: '[percent]', savings_percent }}</span>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          <span class="ai-product-price-{{ ai_gen_id }}">$99.00</span>
+        {% endif %}
+      </div>
+
+      {% if product.description != blank %}
+        <div class="ai-product-description-{{ ai_gen_id }}">
+          {{ product.description }}
+        </div>
+      {% else %}
+        <div class="ai-product-description-{{ ai_gen_id }}">
+          {{ block.settings.default_description }}
+        </div>
+      {% endif %}
+
+      <a href="{{ block.settings.cta_link | default: product.url }}" class="ai-product-cta-{{ ai_gen_id }}">
+        {{ block.settings.cta_text }}
+      </a>
+    </div>
+  </div>
+</product-feature-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductFeature{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.images = this.querySelectorAll('.ai-product-main-image-{{ ai_gen_id }}');
+        this.thumbnails = this.querySelectorAll('.ai-product-thumbnail-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-product-arrow-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-product-arrow-next-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        if (this.images.length <= 1) return;
+
+        this.prevButton.addEventListener('click', () => this.navigate(-1));
+        this.nextButton.addEventListener('click', () => this.navigate(1));
+
+        this.thumbnails.forEach((thumbnail, index) => {
+          thumbnail.addEventListener('click', () => this.goToSlide(index));
+        });
+      }
+
+      navigate(direction) {
+        this.currentIndex = (this.currentIndex + direction + this.images.length) % this.images.length;
+        this.updateSlide();
+      }
+
+      goToSlide(index) {
+        this.currentIndex = index;
+        this.updateSlide();
+      }
+
+      updateSlide() {
+        this.images.forEach((img, index) => {
+          img.classList.toggle('active', index === this.currentIndex);
+        });
+
+        this.thumbnails.forEach((thumb, index) => {
+          thumb.classList.toggle('active', index === this.currentIndex);
+        });
+      }
+    }
+
+    customElements.define('product-feature-{{ ai_gen_id }}', ProductFeature{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product feature section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Section width",
+      "default": 1600
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "gallery_position",
+      "label": "Gallery position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Caption"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption text",
+      "default": "Featured Product"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "caption_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Caption size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count text",
+      "default": "391+ reviews"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "review_text_color",
+      "label": "Review text color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Price"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Price size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "default": "#999999"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_badge",
+      "label": "Show sale badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_badge_text",
+      "label": "Sale badge text",
+      "default": "Save [percent]%",
+      "info": "Use [percent] to display savings percentage"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_bg_color",
+      "label": "Sale badge background",
+      "default": "#e53935"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_text_color",
+      "label": "Sale badge text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "default_description",
+      "label": "Default description",
+      "default": "Experience the ultimate in skincare with our premium product. Designed for all skin types."
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Gallery"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Thumbnail border radius",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "thumbnail_active_border",
+      "label": "Active thumbnail border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg_color",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_icon_color",
+      "label": "Arrow icon color",
+      "default": "#121212"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product feature section"
+    }
+  ]
+}
+{% endschema %}

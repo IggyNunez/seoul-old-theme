@@ -1,0 +1,250 @@
+<style>
+  .sab_reviews_section {
+  background: #ecf3fc;
+  padding: 48px 0 48px 0;
+  width: 100%;
+    margin-top: 80px;
+}
+.sab_reviews_header {
+  text-align: center;
+  margin-bottom: 38px;
+}
+.sab_reviews_heading {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #232323;
+  margin-bottom: 8px;
+}
+.sab_reviews_overall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #888;
+  margin-top: 8px;
+}
+.sab_reviews_stars i {
+  color: #FFD700;
+  font-size: 18px;
+}
+.sab_reviews_avg {
+  font-size: 15px;
+  color: #636363;
+  margin-left: 8px;
+  letter-spacing: 0.01em;
+}
+.sab_reviews_list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.sab_review_card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 22px 32px;
+  box-shadow: 0 3px 14px rgba(60, 60, 60, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.sab_review_top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+.sab_review_stars i {
+  color: #FFD700;
+  font-size: 17px;
+}
+.sab_review_author {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.sab_review_avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e5ec;
+}
+.sab_review_name {
+  font-weight: 600;
+  color: #232323;
+  font-size: 15px;
+}
+.sab_review_location {
+  font-size: 14px;
+  color: #8e98b3;
+  margin-left: 3px;
+}
+.sab_review_text {
+  font-size: 15px;
+  color: #393939;
+  line-height: 1.7;
+  margin-left: 48px;
+}
+@media (max-width: 700px) {
+  .sab_review_card { padding: 18px 12px; }
+  .sab_reviews_section { padding: 24px 0; }
+}
+
+  @media (max-width: 900px) {
+  .sab_reviews_section {
+    padding: 30px 0;
+    margin-top: 40px;
+  }
+  .sab_reviews_heading {
+    font-size: 22px;
+  }
+  .sab_review_card {
+    padding: 14px 8px;
+    border-radius: 7px;
+  }
+  .sab_review_avatar {
+    width: 32px;
+    height: 32px;
+  }
+  .sab_reviews_list {
+    gap: 14px;
+    max-width: 98vw;
+  }
+  .sab_review_top {
+    gap: 10px;
+  }
+  .sab_review_author_name {
+    font-size: 13px;
+  }
+  .sab_review_stars i {
+    font-size: 15px;
+  }
+  .sab_review_text {
+    font-size: 13px;
+    margin-left: 38px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sab_reviews_section {
+    padding: 18px 0 18px 0;
+    margin-top: 18px;
+  }
+  .sab_reviews_heading {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .sab_reviews_overall {
+    font-size: 12px;
+    gap: 5px;
+  }
+  .sab_reviews_stars i {
+    font-size: 13px;
+  }
+  .sab_review_card {
+    padding: 8px 2px;
+    border-radius: 4px;
+    gap: 7px;
+  }
+  .sab_review_avatar {
+    width: 26px;
+    height: 26px;
+  }
+  .sab_review_top {
+    gap: 6px;
+  }
+  .sab_review_stars i {
+    font-size: 13px;
+  }
+  .sab_review_author_name {
+    font-size: 11px;
+  }
+  .sab_review_text {
+    font-size: 11px;
+    margin-left: 26px;
+  }
+}
+
+</style>
+
+<div class="sab_reviews_section">
+  <div class="sab_reviews_header">
+    <h2 class="sab_reviews_heading">{{ section.settings.heading }}</h2>
+    <div class="sab_reviews_overall">
+      <span class="sab_reviews_stars">
+        {% for i in (1..5) %}<i class="fa-solid fa-star"></i>{% endfor %}
+      </span>
+      <span class="sab_reviews_avg">
+        {{ section.settings.average_rating }} from {{ section.settings.review_count }} reviews
+      </span>
+    </div>
+  </div>
+  <div class="sab_reviews_list">
+    {% for block in section.blocks %}
+      <div class="sab_review_card">
+        <div class="sab_review_top">
+          {% if block.settings.avatar != blank %}
+            <img class="sab_review_avatar" src="{{ block.settings.avatar | img_url: '50x50' }}" alt="">
+          {% endif %}
+          <div class="sab_review_author_block">
+            <span class="sab_review_stars">
+              {% for i in (1..5) %}
+                {% if i <= block.settings.stars %}
+                  <i class="fa-solid fa-star"></i>
+                {% endif %}
+              {% endfor %}
+            </span>
+            <div class="sab_review_author_name">
+              {{ block.settings.author }}{% if block.settings.location != blank %}, {{ block.settings.location }}{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="sab_review_text">
+          {{ block.settings.text }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% schema %}
+ {
+  "name": "Customer Reviews",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "WHAT OUR CUSTOMERS SAY" },
+    { "type": "text", "id": "average_rating", "label": "Average Rating", "default": "4.9/5" },
+    { "type": "text", "id": "review_count", "label": "Review Count", "default": "2,847" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "text", "id": "author", "label": "Reviewer Name", "default": "Sarah M." },
+        { "type": "text", "id": "location", "label": "Location", "default": "Los Angeles" },
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Review Text", "default": "Recently, I had a skin analysis done at Sokit. It was a great experience and I learned a lot about my skin and what it actually needs. I was recommended products based on my results, which I thought was a great idea instead of randomly buying things I think I need. The only downside is that it takes around 2-weeks to receive the report, but overall it was a positive experience." }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Customer Reviews",
+      "category": "Custom",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

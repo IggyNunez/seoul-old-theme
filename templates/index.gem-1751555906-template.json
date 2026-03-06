@@ -1,0 +1,442 @@
+{
+  "sections": {
+    "1751295991cc9b83a1": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "pagefly_section_cbBqEc": {
+      "type": "pagefly-section",
+      "name": "PageFly Section",
+      "settings": {
+        "section_id": "pf-0b692657"
+      }
+    },
+    "tpt_feature_collection_2_kMJMHy": {
+      "type": "tpt-feature-collection-2",
+      "blocks": {
+        "tab_GyEYxj": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Shop by NEWLY CURATED",
+            "collection": "seoul"
+          }
+        },
+        "tab_GrXLe7": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Shop by Skin concern",
+            "collection": "seoul"
+          }
+        },
+        "tab_akyjQD": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Shop by Best Sellers",
+            "collection": "seoul"
+          }
+        },
+        "tab_EQkken": {
+          "type": "tab",
+          "settings": {
+            "tab_name": "Shop by SETS & ROUTINES",
+            "collection": "seoul"
+          }
+        }
+      },
+      "block_order": [
+        "tab_GyEYxj",
+        "tab_GrXLe7",
+        "tab_akyjQD",
+        "tab_EQkken"
+      ],
+      "custom_css": [
+        ".active .tpt-tab-item-button {background-color: #f0f8ff00 !important; color: #1c1c1c !important; font-size: 12.141px; font-weight: 700; line-height: 20px; text-transform: uppercase; font-family: \"Roboto Condensed\"; padding: 0 !important;}",
+        "span.tpt-tab-item-button {border: none !important; color: #000 !important; font-size: 12.141px !important; font-weight: 500; line-height: 20px; text-transform: uppercase; font-family: \"Roboto Condensed\"; padding: 0 !important;}"
+      ],
+      "name": "Tpt-Feature collection #2",
+      "settings": {
+        "heading": "Seoul You Need For That Glow",
+        "heading_size": "h2",
+        "sub_heading": "",
+        "description": "",
+        "alignment": "center",
+        "top_button_label": "",
+        "top_button_link": "",
+        "image_ratio": 70,
+        "show_secondary_image": true,
+        "products_limit": 4,
+        "desktop_column": 4,
+        "tablet_column": 3,
+        "mobile_column": 2,
+        "bottom_button_label": "",
+        "bottom_button_link": "",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 0,
+        "padding_tablet_mobile": 0,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "background_color": "#ffffff",
+        "background_gradient_color": "",
+        "title_color": "#000000",
+        "foreground_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "outline_button_color": "#000000",
+        "section_lazyload": false
+      }
+    },
+    "skincare_collection_grid_zAEL3F": {
+      "type": "Skincare-Collection-Grid",
+      "blocks": {
+        "collection_rbp9cd": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/div.png",
+            "title": "Hydration Heroes",
+            "text": "Plump, dewy skin starts here. Best-selling hydrating essences and water creams.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        },
+        "collection_zTQEBw": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/div_1.png",
+            "title": "Clean & Conscious",
+            "text": "No harsh chemicals, no compromises. EWG-verified and cruelty-free formulas.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        },
+        "collection_xTfnFG": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/div_2.png",
+            "title": "SPF Staples",
+            "text": "Lightweight, invisible, and powerful. Your everyday sun protection upgrade.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "collection_rbp9cd",
+        "collection_zTQEBw",
+        "collection_xTfnFG"
+      ],
+      "custom_css": [
+        ".skincare-section .subtitle {color: #000; font-family: \"Anonymous Pro\"; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px; letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".skincare-section h2 {color: #2d2d2d; font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".skincare-column h3 {margin-top: 0;}",
+        ".skincare-columns {gap: 0px;}",
+        ".skincare-column {padding: 14px;}"
+      ],
+      "name": "Skincare 3 Column",
+      "settings": {
+        "heading": "Start Your Skincare Journey",
+        "subheading": "Curated collections for every skin concern",
+        "text_alignment": "center",
+        "box_alignment": "left",
+        "background_color": "#ffffff",
+        "dynamic_colors": "#EFF6FF,#EFF6FF,#EFF6FF",
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "glow_essentials_bundle_zeXXfA": {
+      "type": "glow-essentials-bundle",
+      "blocks": {
+        "list_item_LQhBrM": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Soft Cloud Cleansing – A gentle, pH-balanced foam"
+          }
+        },
+        "list_item_hLy99p": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Soft Cloud Cleansing – A gentle, pH-balanced foam"
+          }
+        },
+        "list_item_4EGMjw": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Soft Cloud Cleansing – A gentle, pH-balanced foam"
+          }
+        },
+        "list_item_HVytPC": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Soft Cloud Cleansing – A gentle, pH-balanced foam"
+          }
+        },
+        "list_item_AYWj78": {
+          "type": "list_item",
+          "settings": {
+            "item_text": "Soft Cloud Cleansing – A gentle, pH-balanced foam"
+          }
+        }
+      },
+      "block_order": [
+        "list_item_LQhBrM",
+        "list_item_hLy99p",
+        "list_item_4EGMjw",
+        "list_item_HVytPC",
+        "list_item_AYWj78"
+      ],
+      "name": "Glow Bundle",
+      "settings": {
+        "badge_text": "LIMITED EDITION",
+        "discount_text": "28% OFF",
+        "heading": "Glow Essentials Beauty Bundle",
+        "description": "Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost.",
+        "original_price": "Bundle Value: $95",
+        "discount_price": "Your Price: $68",
+        "button_label": "Buy Now",
+        "button_link": "https:\/\/maps.google.com",
+        "image": "shopify:\/\/shop_images\/Frame_22_2.png",
+        "background_gradient": "linear-gradient(135deg, rgba(231, 240, 253, 1), rgba(242, 246, 251, 1) 100%)",
+        "border_radius": 20,
+        "image_border_radius": 16,
+        "button_border_radius": 8
+      }
+    },
+    "tpt_image_with_text_6tatWD": {
+      "type": "tpt-image-with-text",
+      "blocks": {
+        "heading_G7FWpT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Glow Essentials Beauty Bundle",
+            "heading_size": "h1"
+          }
+        },
+        "caption_3Nfgpw": {
+          "type": "caption",
+          "settings": {
+            "caption": "Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "text_imYtLT": {
+          "type": "text",
+          "settings": {
+            "text": "<h4><strong>What's Inside:<\/strong><\/h4><ul><li>Soft Cloud Cleansing  –  A gentle, pH-balanced Foam<\/li><li>HydraMist Toner –  Refreshing and alcohol-free with birch<\/li><li>Glow Drops Serum –  Lightweight daily serum packed with<\/li><li>DewySkin Moisturizer –  Fast-absorbing cream with<\/li><li>Sun Veil SPF 50+ PA++++ –  Invisible finish broad-spectrum<\/li><\/ul>",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "button_LzE3NL": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_G7FWpT",
+        "caption_3Nfgpw",
+        "text_imYtLT",
+        "button_LzE3NL"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".tpt-section_container.gradient {background: linear-gradient(90deg, #cfdfff 0%, #fafcff 100%);}"
+      ],
+      "name": "Tpt - Image with Text #1",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Frame_22_2.png",
+        "heading_color": "#000000",
+        "paragraph_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "outline_button_color": "#000000",
+        "border_radius": 0,
+        "image_border_radius": 16,
+        "button_border_radius": 8,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_full_width": true,
+        "section_max_width": 1600,
+        "content_full_width": false,
+        "content_max_width": 1440,
+        "padding_desktop": 60,
+        "padding_tablet_mobile": 40,
+        "margin_desktop": 60,
+        "margin_tablet_mobile": 40,
+        "section_lazyload": false
+      }
+    },
+    "skincare_collection_grid_NaLFkD": {
+      "type": "Skincare-Collection-Grid",
+      "blocks": {
+        "collection_MRwzQD": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/img_1_ca9e5eef-8758-4dfa-98a8-a7404b66420f.png",
+            "title": "Free Gifts",
+            "text": "Buy any $60+ from Soko Glam and get a free deluxe sample trio.",
+            "link_label": "Shop Now",
+            "link": "",
+            "bg_color": "#eff6ff"
+          }
+        },
+        "collection_WPEYT6": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/img_2.png",
+            "title": "Your Summer Cool-Down",
+            "text": "Refresh and revitalize with cooling mists and gel moisturizers.",
+            "link_label": "Cool Now",
+            "link": "",
+            "bg_color": "#f0fdf4"
+          }
+        },
+        "collection_L8EXcD": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/img_3.png",
+            "title": "Glow Secrets This Summer",
+            "text": "Discover the serums and essences that give you that glass skin finish.",
+            "link_label": "Get Glowing",
+            "link": "",
+            "bg_color": "#fefce8"
+          }
+        }
+      },
+      "block_order": [
+        "collection_MRwzQD",
+        "collection_WPEYT6",
+        "collection_L8EXcD"
+      ],
+      "custom_css": [
+        ".skincare-section .subtitle {color: #000; font-family: \"Anonymous Pro\"; font-size: 16px; font-style: normal; font-weight: 400; line-height: 20px; letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".skincare-section h2 {color: #2d2d2d; font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".skincare-column h3 {margin-top: 0;}"
+      ],
+      "name": "Skincare 3 Column",
+      "settings": {
+        "heading": "SKINCARE SPOTLIGHT",
+        "subheading": "Here's why we have over 40K five-star reviews",
+        "text_alignment": "center",
+        "box_alignment": "left",
+        "background_color": "#ffffff",
+        "dynamic_colors": "#fef9f3,#f3f7fe,#f5f5f5",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "psb_reviews_reviews_01_UtDqHp": {
+      "type": "psb-reviews-reviews-01",
+      "blocks": {
+        "review_FJDXxN": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        },
+        "review_4b7GEx": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        },
+        "review_zABzV4": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        },
+        "review_8iJLzX": {
+          "type": "Review",
+          "settings": {
+            "review_image": "shopify:\/\/shop_images\/img_1.png",
+            "review_stars": "5",
+            "review_text": "<p>\"The educational content helped meunderstand my skin better. Now I havea routine that actually works for me!\"<\/p>",
+            "review_name": "Sarah M., Los Angeles",
+            "position": "",
+            "url_product": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_FJDXxN",
+        "review_4b7GEx",
+        "review_zABzV4",
+        "review_8iJLzX"
+      ],
+      "custom_css": [
+        "h1.psb-utilities-heading__heading.psb-rte {font-family: \"Roboto Condensed\"; font-size: 32px; font-style: normal; font-weight: 600; line-height: normal; letter-spacing: 1.28px;}",
+        ".psb-utilities-heading__subheading.psb-rte.psb-block-space {padding-top: 25px; font-family: Arial; font-size: 11.922px; font-style: normal; font-weight: 400; line-height: 20px; \/* 167.759% *\/ letter-spacing: 1.5px; text-transform: uppercase;}",
+        ".psb-relative.psb-block-space {padding-top: 30px;}"
+      ],
+      "name": "⚡︎PSB: Reviews 01",
+      "settings": {
+        "container_width": "psb-container",
+        "heading": "<p>REAL PEOPLE, REAL REVIEWS<\/p>",
+        "heading_tag": "h1",
+        "subheading": "<p>Here's why we have over 40K five-star reviews<\/p>",
+        "heading_color": "#2d2d2d",
+        "subheading_color": "#000000",
+        "enable_star": true,
+        "border_radius": 8,
+        "slider_per_view": 3,
+        "enable_loop": false,
+        "enable_autoplay": false,
+        "enable_pagination": false,
+        "enable_navigation": false,
+        "pagination_type": "fraction",
+        "background_color": "#f9fafb",
+        "swiper_control_color": "#57301b",
+        "review-background-color": "#ffffff",
+        "stars-color": "#ffa500",
+        "text_color": "#374151",
+        "border_color": "#ffffff",
+        "text_align": "center",
+        "section_padding_top": 50,
+        "section_padding_bottom": 50,
+        "text_align_mobile": "center",
+        "section_padding_top_mobile": 35,
+        "section_padding_bottom_mobile": 35
+      }
+    }
+  },
+  "order": [
+    "1751295991cc9b83a1",
+    "pagefly_section_cbBqEc",
+    "tpt_feature_collection_2_kMJMHy",
+    "skincare_collection_grid_zAEL3F",
+    "glow_essentials_bundle_zeXXfA",
+    "tpt_image_with_text_6tatWD",
+    "skincare_collection_grid_NaLFkD",
+    "psb_reviews_reviews_01_UtDqHp"
+  ]
+}

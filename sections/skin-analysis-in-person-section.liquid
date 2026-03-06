@@ -1,0 +1,377 @@
+<style>
+  .sab-skin-analysis-section {
+  margin: 40px 0;
+  font-family: inherit;
+}
+
+.sab-flex-container {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 143rem;
+  margin: auto;
+}
+
+.sab-content {
+   width: 100%;
+}
+
+.sab-badge {
+  color: #88B681;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.sab-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  color: #191919;
+}
+
+.sab-desc {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 18px;
+  line-height: 28px;
+}
+
+.sab-rating-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sab-stars i {
+  color: #FFD700;
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+.sab-rating-text {
+  font-size: 14px;
+  color: #444;
+  margin-left: 8px;
+}
+
+.sab-price-row {
+  margin-bottom: 28px;
+}
+
+.sab-price {
+  font-size: 28px;
+  font-weight: 600;
+  color: #191919;
+}
+
+.sab-btn-row {
+  margin-bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sab-book-btn {
+  background: #B0C8A5;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 14px 36px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+  width: 100%;
+  text-align: center;
+}
+
+.sab-book-btn:hover {
+  background: #a1b893;
+}
+
+.sab-tick-icon i {
+  color: #444;
+  font-size: 22px;
+  vertical-align: middle;
+}
+
+.sab-features-list {
+  margin-top: 10px;
+}
+
+.sab-feature {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.sab-feature-icon {
+  color: #88B681;
+  margin-right: 7px;
+  font-size: 18px;
+}
+
+.sab-feature-text {
+  font-size: 14px;
+}
+
+.sab-images {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sab-main-image {
+  width: 440px;
+  max-width: 100%;
+  margin-bottom: 22px;
+  border-radius: 16px;
+}
+
+.sab-thumbs-row {
+  display: flex;
+  gap: 8px;
+}
+
+.sab-thumb {
+  width: 80px;
+  height: 66px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1.5px solid #eee;
+}
+
+@media (max-width: 900px) {
+  .sab-flex-container {
+    gap: 28px;
+  }
+  .sab-main-image {
+    width: 320px;
+  }
+  .sab-title {
+    font-size: 28px;
+  }
+  .sab-desc {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .sab-price {
+    font-size: 22px;
+  }
+  .sab-book-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+  .sab-thumb {
+    width: 60px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sab-flex-container {
+    flex-direction: column-reverse;
+    gap: 22px;
+    padding: 0 10px;
+  }
+  .sab-content {
+    padding: 0;
+  }
+  .sab-main-image {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 16px;
+  }
+  .sab-thumbs-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .sab-thumb {
+    width: 48px;
+    height: 38px;
+  }
+  .sab-title {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .sab-desc {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .sab-book-btn {
+    padding: 10px 10px;
+    font-size: 14px;
+  }
+  .sab-price {
+    font-size: 18px;
+  }
+  .sab-badge {
+    font-size: 12px;
+  }
+}
+  
+</style>
+
+<div class="sab-skin-analysis-section">
+  <div class="sab-flex-container">
+    <div class="sab-content">
+      {% if section.settings.badge != blank %}
+        <div class="sab-badge">{{ section.settings.badge }}</div>
+      {% endif %}
+      <h1 class="sab-title">{{ section.settings.title }}</h1>
+      <div class="sab-desc">{{ section.settings.description }}</div>
+      <div class="sab-rating-row">
+        <span class="sab-stars">
+          {% for i in (1..5) %}<i class="fa-solid fa-star"></i>{% endfor %}
+        </span>
+        <span class="sab-rating-text">{{ section.settings.rating }} ({{ section.settings.reviews }} reviews)</span>
+      </div>
+      <div class="sab-price-row">
+        <span class="sab-price">${{ section.settings.price }}</span>
+      </div>
+      <div class="sab-btn-row">
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_link }}" class="sab-book-btn">{{ section.settings.button_label }}</a>
+        {% endif %}
+        <span class="sab-tick-icon">
+          <i class="fa fa-heart" style="    color: #444;
+    font-size: 22px;
+    vertical-align: middle;
+    border: 1px solid #D1D5DB;
+    padding: 16px 12px;"></i>
+        </span>
+      </div>
+      <div class="sab-features-list">
+        {% for block in section.blocks %}
+          <div class="sab-feature">
+            {% if block.settings.icon != blank %}
+              <i class="fa-solid fa-{{ block.settings.icon }} sab-feature-icon">{{ block.settings.icon }}</i>
+            {% endif %}
+            <span class="sab-feature-text">{{ block.settings.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="sab-images">
+      {% if section.settings.main_image != blank %}
+        <img class="sab-main-image" width="100%" height="100%" src="{{ section.settings.main_image | img_url: '400x' }}" alt="{{ section.settings.title }}">
+      {% endif %}
+      <div class="sab-thumbs-row">
+      {% for i in (1..5) %}
+        {% assign thumb_key = 'thumb_' | append: i %}
+        {% assign thumb = section.settings[thumb_key] %}
+        {% if thumb != blank %}
+          <img class="sab-thumb" width="100%" height='100%' src="{{ thumb | img_url: '100x' }}" alt="">
+        {% endif %}
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Skin Analysis - Booking",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "BESTSELLER"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Sking Analysis Session (In Person)",
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Get a personalized skincare routine based on your unique skin type, concerns, and goals. Our advanced AI technology analyzes your skin and recommends the perfect K-beauty products for you."
+    },
+    { 
+      "type": "text", 
+      "id": "rating", 
+      "label": "Rating", 
+      "default": "4.9" 
+    },
+    { 
+      "type": "text", 
+      "id": "reviews", 
+      "label": "Review Count", 
+      "default": "127" 
+    },
+    { "type": "text", 
+      "id": "price", 
+      "label": "Price", 
+      "default": "256" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "main_image", 
+      "label": "Main Image" 
+    },
+    { "type": "image_picker", 
+      "id": "thumb_1", 
+      "label": "Thumbnail 1" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "thumb_2", 
+      "label": "Thumbnail 2" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "thumb_3", 
+      "label": "Thumbnail 3" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "thumb_4", 
+      "label": "Thumbnail 4" 
+    },
+    { 
+      "type": "image_picker", 
+      "id": "thumb_5", 
+      "label": "Thumbnail 5" 
+    },
+    { 
+      "type": "text", 
+      "id": "button_label", 
+      "label": "Button Label", 
+      "default": "Book Now" 
+    },
+    { 
+      "type": "url", 
+      "id": "button_link", 
+      "label": "Button Link", 
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🚚" },
+        { "type": "text", "id": "text", "label": "Feature Text", "default": "Free shipping on orders over $40" }
+      ] 
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Skin Analysis - Booking",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

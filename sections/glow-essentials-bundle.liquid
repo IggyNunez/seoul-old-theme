@@ -1,0 +1,347 @@
+{% comment %} Glow Essentials Beauty Bundle - Fully Dynamic {% endcomment %}
+{{ 'tpt-section.css' | asset_url | stylesheet_tag }}
+
+{{ 'tpt-grid.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+.glow-bundle-section {
+  background: {{ section.settings.background_gradient }};
+  padding: 3rem 1rem;
+  overflow: hidden;
+  max-width: 190rem !important;
+}
+.glow-bundle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.6rem;
+  
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+  /* .glow-bundle-badge span.bdg {
+    background: #000;
+    padding: 0.3rem 0.8rem;
+    border-radius: 9999px;
+    color: #FFF;
+    font-size: 11px;
+    font-family: "Roboto Condensed";
+    font-weight: 500;
+} */
+  .glow-bundle-list img {
+    margin-top: 5px !important;
+}
+.glow-bundle-heading {
+    margin: 1.2rem 0;
+    color: #1F2937;
+    font-family: "Roboto Condensed";
+    font-size: 44px;
+    font-weight: 500;
+    letter-spacing: 0.88px;
+    width: 70%;
+}
+.glow-bundle-description {
+    margin-bottom: 2rem;
+    color: #151515;
+    font-family: "Anonymous Pro";
+    font-size: 18px;
+    font-weight: 400;
+    width: 78%;
+}
+.glow-bundle-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+}
+.glow-bundle-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+.glow-bundle-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.glow-bundle-price del {
+  color: #888;
+  font-weight: 400;
+  margin-right: 0.8rem;
+}
+  .glow-bundle-price-original del {
+  color: #6B7280;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+.glow-bundle-pricing-wrapper {
+  margin-bottom: 20px;
+}
+.glow-bundle-price-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 44px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.glow-bundle-discount {
+  color: #1F2937;
+  font-family: "Roboto Condensed";
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0.64px;
+}
+
+.glow-bundle-button {
+    display: inline-block;
+    padding: 11px 39px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 600;
+  text-decoration: none;
+}
+  .glow-bundle-button:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+}
+.glow-bundle-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+.glow-bundle-image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: {{ section.settings.image_border_radius }}px;
+}
+  .glow-bundle-list li span {
+    color: #000;
+    font-family: "Anonymous Pro";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+}
+@media screen and (min-width: 750px) {
+  .glow-bundle-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+  .glow-bundle-text {
+    flex: 1;
+    max-width: 50%;
+  }
+  .glow-bundle-image-container {
+    flex: 1;
+    max-width: 50%;
+  }
+
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+{% endstyle %}
+
+<section class="glow-bundle-section page-width fade-in" id="glow-bundle-section">
+  <div class="glow-bundle-grid">
+    <div class="glow-bundle-text">
+      <div class="glow-bundle-badge">
+        <span class="bdg">{{ section.settings.badge_text | escape }}</span>
+        <span>{{ section.settings.discount_text | escape }}</span>
+      </div>
+      <h2 class="glow-bundle-heading">{{ section.settings.heading | escape }}</h2>
+      <p class="glow-bundle-description">{{ section.settings.description }}</p>
+      <ul class="glow-bundle-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'list_item' %}
+            <li style="display: flex; align-items: start; gap: 8px; margin-bottom: 0.5rem;">
+              <img 
+                src="https://cdn.shopify.com/s/files/1/0589/8413/6833/files/Frame.png?v=1751444484" 
+                alt="check" 
+                style="margin-top: 2px;">
+              <span style="display: block;">{{ block.settings.item_text }}</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="glow-bundle-pricing-wrapper">
+  <div class="glow-bundle-price-original">
+    <del>{{ section.settings.original_price }}</del>
+  </div>
+  <div class="glow-bundle-price-row">
+    <span class="glow-bundle-discount">{{ section.settings.discount_price }}</span>
+    {% if section.settings.button_label != blank %}
+      <a href="{{ section.settings.button_link }}" class="glow-bundle-button">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</div>
+    </div>
+    <div class="glow-bundle-image-container">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url: width: 600 }}" alt="{{ section.settings.heading | escape }}">
+      {% else %}
+        {{ 'image' | placeholder_svg_tag }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+});
+</script>
+
+{% schema %}
+{
+  "name": "Glow Bundle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "LIMITED EDITION"
+    },
+    {
+      "type": "text",
+      "id": "discount_text",
+      "label": "Discount Text",
+      "default": "28% OFF"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Glow Essentials Beauty Bundle"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Get glowing from cleanse to seal. This limited-time bundle includes all the essentials to reset your skin barrier, boost."
+    },
+    {
+      "type": "text",
+      "id": "original_price",
+      "label": "Original Price",
+      "default": "Bundle Value: $95"
+    },
+    {
+      "type": "text",
+      "id": "discount_price",
+      "label": "Discount Price",
+      "default": "Your Price: $68"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Buy Now"
+    },
+    {
+      "type": "text",
+      "id": "button_link",
+      "label": "Button Link",
+       "default": "https://maps.google.com"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product Image"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background Gradient",
+      "default": "linear-gradient(135deg, #e7f0fd, #f2f6fb)"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "label": "Section Border Radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "label": "Image Border Radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "label": "Button Border Radius",
+      "default": 8
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list_item",
+      "name": "Inside Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Item Text",
+          "default": "Soft Cloud Cleansing – A gentle, pH-balanced foam"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Glow Bundle",
+      "blocks": [
+        {
+          "type": "list_item"
+        },
+        {
+          "type": "list_item"
+        },
+        {
+          "type": "list_item"
+        },
+        {
+          "type": "list_item"
+        },
+        {
+          "type": "list_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

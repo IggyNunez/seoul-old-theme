@@ -1,0 +1,357 @@
+<style>
+  .sab_skincare_sample_analysis {
+  width: 100%;
+  padding: 0;
+  margin: 60px 0 0 0;
+}
+
+.sab_skincare_content_header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.sab_sample_heading {
+  font-size: 30px;
+  font-weight: 700;
+  color: #232323;
+  margin-bottom: 7px;
+  letter-spacing: 1px;
+}
+
+.sab_sample_desc {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.sab_skincare_boxes {
+  background: #F8F6F3;
+  border-radius: 10px;
+  padding: 40px 30px;
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 140rem;
+  margin: 32px auto 0 auto;
+}
+
+.sab_sample_box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px 24px 28px 24px;
+  min-width: 260px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+}
+
+.sab_sample_box_title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #232323;
+}
+
+.sab_sample_skin_type {
+  margin-bottom: 13px;
+}
+.sab_sample_skin_icon img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e9f1fe;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+}
+
+.sab_sample_skin_type_name {
+  font-weight: 700;
+  color: #232323;
+  font-size: 20px;
+  margin-bottom: 7px;
+  text-align: center;
+  width:100%;
+  margin-top: 0px;
+}
+
+.sab_sample_skin_type_desc {
+  font-size: 16px;
+  color: #626262;
+  text-align: center;
+}
+
+.sab_sample_concerns {
+  width: 100%;
+}
+.sab_sample_concern_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+.sab_sample_concern_name {
+  font-size: 15px;
+  color: #232323;
+  font-weight: 500;
+}
+.sab_sample_concern_bar {
+  width: 55px;
+  height: 8px;
+  border-radius: 4px;
+  background: #f1f1f1;
+  margin-left: 10px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.sab_bar_high {
+  background: linear-gradient(90deg,#fd7171 70%,#f7cac9 100%);
+}
+.sab_bar_medium {
+  background: linear-gradient(90deg,#ffd36e 70%,#f9e7b7 100%);
+}
+.sab_bar_low {
+  background: linear-gradient(90deg,#a9e3cf 70%,#d4f2ed 100%);
+}
+.sab_sample_routine {
+  width: 100%;
+}
+.sab_sample_routine_step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.sab_sample_routine_number {
+  background: #9CAF88;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 600;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.sab_sample_routine_name {
+  font-size: 15px;
+  color: #232323;
+  letter-spacing: 0.01em;
+}
+.sab_sample_box_droplet{
+      width: 64px;
+    height: 64px;
+    background-color: #DBEAFE;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    color: blue;
+    font-size: 22px;
+    margin: auto;
+  }
+@media (max-width: 900px) {
+  .sab_skincare_boxes { flex-direction: column; gap: 24px; padding: 22px 10px;}
+  .sab_sample_box { min-width: 0; }
+}
+
+  @media (max-width: 1100px) {
+ 
+  .sab_sample_box {
+    padding: 18px 14px 18px 14px;
+  }
+  .sab_sample_heading {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 700px) {
+ 
+  .sab_sample_box {
+    min-width: 0;
+    width: 100%;
+    padding: 16px 8px 16px 8px;
+    border-radius: 8px;
+  }
+  .sab_sample_box_title {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .sab_sample_box_droplet {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+  .sab_sample_skin_icon img {
+    width: 32px;
+    height: 32px;
+  }
+  .sab_sample_skin_type_name {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+  .sab_sample_skin_type_desc {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .sab_sample_concern_name,
+  .sab_sample_routine_name {
+    font-size: 13px;
+  }
+  .sab_sample_concern_bar {
+    width: 32px;
+    height: 6px;
+    margin-left: 7px;
+  }
+  .sab_sample_routine_number {
+    width: 19px;
+    height: 19px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sab_skincare_content_header {
+    margin-bottom: 16px;
+  }
+  .sab_sample_heading {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .sab_sample_desc {
+    font-size: 11px;
+  }
+  .sab_sample_box {
+    padding: 12px 20px;
+  }
+}
+
+</style>
+
+<div class="sab_skincare_sample_analysis">
+  <div class="sab_skincare_content_header">
+    {% if section.settings.heading != blank %}
+      <h2 class="sab_sample_heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.description %}
+      <p class="sab_sample_desc">{{ section.settings.description }}</p>
+    {% endif %}
+  </div>
+  <div class="sab_skincare_boxes">
+    <div class="sab_sample_box">
+      <h2 class="sab_sample_box_title">{{ section.settings.skin_type_heading }}</h2>
+      <div class="sab_sample_box_droplet">
+        <i class="fa fa-droplet"></i>
+      </div>
+      <div class="sab_sample_skin_type">
+        {% if section.settings.skin_type_icon != blank %}
+          <span class="sab_sample_skin_icon">
+            <img src="{{ section.settings.skin_type_icon | img_url: '48x48' }}" alt="">
+          </span>
+        {% endif %}
+      </div>
+      <h3 class="sab_sample_skin_type_name">{{ section.settings.skin_type_name }}</h3>
+      <div class="sab_sample_skin_type_desc">{{ section.settings.skin_type_desc }}</div>
+    </div>
+    <div class="sab_sample_box">
+      <h2 class="sab_sample_box_title">{{ section.settings.concern_heading }}</h2>
+      <div class="sab_sample_concerns">
+        {% for block in section.blocks %}
+          {% if block.type == 'concern' %}
+            <div class="sab_sample_concern_row">
+              <span class="sab_sample_concern_name">{{ block.settings.concern }}</span>
+              <span class="sab_sample_concern_bar sab_bar_{{ block.settings.level }}"></span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="sab_sample_box">
+      <h2 class="sab_sample_box_title">{{ section.settings.routine_heading }}</h2>
+      <div class="sab_sample_routine">
+        {% assign step = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'routine' %}
+            {% assign step = step | plus: 1 %}
+            <div class="sab_sample_routine_step">
+              <span class="sab_sample_routine_number">{{ step }}</span>
+              <span class="sab_sample_routine_name">{{ block.settings.routine_step }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Skincare Sample Analysis",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Enter Heading",
+        "default": "SAMPLE ANALYSIS RESULTS"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Enter Description",
+        "default": "See what your personalized report looks like"
+      },
+      { "type": "text", "id": "skin_type_heading", "label": "Skin Type Heading", "default": "Your Skin Type" },
+      { "type": "image_picker", "id": "skin_type_icon", "label": "Skin Type Icon" },
+      { "type": "text", "id": "skin_type_name", "label": "Skin Type Name", "default": "Combination" },
+      { "type": "textarea", "id": "skin_type_desc", "label": "Skin Type Description", "default": "T-zone tends to be oily while cheeks are normal to dry" },
+      { "type": "text", "id": "concern_heading", "label": "Concern Heading", "default": "Key Concerns" },
+      { "type": "text", "id": "routine_heading", "label": "Routine Heading", "default": "Recommended Routine" }
+    ],
+    "blocks": [
+      {
+        "type": "concern",
+        "name": "Key Concern",
+        "settings": [
+          { "type": "text", "id": "concern", "label": "Concern", "default": "Enlarged Pores" },
+          { "type": "select", "id": "level", "label": "Level", "options": [
+            { "value": "high", "label": "High" },
+            { "value": "medium", "label": "Medium" },
+            { "value": "low", "label": "Low" }
+          ], "default": "high" }
+        ]
+      },
+      {
+        "type": "routine",
+        "name": "Routine Step",
+        "settings": [
+          { "type": "text", "id": "routine_step", "label": "Routine Step", "default": "Oil Cleanser" }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Skincare Sample Analysis",
+        "category": "Custom",
+        "blocks": [
+          { "type": "concern" },
+          { "type": "concern" },
+          { "type": "concern" },
+          { "type": "routine" },
+          { "type": "routine" },
+          { "type": "routine" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

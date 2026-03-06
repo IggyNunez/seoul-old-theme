@@ -1,0 +1,138 @@
+{% schema %}
+{
+  "name": "Past Events",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "event_card",
+      "name": "Event Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Event Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Event Title"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Event Date (e.g. January 2024)"
+        },
+        {
+          "type": "text",
+          "id": "attendees",
+          "label": "Attendee Count"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Event Description"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Past Events Section",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="past-events-section">
+  <div class="page-width">
+    <h2 class="section-title center">Past Events</h2>
+    <div class="events-grid">
+      {% for block in section.blocks %}
+        <div class="event-card">
+          <div class="image">
+            {{ block.settings.image | image_url: width: 600 | image_tag: alt: block.settings.title }}
+          </div>
+          <div class="event-info">
+            <h3>{{ block.settings.title }}</h3>
+            <p class="meta">{{ block.settings.date }} &bull; {{ block.settings.attendees }} attendees</p>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  section#shopify-section-template--15345803919489__past_events_Q4VPAc h2.section-title.center {
+    color: #2D2D2D;
+    font-family: "Roboto Condensed";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.28px;
+}
+
+section#shopify-section-template--15345803919489__past_events_Q4VPAc .event-info h3 {
+    color: #2D2D2D;
+    font-family: "Roboto Condensed";
+    font-size: 18px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+section#shopify-section-template--15345803919489__past_events_Q4VPAc p.meta {
+    color: #4B5563;
+    font-family: "Anonymous Pro";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+section#shopify-section-template--15345803919489__past_events_Q4VPAcp {
+    color: #4B5563;
+    font-family: "Anonymous Pro";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+.past-events-section {
+  padding: 60px 20px;
+}
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 30px;
+}
+.event-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.event-card .image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.event-info {
+  padding: 20px;
+}
+.event-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+.event-info .meta {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+</style>

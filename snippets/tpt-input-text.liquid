@@ -1,0 +1,52 @@
+{% case block.settings.input_type %}
+  {%- when 'text' -%}
+    {%- capture attr -%}
+      type="{{ block.settings.input_type }}"
+      name="contact[{{ block.settings.input_label }}]"
+     {% if block.settings.input_required %}required{% endif %}
+    {%- endcapture -%}
+
+  {%- when 'number' -%}
+    {%- capture attr -%}
+      type="{{ block.settings.input_type }}"
+      name="contact[{{ block.settings.input_label }}]"
+      {% if block.settings.input_required %}required{% endif %}
+    {%- endcapture -%}
+
+  {%- when 'tel' -%}
+    {%- capture attr -%}
+      type="{{ block.settings.input_type }}"
+      pattern="[0-9\-]*"
+      name="contact[{{ block.settings.input_label }}]"
+      {% if block.settings.input_required %}required{% endif %}
+    {%- endcapture -%}
+
+  {%- when 'date' -%}
+    {%- capture attr -%}
+      type="{{ block.settings.input_type }}"
+      name="contact[{{ block.settings.input_label }}]"
+      {% if block.settings.input_required %}required{% endif %}
+    {%- endcapture -%}
+
+  {%- when 'time' -%}
+    {%- capture attr -%}
+      type="{{ block.settings.input_type }}"
+      name="contact[{{ block.settings.input_label }}]"
+      {% if block.settings.input_required %}required{% endif %}
+    {%- endcapture -%}
+{%- endcase -%}
+
+<div class="tpt-grid_item tpt-field" style="--input-width: {{ block.settings.input_width }}%">
+  <label class="tpt-label" for="input-{{ block.id }}">
+    {{ block.settings.input_label }}
+  </label>
+  <input
+    id="input-{{ block.id }}"
+    class="tpt-input_text"
+    {{ attr }}
+    placeholder="{{ block.settings.input_placeholder }}"
+  >
+  {%- if block.settings.input_note != blank -%}
+    <div class="tpt-input__note">{{ block.settings.input_note }}</div>
+  {%- endif -%}
+</div>

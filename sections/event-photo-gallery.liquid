@@ -1,0 +1,837 @@
+{{ 'section-event-gallery.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign section_id = section.id
+  assign heading = section.settings.heading
+  assign subheading = section.settings.subheading
+  assign layout = section.settings.layout
+  assign columns_desktop = section.settings.columns_desktop
+  assign columns_mobile = section.settings.columns_mobile
+  assign enable_lightbox = section.settings.enable_lightbox
+  assign enable_animations = section.settings.enable_animations
+  assign enable_filtering = section.settings.enable_filtering
+  assign image_ratio = section.settings.image_ratio
+  assign bg_color = section.settings.bg_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign overlay_color = section.settings.overlay_color
+  assign heading_font_size = section.settings.heading_font_size
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign max_width = section.settings.max_width
+  assign gap_size = section.settings.gap_size
+  assign border_radius = section.settings.border_radius
+  assign hover_effect = section.settings.hover_effect
+  assign lazy_load = section.settings.lazy_load
+  assign images_per_page = section.settings.images_per_page
+  assign enable_load_more = section.settings.enable_load_more
+
+  assign events = section.blocks | where: "type", "event_group"
+  assign photos = section.blocks | where: "type", "photo"
+
+  assign event_names = ""
+  for block in events
+    if event_names == ""
+      assign event_names = block.settings.event_name
+    else
+      assign event_names = event_names | append: "||" | append: block.settings.event_name
+    endif
+  endfor
+-%}
+
+<style>
+  #EventGallery-{{ section_id }} {
+    --eg-bg: {{ bg_color }};
+    --eg-text: {{ text_color }};
+    --eg-accent: {{ accent_color }};
+    --eg-overlay: {{ overlay_color }};
+    --eg-heading-size: {{ heading_font_size }}px;
+    --eg-padding-top: {{ padding_top }}px;
+    --eg-padding-bottom: {{ padding_bottom }}px;
+    --eg-max-width: {{ max_width }}px;
+    --eg-gap: {{ gap_size }}px;
+    --eg-radius: {{ border_radius }}px;
+    --eg-cols-desktop: {{ columns_desktop }};
+    --eg-cols-mobile: {{ columns_mobile }};
+  }
+</style>
+
+<section
+  id="EventGallery-{{ section_id }}"
+  class="eg-section{% if enable_animations %} eg-animate{% endif %}"
+  data-section-id="{{ section_id }}"
+  data-layout="{{ layout }}"
+  data-images-per-page="{{ images_per_page }}"
+  data-enable-load-more="{{ enable_load_more }}"
+>
+  <div class="eg-container">
+    {%- if heading != blank or subheading != blank -%}
+      <div class="eg-header">
+        {%- if subheading != blank -%}
+          <p class="eg-subheading">{{ subheading }}</p>
+        {%- endif -%}
+        {%- if heading != blank -%}
+          <h2 class="eg-heading">{{ heading }}</h2>
+        {%- endif -%}
+        <div class="eg-heading-line"></div>
+      </div>
+    {%- endif -%}
+
+    {%- if enable_filtering and events.size > 0 -%}
+      <div class="eg-filters" role="tablist" aria-label="Filter gallery by event">
+        <button
+          class="eg-filter-btn eg-filter-active"
+          data-filter="all"
+          role="tab"
+          aria-selected="true"
+        >
+          All Events
+        </button>
+        {%- for block in events -%}
+          <button
+            class="eg-filter-btn"
+            data-filter="{{ block.settings.event_name | handleize }}"
+            role="tab"
+            aria-selected="false"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.event_name }}
+            {%- if block.settings.event_date != blank -%}
+              <span class="eg-filter-date">{{ block.settings.event_date }}</span>
+            {%- endif -%}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="eg-gallery eg-layout-{{ layout }}" role="region" aria-label="Event photo gallery">
+      {%- for block in photos -%}
+        {%- liquid
+          assign event_handle = block.settings.event_category | handleize
+          assign show_class = ""
+          if enable_load_more and forloop.index > images_per_page
+            assign show_class = " eg-hidden"
+          endif
+        -%}
+        <div
+          class="eg-item{{ show_class }}"
+          data-event="{{ event_handle }}"
+          data-index="{{ forloop.index0 }}"
+          {% if enable_animations %}data-animate="true"{% endif %}
+          style="--eg-item-delay: {{ forloop.index0 | times: 0.06 }}s"
+          {{ block.shopify_attributes }}
+        >
+          <div class="eg-image-wrap eg-hover-{{ hover_effect }}{% if image_ratio == 'natural' %} eg-natural{% endif %}">
+            {%- if block.settings.image != blank -%}
+              {%- if image_ratio != 'natural' -%}
+                <div class="eg-ratio eg-ratio-{{ image_ratio }}">
+              {%- endif -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 400 }} 400w,
+                    {{ block.settings.image | image_url: width: 600 }} 600w,
+                    {{ block.settings.image | image_url: width: 800 }} 800w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w,
+                    {{ block.settings.image | image_url: width: 1600 }} 1600w
+                  "
+                  sizes="(max-width: 749px) calc(100vw / {{ columns_mobile }} - {{ gap_size }}px), calc({{ max_width }}px / {{ columns_desktop }} - {{ gap_size }}px)"
+                  alt="{{ block.settings.alt_text | default: block.settings.caption | default: heading | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  class="eg-img"
+                  {% if lazy_load and forloop.index > 4 %}loading="lazy" decoding="async"{% else %}loading="eager" fetchpriority="{% if forloop.index <= 2 %}high{% else %}auto{% endif %}"{% endif %}
+                >
+              {%- if image_ratio != 'natural' -%}
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              <div class="eg-ratio eg-ratio-{{ image_ratio | default: 'square' }}">
+                {{ 'image' | placeholder_svg_tag: 'eg-placeholder' }}
+              </div>
+            {%- endif -%}
+
+            <div class="eg-overlay">
+              {%- if block.settings.caption != blank -%}
+                <p class="eg-caption">{{ block.settings.caption }}</p>
+              {%- endif -%}
+              {%- if block.settings.event_category != blank -%}
+                <span class="eg-tag">{{ block.settings.event_category }}</span>
+              {%- endif -%}
+              {%- if enable_lightbox -%}
+                <button
+                  class="eg-expand-btn"
+                  aria-label="View full size image"
+                  data-lightbox-trigger
+                  data-full-src="{{ block.settings.image | image_url: width: 2000 }}"
+                  data-caption="{{ block.settings.caption | escape }}"
+                  data-event="{{ block.settings.event_category | escape }}"
+                  data-index="{{ forloop.index0 }}"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                </button>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if enable_load_more and photos.size > images_per_page -%}
+      <div class="eg-load-more-wrap">
+        <button class="eg-load-more-btn" data-load-more>
+          <span class="eg-load-more-text">Load More Photos</span>
+          <span class="eg-load-more-count">({{ photos.size | minus: images_per_page }} remaining)</span>
+        </button>
+      </div>
+    {%- endif -%}
+
+    {%- if photos.size > 0 -%}
+      <div class="eg-counter">
+        <span class="eg-counter-shown">{{ photos.size | at_most: images_per_page }}</span>
+        of <span class="eg-counter-total">{{ photos.size }}</span> photos
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if enable_lightbox -%}
+    <div class="eg-lightbox" id="EGLightbox-{{ section_id }}" role="dialog" aria-modal="true" aria-label="Image lightbox" tabindex="-1">
+      <div class="eg-lightbox-backdrop"></div>
+      <div class="eg-lightbox-content">
+        <button class="eg-lightbox-close" aria-label="Close lightbox">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <button class="eg-lightbox-nav eg-lightbox-prev" aria-label="Previous image">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="eg-lightbox-nav eg-lightbox-next" aria-label="Next image">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        <div class="eg-lightbox-img-wrap">
+          <img class="eg-lightbox-img" src="" alt="" />
+          <div class="eg-lightbox-spinner">
+            <div class="eg-spinner"></div>
+          </div>
+        </div>
+        <div class="eg-lightbox-info">
+          <p class="eg-lightbox-caption"></p>
+          <span class="eg-lightbox-event-tag"></span>
+          <span class="eg-lightbox-counter"></span>
+        </div>
+      </div>
+
+      {%- comment -%} Mobile swipe strip for quick navigation {%- endcomment -%}
+      <div class="eg-lightbox-strip">
+        {%- for block in photos -%}
+          {%- if block.settings.image != blank -%}
+            <button class="eg-strip-thumb" data-strip-index="{{ forloop.index0 }}">
+              <img
+                src="{{ block.settings.image | image_url: width: 100 }}"
+                alt="{{ block.settings.caption | default: 'Thumbnail' | escape }}"
+                loading="lazy"
+                width="60"
+                height="60"
+              >
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+<script>
+  (function() {
+    const SECTION_ID = '{{ section_id }}';
+    const section = document.getElementById('EventGallery-' + SECTION_ID);
+    if (!section) return;
+
+    /* ─── Intersection Observer for Animations ─── */
+    if (section.classList.contains('eg-animate')) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('eg-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      section.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+      const header = section.querySelector('.eg-header');
+      if (header) {
+        header.setAttribute('data-animate', 'true');
+        observer.observe(header);
+      }
+    }
+
+    /* ─── Filtering ─── */
+    const filterBtns = section.querySelectorAll('.eg-filter-btn');
+    const allItems = section.querySelectorAll('.eg-item');
+    let activeFilter = 'all';
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        activeFilter = filter;
+
+        filterBtns.forEach(b => {
+          b.classList.remove('eg-filter-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('eg-filter-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        let visibleCount = 0;
+        allItems.forEach((item, i) => {
+          const match = filter === 'all' || item.dataset.event === filter;
+          item.style.display = match ? '' : 'none';
+          if (match) {
+            item.style.setProperty('--eg-item-delay', (visibleCount * 0.04) + 's');
+            item.classList.remove('eg-visible');
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => item.classList.add('eg-visible'));
+            });
+            visibleCount++;
+          }
+        });
+
+        updateCounter();
+      });
+    });
+
+    /* ─── Load More ─── */
+    const loadMoreBtn = section.querySelector('[data-load-more]');
+    const imagesPerPage = parseInt(section.dataset.imagesPerPage) || 12;
+    let loadedCount = imagesPerPage;
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        const hiddenItems = section.querySelectorAll('.eg-item.eg-hidden');
+        const batch = Array.from(hiddenItems).slice(0, imagesPerPage);
+
+        batch.forEach((item, i) => {
+          item.classList.remove('eg-hidden');
+          item.style.setProperty('--eg-item-delay', (i * 0.05) + 's');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => item.classList.add('eg-visible'));
+          });
+        });
+
+        loadedCount += batch.length;
+        const remaining = section.querySelectorAll('.eg-item.eg-hidden').length;
+        if (remaining === 0) {
+          loadMoreBtn.parentElement.style.display = 'none';
+        } else {
+          loadMoreBtn.querySelector('.eg-load-more-count').textContent = '(' + remaining + ' remaining)';
+        }
+        updateCounter();
+      });
+    }
+
+    function updateCounter() {
+      const shown = section.querySelector('.eg-counter-shown');
+      const total = section.querySelector('.eg-counter-total');
+      if (!shown || !total) return;
+      const visible = section.querySelectorAll('.eg-item:not(.eg-hidden):not([style*="display: none"])');
+      shown.textContent = visible.length;
+    }
+
+    /* ─── Lightbox ─── */
+    const lightbox = document.getElementById('EGLightbox-' + SECTION_ID);
+    if (!lightbox) return;
+
+    const lbImg = lightbox.querySelector('.eg-lightbox-img');
+    const lbCaption = lightbox.querySelector('.eg-lightbox-caption');
+    const lbEventTag = lightbox.querySelector('.eg-lightbox-event-tag');
+    const lbCounter = lightbox.querySelector('.eg-lightbox-counter');
+    const lbSpinner = lightbox.querySelector('.eg-lightbox-spinner');
+    const lbClose = lightbox.querySelector('.eg-lightbox-close');
+    const lbPrev = lightbox.querySelector('.eg-lightbox-prev');
+    const lbNext = lightbox.querySelector('.eg-lightbox-next');
+    const lbStrip = lightbox.querySelector('.eg-lightbox-strip');
+    const stripThumbs = lightbox.querySelectorAll('.eg-strip-thumb');
+
+    let currentIndex = 0;
+    let lbItems = [];
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchDiffX = 0;
+
+    function collectLightboxItems() {
+      lbItems = [];
+      section.querySelectorAll('.eg-item:not([style*="display: none"]):not(.eg-hidden) [data-lightbox-trigger]').forEach(trigger => {
+        lbItems.push({
+          src: trigger.dataset.fullSrc,
+          caption: trigger.dataset.caption,
+          event: trigger.dataset.event,
+          index: parseInt(trigger.dataset.index)
+        });
+      });
+    }
+
+    function openLightbox(index) {
+      collectLightboxItems();
+      if (lbItems.length === 0) return;
+
+      currentIndex = Math.max(0, Math.min(index, lbItems.length - 1));
+      updateLightboxImage();
+      lightbox.classList.add('eg-lightbox-open');
+      document.body.style.overflow = 'hidden';
+      lightbox.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('eg-lightbox-open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    function updateLightboxImage() {
+      const item = lbItems[currentIndex];
+      if (!item) return;
+
+      lbSpinner.style.display = 'flex';
+      lbImg.style.opacity = '0';
+
+      const img = new Image();
+      img.onload = () => {
+        lbImg.src = item.src;
+        lbImg.alt = item.caption || 'Event photo';
+        lbSpinner.style.display = 'none';
+        requestAnimationFrame(() => {
+          lbImg.style.opacity = '1';
+        });
+      };
+      img.onerror = () => {
+        lbSpinner.style.display = 'none';
+        lbImg.src = item.src;
+        lbImg.style.opacity = '1';
+      };
+      img.src = item.src;
+
+      lbCaption.textContent = item.caption || '';
+      lbCaption.style.display = item.caption ? '' : 'none';
+      lbEventTag.textContent = item.event || '';
+      lbEventTag.style.display = item.event ? '' : 'none';
+      lbCounter.textContent = (currentIndex + 1) + ' / ' + lbItems.length;
+
+      /* Update strip */
+      stripThumbs.forEach(thumb => thumb.classList.remove('eg-strip-active'));
+      const activeThumb = lightbox.querySelector('[data-strip-index="' + item.index + '"]');
+      if (activeThumb) {
+        activeThumb.classList.add('eg-strip-active');
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      lbPrev.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+      lbNext.style.visibility = currentIndex === lbItems.length - 1 ? 'hidden' : 'visible';
+    }
+
+    function navigateLightbox(dir) {
+      currentIndex = Math.max(0, Math.min(currentIndex + dir, lbItems.length - 1));
+      updateLightboxImage();
+    }
+
+    /* Lightbox event listeners */
+    section.querySelectorAll('[data-lightbox-trigger]').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        collectLightboxItems();
+        const triggerIdx = parseInt(trigger.dataset.index);
+        const lbIdx = lbItems.findIndex(item => item.index === triggerIdx);
+        openLightbox(lbIdx >= 0 ? lbIdx : 0);
+      });
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+
+    /* Close when clicking anywhere that is NOT the image, nav buttons, info, or strip */
+    lightbox.addEventListener('click', (e) => {
+      if (
+        e.target.closest('.eg-lightbox-nav') ||
+        e.target.closest('.eg-lightbox-close') ||
+        e.target.closest('.eg-lightbox-strip') ||
+        e.target.closest('.eg-lightbox-info') ||
+        (e.target.tagName === 'IMG' && e.target.classList.contains('eg-lightbox-img'))
+      ) return;
+      closeLightbox();
+    });
+
+    lbPrev.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+    lbNext.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+
+    stripThumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const idx = parseInt(thumb.dataset.stripIndex);
+        const lbIdx = lbItems.findIndex(item => item.index === idx);
+        if (lbIdx >= 0) {
+          currentIndex = lbIdx;
+          updateLightboxImage();
+        }
+      });
+    });
+
+    /* Keyboard navigation */
+    lightbox.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    /* Touch / swipe support for lightbox */
+    const lbTouchArea = lightbox.querySelector('.eg-lightbox-content');
+    lbTouchArea.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    lbTouchArea.addEventListener('touchend', (e) => {
+      const diffX = e.changedTouches[0].screenX - touchStartX;
+      const diffY = e.changedTouches[0].screenY - touchStartY;
+
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX > 0) navigateLightbox(-1);
+        else navigateLightbox(1);
+      }
+    }, { passive: true });
+
+    /* Prevent scroll on lightbox */
+    lightbox.addEventListener('touchmove', (e) => {
+      if (!e.target.closest('.eg-lightbox-strip')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    /* Mobile gallery horizontal scroll (for slider layout) */
+    const gallery = section.querySelector('.eg-gallery');
+    if (section.dataset.layout === 'slider') {
+      let isDown = false, startX, scrollLeft;
+
+      gallery.addEventListener('mousedown', (e) => {
+        isDown = true;
+        gallery.classList.add('eg-grabbing');
+        startX = e.pageX - gallery.offsetLeft;
+        scrollLeft = gallery.scrollLeft;
+      });
+      gallery.addEventListener('mouseleave', () => { isDown = false; gallery.classList.remove('eg-grabbing'); });
+      gallery.addEventListener('mouseup', () => { isDown = false; gallery.classList.remove('eg-grabbing'); });
+      gallery.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - gallery.offsetLeft;
+        gallery.scrollLeft = scrollLeft - (x - startX) * 1.5;
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Event Photo Gallery",
+  "tag": "section",
+  "class": "section-event-gallery",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Event Gallery"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Capturing the moments that matter"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Gallery layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "masonry", "label": "Masonry" },
+        { "value": "slider", "label": "Horizontal Slider" }
+      ],
+      "default": "masonry"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Columns (Desktop)",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Columns (Mobile)",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        { "value": "natural", "label": "Natural (original)" },
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "landscape", "label": "Landscape (4:3)" },
+        { "value": "wide", "label": "Wide (16:9)" }
+      ],
+      "default": "natural"
+    },
+    {
+      "type": "range",
+      "id": "gap_size",
+      "min": 2,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between images",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lightbox",
+      "label": "Enable lightbox (fullscreen view)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable event filtering",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable scroll animations",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_load_more",
+      "label": "Enable 'Load More' pagination",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "images_per_page",
+      "min": 4,
+      "max": 40,
+      "step": 4,
+      "label": "Images shown initially",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy_load",
+      "label": "Lazy load images",
+      "default": true,
+      "info": "First 4 images always load eagerly for performance."
+    },
+    {
+      "type": "select",
+      "id": "hover_effect",
+      "label": "Hover effect",
+      "options": [
+        { "value": "zoom", "label": "Zoom" },
+        { "value": "lift", "label": "Lift (shadow)" },
+        { "value": "glow", "label": "Glow" },
+        { "value": "tilt", "label": "Subtle tilt" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "zoom"
+    },
+    {
+      "type": "header",
+      "content": "Brand Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#c084fc"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Image overlay color",
+      "default": "#0a0a0a"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading font size",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1800,
+      "step": 40,
+      "unit": "px",
+      "label": "Max content width",
+      "default": 1400
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event_group",
+      "name": "Event Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "event_name",
+          "label": "Event name",
+          "default": "Event Name"
+        },
+        {
+          "type": "text",
+          "id": "event_date",
+          "label": "Event date (display)",
+          "info": "Optional date shown on filter button"
+        }
+      ]
+    },
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "info": "Shown on hover and in lightbox"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text",
+          "info": "Describe the image for accessibility"
+        },
+        {
+          "type": "text",
+          "id": "event_category",
+          "label": "Event category",
+          "info": "Must match an Event Category block name exactly for filtering to work"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Event Photo Gallery",
+      "blocks": [
+        {
+          "type": "event_group",
+          "settings": { "event_name": "Launch Party", "event_date": "Jan 2026" }
+        },
+        {
+          "type": "event_group",
+          "settings": { "event_name": "Pop-Up Shop", "event_date": "Dec 2025" }
+        },
+        {
+          "type": "photo",
+          "settings": { "caption": "Opening night vibes", "event_category": "Launch Party" }
+        },
+        {
+          "type": "photo",
+          "settings": { "caption": "The crowd goes wild", "event_category": "Launch Party" }
+        },
+        {
+          "type": "photo",
+          "settings": { "caption": "Behind the scenes", "event_category": "Pop-Up Shop" }
+        },
+        {
+          "type": "photo",
+          "settings": { "caption": "Setting up the space", "event_category": "Pop-Up Shop" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

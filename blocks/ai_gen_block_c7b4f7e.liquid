@@ -1,0 +1,1042 @@
+{% doc %}
+  @prompt
+    please make a text-image section with title subtitle, description, image for mobile and desktop, list option with custom icons, button, image shadow size radius options, should match site brand. colro options for all elemtns, font size options, weight options. , lets control image on top or bottomon mobile, and position on mobile seperate, same for not alignment on mobile controls, great, we need to be able to upload our own icons aswell for the list
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-text-image-section-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+    background-color: {{ block.settings.section_background_color }};
+  }
+
+  .ai-text-image-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: {{ block.settings.content_gap_mobile }}px;
+    align-items: center;
+  }
+
+  .ai-text-image-container-{{ ai_gen_id }}.mobile-image-top .ai-text-image-media-{{ ai_gen_id }} {
+    order: 1;
+  }
+
+  .ai-text-image-container-{{ ai_gen_id }}.mobile-image-top .ai-text-image-content-{{ ai_gen_id }} {
+    order: 2;
+  }
+
+  .ai-text-image-container-{{ ai_gen_id }}.mobile-image-bottom .ai-text-image-media-{{ ai_gen_id }} {
+    order: 2;
+  }
+
+  .ai-text-image-container-{{ ai_gen_id }}.mobile-image-bottom .ai-text-image-content-{{ ai_gen_id }} {
+    order: 1;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-text-image-container-{{ ai_gen_id }} {
+      grid-template-columns: {% if block.settings.layout == 'image-left' %}1fr 1fr{% else %}1fr 1fr{% endif %};
+      gap: {{ block.settings.content_gap }}px;
+    }
+
+    .ai-text-image-container-{{ ai_gen_id }}.layout-image-left .ai-text-image-content-{{ ai_gen_id }} {
+      order: 2;
+    }
+
+    .ai-text-image-container-{{ ai_gen_id }}.layout-image-left .ai-text-image-media-{{ ai_gen_id }} {
+      order: 1;
+    }
+
+    .ai-text-image-container-{{ ai_gen_id }}.layout-image-right .ai-text-image-content-{{ ai_gen_id }} {
+      order: 1;
+    }
+
+    .ai-text-image-container-{{ ai_gen_id }}.layout-image-right .ai-text-image-media-{{ ai_gen_id }} {
+      order: 2;
+    }
+  }
+
+  .ai-text-image-content-{{ ai_gen_id }} {
+    padding: {{ block.settings.content_padding_mobile }}px;
+    text-align: {{ block.settings.text_alignment_mobile }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-text-image-content-{{ ai_gen_id }} {
+      padding: {{ block.settings.content_padding }}px;
+      text-align: {{ block.settings.text_alignment }};
+    }
+  }
+
+  .ai-text-image-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: {{ block.settings.title_weight }};
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.title_margin }}px;
+    line-height: 1.2;
+  }
+
+  .ai-text-image-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    font-weight: {{ block.settings.subtitle_weight }};
+    color: {{ block.settings.subtitle_color }};
+    margin: 0 0 {{ block.settings.subtitle_margin }}px;
+    line-height: 1.4;
+  }
+
+  .ai-text-image-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    font-weight: {{ block.settings.description_weight }};
+    color: {{ block.settings.description_color }};
+    margin: 0 0 {{ block.settings.description_margin }}px;
+    line-height: 1.6;
+  }
+
+  .ai-text-image-list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 {{ block.settings.list_margin }}px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .ai-text-image-list-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: {{ block.settings.list_item_size }}px;
+    font-weight: {{ block.settings.list_item_weight }};
+    color: {{ block.settings.list_item_color }};
+  }
+
+  .ai-text-image-list-item-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-text-image-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-text-image-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-text-image-icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-text-image-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: {{ block.settings.button_text_weight }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ai-text-image-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-text-image-media-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-text-image-picture-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    box-shadow: {{ block.settings.image_shadow_horizontal }}px {{ block.settings.image_shadow_vertical }}px {{ block.settings.image_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.image_shadow_opacity | divided_by: 100.0 }});
+  }
+
+  .ai-text-image-picture-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-text-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: {{ block.settings.image_shadow_horizontal }}px {{ block.settings.image_shadow_vertical }}px {{ block.settings.image_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.image_shadow_opacity | divided_by: 100.0 }});
+  }
+
+  .ai-text-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-text-image-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-text-image-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-text-image-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+
+    .ai-text-image-description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.description_size }}px * 0.95);
+    }
+  }
+{% endstyle %}
+
+<div class="ai-text-image-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-text-image-container-{{ ai_gen_id }} layout-{{ block.settings.layout }} mobile-image-{{ block.settings.mobile_image_position }}">
+    <div class="ai-text-image-content-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-text-image-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+
+      {% if block.settings.subtitle != blank %}
+        <div class="ai-text-image-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+      {% endif %}
+
+      {% if block.settings.description != blank %}
+        <div class="ai-text-image-description-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+      {% endif %}
+
+      {% if block.settings.show_list %}
+        <ul class="ai-text-image-list-{{ ai_gen_id }}">
+          {% for i in (1..5) %}
+            {% assign list_text_key = 'list_item_' | append: i %}
+            {% assign list_icon_key = 'list_item_' | append: i | append: '_icon' %}
+            {% assign list_text = block.settings[list_text_key] %}
+            {% assign list_icon = block.settings[list_icon_key] %}
+            {% if list_text != blank %}
+              <li class="ai-text-image-list-item-{{ ai_gen_id }}">
+                <div class="ai-text-image-icon-{{ ai_gen_id }}">
+                  {% if list_icon != blank %}
+                    <img
+                      src="{{ list_icon | image_url: width: 100 }}"
+                      alt=""
+                      loading="lazy"
+                      width="100"
+                      height="100"
+                    >
+                  {% else %}
+                    {% if block.settings.icon_type == 'checkmark' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    {% elsif block.settings.icon_type == 'star' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {% elsif block.settings.icon_type == 'heart' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                      </svg>
+                    {% elsif block.settings.icon_type == 'circle' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10"/>
+                      </svg>
+                    {% elsif block.settings.icon_type == 'arrow' %}
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    {% endif %}
+                  {% endif %}
+                </div>
+                <span>{{ list_text }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if block.settings.button_text != blank %}
+        <a href="{{ block.settings.button_link }}" class="ai-text-image-button-{{ ai_gen_id }}">
+          {{ block.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ai-text-image-media-{{ ai_gen_id }}">
+      {% if block.settings.image_desktop != blank or block.settings.image_mobile != blank %}
+        <picture class="ai-text-image-picture-{{ ai_gen_id }}">
+          {% if block.settings.image_mobile != blank %}
+            <source media="(max-width: 749px)" srcset="{{ block.settings.image_mobile | image_url: width: 750 }}">
+          {% endif %}
+          {% if block.settings.image_desktop != blank %}
+            <img
+              src="{{ block.settings.image_desktop | image_url: width: 1500 }}"
+              alt="{{ block.settings.image_desktop.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_desktop.width }}"
+              height="{{ block.settings.image_desktop.height }}"
+            >
+          {% elsif block.settings.image_mobile != blank %}
+            <img
+              src="{{ block.settings.image_mobile | image_url: width: 750 }}"
+              alt="{{ block.settings.image_mobile.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_mobile.width }}"
+              height="{{ block.settings.image_mobile.height }}"
+            >
+          {% endif %}
+        </picture>
+      {% else %}
+        <div class="ai-text-image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-text-image-empty-state-{{ ai_gen_id }}">
+            Next, add an image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Text with image",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop image position",
+      "options": [
+        {
+          "value": "image-right",
+          "label": "Right"
+        },
+        {
+          "value": "image-left",
+          "label": "Left"
+        }
+      ],
+      "default": "image-right"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "Mobile image position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Desktop text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "Mobile text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 600,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop content gap",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile content gap",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop content padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile content padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Section padding bottom",
+      "default": 60
+    },
+    {
+      "type": "color",
+      "id": "section_background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Discover Seoul Glow Lab"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "title_margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Premium Korean skincare"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Font size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "subtitle_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Experience the transformative power of Korean beauty with our curated collection of premium skincare products."
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "description_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "description_margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "List"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_list",
+      "label": "Show list",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "icon_type",
+      "label": "Default icon type",
+      "options": [
+        {
+          "value": "checkmark",
+          "label": "Checkmark"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "arrow",
+          "label": "Arrow"
+        }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#121212"
+    },
+    {
+      "type": "text",
+      "id": "list_item_1",
+      "label": "List item 1",
+      "default": "Clinically tested formulas"
+    },
+    {
+      "type": "image_picker",
+      "id": "list_item_1_icon",
+      "label": "List item 1 custom icon"
+    },
+    {
+      "type": "text",
+      "id": "list_item_2",
+      "label": "List item 2",
+      "default": "Natural ingredients"
+    },
+    {
+      "type": "image_picker",
+      "id": "list_item_2_icon",
+      "label": "List item 2 custom icon"
+    },
+    {
+      "type": "text",
+      "id": "list_item_3",
+      "label": "List item 3",
+      "default": "Cruelty-free products"
+    },
+    {
+      "type": "image_picker",
+      "id": "list_item_3_icon",
+      "label": "List item 3 custom icon"
+    },
+    {
+      "type": "text",
+      "id": "list_item_4",
+      "label": "List item 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "list_item_4_icon",
+      "label": "List item 4 custom icon"
+    },
+    {
+      "type": "text",
+      "id": "list_item_5",
+      "label": "List item 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "list_item_5_icon",
+      "label": "List item 5 custom icon"
+    },
+    {
+      "type": "range",
+      "id": "list_item_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "List font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "list_item_weight",
+      "label": "List font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "list_item_color",
+      "label": "List text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "list_margin",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "List bottom margin",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "button_text_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Background color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Hover background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Shadow opacity",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_horizontal",
+      "min": -20,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow horizontal",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_vertical",
+      "min": -20,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Shadow vertical",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "image_shadow_blur",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Shadow blur",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with image"
+    }
+  ]
+}
+{% endschema %}

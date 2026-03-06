@@ -1,0 +1,60 @@
+<div class="tpt-grid_item tpt-field" style="--input-width: {{ block.settings.input_width }}%">
+  <label class="tpt-label">{{ block.settings.input_label }}</label>
+
+  <div class="tpt-select">
+    <select
+      id="input-{{ block.id }}"
+      class="tpt-input_text tpt-input__select"
+      name="contact[{{ block.settings.input_label }}]"
+    >
+      {%- if block.settings.option_1 != blank -%}
+        <option value="{{ block.settings.option_1 }}">{{ block.settings.option_1 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_2 != blank -%}
+        <option value="{{ block.settings.option_2 }}">{{ block.settings.option_2 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_3 != blank -%}
+        <option value="{{ block.settings.option_3 }}">{{ block.settings.option_3 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_4 != blank -%}
+        <option value="{{ block.settings.option_4 }}">{{ block.settings.option_4 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_5 != blank -%}
+        <option value="{{ block.settings.option_5 }}">{{ block.settings.option_5 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_6 != blank -%}
+        <option value="{{ block.settings.option_6 }}">{{ block.settings.option_6 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_7 != blank -%}
+        <option value="{{ block.settings.option_7 }}">{{ block.settings.option_7 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_8 != blank -%}
+        <option value="{{ block.settings.option_8 }}">{{ block.settings.option_8 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_9 != blank -%}
+        <option value="{{ block.settings.option_9 }}">{{ block.settings.option_9 }}</option>
+      {%- endif -%}
+
+      {%- if block.settings.option_10 != blank -%}
+        <option value="{{ block.settings.option_10 }}">{{ block.settings.option_10 }}</option>
+      {%- endif -%}
+    </select>
+
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+      </path>
+    </svg>
+  </div>
+
+  {%- if block.settings.input_note != blank -%}
+    <div class="tpt-input__note">{{ block.settings.input_note }}</div>
+  {%- endif -%}
+</div>

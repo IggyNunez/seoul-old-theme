@@ -1,0 +1,486 @@
+
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-event-details-{{ ai_gen_id }} {
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-event-details__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-event-details__layout-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-event-details__layout-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+ 
+  }
+
+  .ai-event-details__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+@media screen and (min-width: 750px) {
+  .ai-event-details__image-wrapper-{{ ai_gen_id }} {
+    position: sticky;
+    top: 40px;
+    align-self: start;
+  }
+}
+  .ai-event-details__image-desktop-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-event-details__image-mobile-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-event-details__image-desktop-{{ ai_gen_id }} {
+      display: block;
+    }
+
+    .ai-event-details__image-mobile-{{ ai_gen_id }} {
+      display: none;
+    }
+  }
+
+  .ai-event-details__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-event-details__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-event-details__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-event-details__content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .ai-event-details__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .ai-event-details__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+  }
+
+  .ai-event-details__meta-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-event-details__meta-item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ai-event-details__meta-label-{{ ai_gen_id }} {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: {{ block.settings.label_color }};
+  }
+
+  .ai-event-details__meta-value-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-event-details__price-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ block.settings.price_color }};
+  }
+
+  .ai-event-details__long-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.long_description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.8;
+  }
+
+  .ai-event-details__button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+
+  .ai-event-details__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-event-details__title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-event-details__price-{{ ai_gen_id }} {
+      font-size: 20px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-event-details-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-event-details__container-{{ ai_gen_id }}">
+    <div class="ai-event-details__layout-{{ ai_gen_id }}">
+      <div class="ai-event-details__image-wrapper-{{ ai_gen_id }}">
+        {% if block.settings.image_desktop or block.settings.image_mobile %}
+          {% if block.settings.image_desktop %}
+            <img
+              src="{{ block.settings.image_desktop | image_url: width: 1200 }}"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_desktop.width }}"
+              height="{{ block.settings.image_desktop.height }}"
+              class="ai-event-details__image-desktop-{{ ai_gen_id }}"
+            >
+          {% endif %}
+          {% if block.settings.image_mobile %}
+            <img
+              src="{{ block.settings.image_mobile | image_url: width: 800 }}"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_mobile.width }}"
+              height="{{ block.settings.image_mobile.height }}"
+              class="ai-event-details__image-mobile-{{ ai_gen_id }}"
+            >
+          {% elsif block.settings.image_desktop %}
+            <img
+              src="{{ block.settings.image_desktop | image_url: width: 800 }}"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+              width="{{ block.settings.image_desktop.width }}"
+              height="{{ block.settings.image_desktop.height }}"
+              class="ai-event-details__image-mobile-{{ ai_gen_id }}"
+            >
+          {% endif %}
+        {% else %}
+          <div class="ai-event-details__image-placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+            <div class="ai-event-details__empty-state-{{ ai_gen_id }}">
+              Add event images
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="ai-event-details__content-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h1 class="ai-event-details__title-{{ ai_gen_id }}">{{ block.settings.title }}</h1>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="ai-event-details__description-{{ ai_gen_id }}">
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+
+        <div class="ai-event-details__meta-{{ ai_gen_id }}">
+          {% if block.settings.event_date != blank %}
+            <div class="ai-event-details__meta-item-{{ ai_gen_id }}">
+              <div class="ai-event-details__meta-label-{{ ai_gen_id }}">Date</div>
+              <div class="ai-event-details__meta-value-{{ ai_gen_id }}">{{ block.settings.event_date }}</div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.event_time != blank %}
+            <div class="ai-event-details__meta-item-{{ ai_gen_id }}">
+              <div class="ai-event-details__meta-label-{{ ai_gen_id }}">Time</div>
+              <div class="ai-event-details__meta-value-{{ ai_gen_id }}">{{ block.settings.event_time }}</div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.location != blank %}
+            <div class="ai-event-details__meta-item-{{ ai_gen_id }}">
+              <div class="ai-event-details__meta-label-{{ ai_gen_id }}">Location</div>
+              <div class="ai-event-details__meta-value-{{ ai_gen_id }}">{{ block.settings.location }}</div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.hosted_by != blank %}
+            <div class="ai-event-details__meta-item-{{ ai_gen_id }}">
+              <div class="ai-event-details__meta-label-{{ ai_gen_id }}">Hosted by</div>
+              <div class="ai-event-details__meta-value-{{ ai_gen_id }}">{{ block.settings.hosted_by }}</div>
+            </div>
+          {% endif %}
+
+          {% if block.settings.price != blank %}
+            <div class="ai-event-details__meta-item-{{ ai_gen_id }}">
+              <div class="ai-event-details__meta-label-{{ ai_gen_id }}">Price</div>
+              <div class="ai-event-details__price-{{ ai_gen_id }}">{{ block.settings.price }}</div>
+            </div>
+          {% endif %}
+        </div>
+
+        {% if block.settings.long_description != blank %}
+          <div class="ai-event-details__long-description-{{ ai_gen_id }}">
+            {{ block.settings.long_description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.button_text != blank %}
+          <div>
+            <a
+              href="{{ block.settings.button_link }}"
+              class="ai-event-details__button-{{ ai_gen_id }}"
+            >
+              {{ block.settings.button_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Event details",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Event images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Event information"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Glow Skincare Workshop"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Short description",
+      "default": "<p>Join us for an exclusive skincare workshop featuring K-beauty techniques and product demonstrations.</p>"
+    },
+    {
+      "type": "text",
+      "id": "event_date",
+      "label": "Date",
+      "default": "Saturday, December 14, 2025"
+    },
+    {
+      "type": "text",
+      "id": "event_time",
+      "label": "Time",
+      "default": "2:00 PM - 4:00 PM PST"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Location",
+      "default": "Seoul Glow Lab Studio, Los Angeles, CA"
+    },
+    {
+      "type": "text",
+      "id": "hosted_by",
+      "label": "Hosted by",
+      "default": "Katie Hernandez & Team"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "$45.00"
+    },
+    {
+      "type": "richtext",
+      "id": "long_description",
+      "label": "Long description",
+      "default": "<p>Discover the secrets of Korean skincare in this hands-on workshop. Learn about the 10-step routine, ingredient benefits, and personalized skincare solutions. Each attendee will receive a complimentary product sample kit and exclusive discount code for future purchases.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Register Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Labels",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Short description size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "long_description_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Long description size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Event details"
+    }
+  ]
+}
+{% endschema %}

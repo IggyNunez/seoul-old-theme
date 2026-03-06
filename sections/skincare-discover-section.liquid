@@ -1,0 +1,217 @@
+<style>
+  .sab_discover_section {
+    background: linear-gradient(180deg, #FCF1E2 0%, #FFFFFF 100%);
+  }
+  .sab_discover_flex{
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 64px 0;
+    max-width: 140rem;
+    margin: auto;
+    align-items:center;
+  }
+.sab_discover_content_section {
+  flex: 1;
+  max-width: 480px;
+}
+.sab_discover_heading {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 80px;
+  color: #232323;
+}
+.sab_discover_list {
+  display: flex;
+  flex-direction: column;
+}
+.sab_discover_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.sab_discover_icon {
+  color: #8fc28d;
+  font-size: 26px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.sab_discover_title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #222;
+  margin-top: 0px;
+}
+.sab_discover_desc {
+  font-size: 15px;
+  color: #555;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+.sab_discover_image_section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.sab_discover_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+.sab_discover_img_wrap {
+  position: relative;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+}
+
+  @media (max-width: 1100px) {
+  .sab_discover_flex {
+    gap: 24px;
+    padding: 38px 0;
+  }
+  .sab_discover_heading {
+    font-size: 28px;
+    margin-bottom: 36px;
+  }
+  .sab_discover_content_section {
+    max-width: 100%;
+  }
+  .sab_discover_grid {
+    grid-gap: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sab_discover_flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    padding: 26px 0;
+  }
+  .sab_discover_content_section {
+    max-width: 100%;
+  }
+  .sab_discover_heading {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .sab_discover_list {
+    gap: 15px;
+  }
+  .sab_discover_item {
+    gap: 12px;
+  }
+  .sab_discover_title {
+    font-size: 15px;
+  }
+  .sab_discover_desc {
+    font-size: 13px;
+  }
+  .sab_discover_grid {
+    grid-template-columns: 1fr;
+    grid-gap: 12px;
+    justify-items: center;
+  }
+  .sab_discover_img_wrap {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+  .sab_discover_img {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+</style>
+
+  
+<div class="sab_discover_section">
+  <div class="sab_discover_flex">
+    <div class="sab_discover_content_section">
+      {% if section.settings.discover_text != blank %}
+        <h2 class="sab_discover_heading">{{ section.settings.discover_text }}</h2>
+      {% endif %}
+      <div class="sab_discover_list">
+        {% for block in section.blocks %}
+          <div class="sab_discover_item">
+            <span class="sab_discover_icon"><i class="fa fa-check" style="    color: white;
+    background-color: #9CAF88;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;"></i></span>
+            <div>
+              <h2 class="sab_discover_title">{{ block.settings.title }}</h2>
+              <p class="sab_discover_desc">{{ block.settings.desc }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="sab_discover_image_section">
+     <div class="sab_discover_grid">
+      {% for i in (1..4) %}
+        {% assign img_key = 'discover_img_' | append: i %}
+        {% assign img = section.settings[img_key] %}
+        {% assign label_key = 'discover_img_label_' | append: i %}
+        {% assign label = section.settings[label_key] %}
+        {% if img != blank %}
+          <div class="sab_discover_img_wrap">
+            <img class="sab_discover_img" src="{{ img | img_url: '300x300' }}" alt="">
+            {% if label != blank %}
+              <span class="sab_discover_img_label">{{ label }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+  "name": "Skincare Discover",
+  "settings": [
+    {
+      "type": "text",
+      "id": "discover_text",
+      "label": "Heading",
+      "default": "What You'll Discover"
+    },
+    { "type": "image_picker", "id": "discover_img_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "discover_img_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "discover_img_3", "label": "Image 3" },
+    { "type": "image_picker", "id": "discover_img_4", "label": "Image 4" },
+    { "type": "text", "id": "discover_img_label_1", "label": "Label for Image 1", },
+    { "type": "text", "id": "discover_img_label_2", "label": "Label for Image 2", },
+    { "type": "text", "id": "discover_img_label_3", "label": "Label for Image 3", },
+    { "type": "text", "id": "discover_img_label_4", "label": "Label for Image 4", }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Discovery Point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Skin Type Analysis" },
+        { "type": "textarea", "id": "desc", "label": "Description", "default": "Determine if you have oily, dry, combination, or sensitive skin with 95% accuracy." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Skincare Discover",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

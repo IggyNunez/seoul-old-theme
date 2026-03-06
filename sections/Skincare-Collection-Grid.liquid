@@ -1,0 +1,269 @@
+{% comment %}
+  Skincare Collection Grid with 3 Dynamic Background Colors and Dynamic Images
+{% endcomment %}
+
+<style>
+  .skincare-section {
+    padding-top: var(--section-pt, 40px);
+    padding-bottom: var(--section-pb, 40px);
+  }
+
+  .skincare-section .subtitle {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+
+  .skincare-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .skincare-column {
+    padding: 24px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    text-align: inherit;
+  }
+
+  .skincare-column:hover {
+    transform: translateY(-4px);
+  }
+
+  .skincare-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .skincare-column h3 {
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .skincare-column .rte {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 16px;
+  }
+
+  .skincare-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4CAF50;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .skincare-link::after {
+    content: '→';
+    margin-left: 6px;
+    transition: margin-left 0.2s;
+  }
+
+  .skincare-link:hover::after {
+    margin-left: 10px;
+  }
+  @media (max-width: 1024px) {
+    .skincare-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .skincare-columns {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+{% assign dynamic_colors = section.settings.dynamic_colors | split: ',' %}
+
+<div class="skincare-section" style="--section-pt: {{ section.settings.padding_top }}px; --section-pb: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.background_color }};">
+  <div class="page-width" style="text-align: {{ section.settings.text_alignment }};">
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="subtitle">{{ section.settings.subheading }}</p>
+
+    <div class="skincare-columns">
+      {% assign max_blocks = section.settings.max_blocks | default: section.blocks.size %}
+        {% for block in section.blocks limit: max_blocks %}
+        {% assign bg_color = block.settings.bg_color %}
+        {% if bg_color == blank and forloop.index <= dynamic_colors.size %}
+          {% assign bg_color = dynamic_colors[forloop.index0] %}
+        {% endif %}
+        <div class="skincare-column" style="background-color: {{ bg_color }}; text-align: {{ section.settings.box_alignment }};">
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 800 }}"
+              alt="{{ block.settings.title | escape }}"
+              class="skincare-image"
+              loading="lazy"
+            >
+          {% endif %}
+
+          {% if block.settings.title %}
+            <h3>{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.text %}
+            <div class="rte">{{ block.settings.text }}</div>
+          {% endif %}
+
+          {% if block.settings.link_label %}
+            <a
+              {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}
+              class="skincare-link"
+            >
+              {{ block.settings.link_label }}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Skincare Collection Grid",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Start Your Skincare Journey",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "Curated collections for every skin concern",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Heading Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "box_alignment",
+      "label": "Box Content Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "dynamic_colors",
+      "label": "Dynamic Colors for First 3 Boxes (comma-separated)",
+      "default": "#fef9f3,#f3f7fe,#f5f5f5",
+      "info": "Enter 3 comma-separated HEX colors. These will auto-apply to the first 3 blocks if block color is not set."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
+    },
+    {
+      "type": "number",
+      "id": "max_blocks",
+      "label": "Maximum Blocks to Show (multiples of 3 recommended)",
+      "default": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Hydration Heroes",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "default": "Plump, dewy skin starts here.",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "default": "Shop Now",
+          "label": "Link Label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Override Card Background Color",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare 3 Column",
+      "settings": {
+        "max_blocks": 6
+      },
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
