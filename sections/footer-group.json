@@ -1,1 +1,84 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"newsletter_wm4CfF":{"type":"newsletter","blocks":{"heading_LfjPDk":{"type":"heading","settings":{"heading":"Join the Glow List","heading_size":"h2"}},"paragraph_7bpbQP":{"type":"paragraph","settings":{"text":"<p>Be the first to know about new collections and exclusive offers.<\/p>"}},"email_form_QUJdbg":{"type":"email_form","settings":{}}},"block_order":["heading_LfjPDk","paragraph_7bpbQP","email_form_QUJdbg"],"disabled":true,"name":"t:sections.newsletter.presets.name","settings":{"color_scheme":"scheme-2","full_width":true,"padding_top":40,"padding_bottom":52}},"custom_liquid_DVjCQh":{"type":"custom-liquid","custom_css":[],"name":"t:sections.custom-liquid.presets.name","settings":{"custom_liquid":"<style>\n  \n  @media(max-width: 600px){\n    .footer {\n      flex-direction: column;\n      align-items: center;\n    }\n    .footer-column {\n      text-align: center;\n    }\n    .social-icons {\n      justify-content: center;\n    }\n  }\n<\/style>\n<footer class=\"footer\">\n    <div class=\"footer-column footer-logo\">\n      <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0589\/8413\/6833\/files\/Secondary_Logo_1.png?v=1751365939\">\n      <small>Made with care in San Diego & Seoul\n<\/small>\n    <\/div>\n    <div class=\"footer-column\">\n      <h4>Shop<\/h4>\n      <a href=\"https:\/\/www.seoulglowlab.com\/collections\/all\">All Products<\/a>\n      <a href=\"https:\/\/www.seoulglowlab.com\/products\/skin-analysis-session-in-person?_ab=0&key=1751646024839\">Skin Analysis<\/a>\n      <a href=\"https:\/\/www.seoulglowlab.com\/pages\/about-seoul-glow-lab\">About Seoul Glow Lab<\/a>\n    <\/div>\n    <div class=\"footer-column\">\n      <h4>Support<\/h4>\n      <a href=\"https:\/\/www.seoulglowlab.com\/pages\/contact\">Contact<\/a>\n     \n    <\/div>\n    <div class=\"footer-column\">\n      <h4>Connect<\/h4>\n      <div class=\"social-icons\">\n        <a href=\"https:\/\/www.instagram.com\/seoulglowlab\/\"><i class=\"fab fa-instagram\"><\/i><\/a>\n        <a href=\"https:\/\/www.tiktok.com\/@seoulglowlabsd\"><i class=\"fab fa-tiktok\"><\/i><\/a>\n      \n      <\/div>\n      <small>@seoulglowlab #seoulglowlab<\/small>\n    <\/div>\n  <\/footer>\n  <div class=\"footer-bottom\">\n    © 2025 Seoul Glow Lab. All rights reserved.\n  <\/div>","color_scheme":"","padding_top":40,"padding_bottom":52}},"footer":{"type":"footer","disabled":true,"settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["newsletter_wm4CfF","custom_liquid_DVjCQh","footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "newsletter_wm4CfF": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_LfjPDk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the Glow List",
+            "heading_size": "h2"
+          }
+        },
+        "paragraph_7bpbQP": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          }
+        },
+        "email_form_QUJdbg": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_LfjPDk",
+        "paragraph_7bpbQP",
+        "email_form_QUJdbg"
+      ],
+      "disabled": true,
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_DVjCQh": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  \n  @media(max-width: 600px){\n    .footer {\n      flex-direction: column;\n      align-items: center;\n    }\n    .footer-column {\n      text-align: center;\n    }\n    .social-icons {\n      justify-content: center;\n    }\n  }\n</style>\n<footer class=\"footer\">\n    <div class=\"footer-column footer-logo\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0589/8413/6833/files/Secondary_Logo_1.png?v=1751365939\">\n      <small>Made with care in San Diego & Seoul\n</small>\n    </div>\n    <div class=\"footer-column\">\n      <h4>Shop</h4>\n      <a href=\"https://www.seoulglowlab.com/collections/all\">All Products</a>\n      <a href=\"https://www.seoulglowlab.com/products/skin-analysis-session-in-person?_ab=0&key=1751646024839\">Skin Analysis</a>\n      <a href=\"https://www.seoulglowlab.com/pages/about-seoul-glow-lab\">About Seoul Glow Lab</a>\n    </div>\n    <div class=\"footer-column\">\n      <h4>Support</h4>\n      <a href=\"https://www.seoulglowlab.com/pages/contact\">Contact</a>\n     \n    </div>\n    <div class=\"footer-column\">\n      <h4>Connect</h4>\n      <div class=\"social-icons\">\n        <a href=\"https://www.instagram.com/seoulglowlab/\"><i class=\"fab fa-instagram\"></i></a>\n        <a href=\"https://www.tiktok.com/@seoulglowlabsd\"><i class=\"fab fa-tiktok\"></i></a>\n      \n      </div>\n      <small>@seoulglowlab #seoulglowlab</small>\n    </div>\n  </footer>\n  <div class=\"footer-bottom\">\n    © 2025 Seoul Glow Lab. All rights reserved.\n  </div>",
+        "color_scheme": "scheme-3",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": true,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "newsletter_wm4CfF",
+    "custom_liquid_DVjCQh",
+    "footer"
+  ]
+}
