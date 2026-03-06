@@ -398,6 +398,7 @@
         },
         "event_LV3T6g": {
           "type": "event",
+          "disabled": true,
           "settings": {
             "event_image": "shopify://shop_images/WhatsApp_Image_2026-02-21_at_12.46.25_AM.jpg",
             "event_title": "SPRING EQUINOX RITUALS"
@@ -408,6 +409,7 @@
         "event_KbVcaD",
         "event_LV3T6g"
       ],
+      "disabled": true,
       "name": "Past events gallery",
       "settings": {
         "title": "Future Events",
@@ -1231,12 +1233,12 @@
       "name": "Tpt - Email signup #1",
       "settings": {
         "image": "shopify://shop_images/section_4.png",
-        "heading_color": "#ffffff",
-        "paragraph_color": "#ffffff",
+        "heading_color": "#212a2f",
+        "paragraph_color": "#212a2f",
         "button_background_color": "#ffffff",
         "button_text_color": "#000000",
         "outline_button_color": "#ffffff",
-        "outline_input_color": "#ffffff",
+        "outline_input_color": "#212a2f",
         "success_message": "Thanks for subscribing",
         "section_full_width": true,
         "section_max_width": 1600,
