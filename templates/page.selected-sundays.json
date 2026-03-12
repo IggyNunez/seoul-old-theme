@@ -30,17 +30,18 @@
         "title_KrUbWE": {
           "type": "title",
           "settings": {
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         },
         "price_hAX4wd": {
           "type": "price",
+          "disabled": true,
           "settings": {}
         },
         "forms_inline_FHzeBN": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
-            "form_id": "908645",
+            "form_id": "908661",
             "text_color": "#202020",
             "button_background_color": "#202020",
             "button_label_color": "#FFFFFF",
@@ -56,6 +57,7 @@
         },
         "share_UcWeqQ": {
           "type": "share",
+          "disabled": true,
           "settings": {
             "share_label": "Share"
           }
@@ -70,14 +72,14 @@
       ],
       "name": "t:sections.featured-product.presets.name",
       "settings": {
-        "product": "",
+        "product": "skin-analysis-session-selected-sundays",
         "color_scheme": "",
         "secondary_background": false,
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
         "media_position": "left",
-        "image_zoom": "lightbox",
+        "image_zoom": "none",
         "hide_variants": false,
         "enable_video_looping": false,
         "padding_top": 36,
