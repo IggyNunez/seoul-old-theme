@@ -23,12 +23,14 @@
         "title_KrUbWE": {
           "type": "title",
           "settings": {
-            "heading_size": "h2"
+            "heading_size": "h1"
           }
         },
-        "price_hAX4wd": {
-          "type": "price",
-          "settings": {}
+        "custom_liquid_RaKyWp": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<h2>Turn your skincare visit into a private night out.</h2>\n<p>The Glow Lab Private Group Experience is an intimate, after-hours booking designed for small groups who want dedicated time, personalized skin guidance, and a relaxed space to explore skincare together.</p>\n<p>Perfect for birthdays, bridal parties, friend nights, and meaningful catch-ups.</p>\n<p>What’s Included</p>\n<ul>\n<li>Private access to Seoul Glow Lab (store closed to the public)<br>\n</li>\n<li>Up to 4 guests total<br>\n</li>\n<li>Individual professional skin analysis for each guest<br>\n</li>\n<li>Personalized routine recommendations<br>\n</li>\n<li>Private shopping experience<br>\n</li>\n<li>Light refreshments (mocktails + champagne)<br>\n</li>\n<li>10% off in-store purchases during your visit</li>\n</ul>\n<p>Experience Details</p>\n<p><em><strong>Select Sundays only</strong></em><br><strong>5:00 PM – 7:00 PM (after closing)</strong><br>Unhurried, one-on-one rotations for a thoughtful experience</p>\n<p>Investment</p>\n<p><strong>$495 per private group (up to 4 guests)</strong></p>\n<p> </p>"
+          }
         },
         "forms_inline_FHzeBN": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
@@ -57,7 +59,7 @@
       },
       "block_order": [
         "title_KrUbWE",
-        "price_hAX4wd",
+        "custom_liquid_RaKyWp",
         "forms_inline_FHzeBN",
         "share_UcWeqQ"
       ],
@@ -68,11 +70,11 @@
       "name": "t:sections.featured-product.presets.name",
       "settings": {
         "product": "skin-analysis-session-selected-sundays",
-        "color_scheme": "",
-        "secondary_background": false,
-        "media_size": "medium",
+        "color_scheme": "scheme-1",
+        "secondary_background": true,
+        "media_size": "small",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "media_position": "left",
         "image_zoom": "none",
         "hide_variants": false,
