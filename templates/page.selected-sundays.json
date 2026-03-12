@@ -62,7 +62,8 @@
         "share_UcWeqQ"
       ],
       "custom_css": [
-        "shopify-payment-terms {display: none;}"
+        "shopify-payment-terms {display: none;}",
+        "a.link.product__view-details.animate-arrow {display: none;}"
       ],
       "name": "t:sections.featured-product.presets.name",
       "settings": {
