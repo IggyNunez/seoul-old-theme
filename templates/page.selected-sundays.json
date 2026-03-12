@@ -23,7 +23,7 @@
         "title_KrUbWE": {
           "type": "title",
           "settings": {
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         },
         "custom_liquid_RaKyWp": {
@@ -49,6 +49,12 @@
             "padding_left": 0
           }
         },
+        "custom_liquid_tkgNNr": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<p><strong>Booking</strong></p>\n<p>This experience is offered on select dates only.</p>\n<p>Tap Request Booking and our team will follow up to confirm availability.</p>"
+          }
+        },
         "share_UcWeqQ": {
           "type": "share",
           "disabled": true,
@@ -61,6 +67,7 @@
         "title_KrUbWE",
         "custom_liquid_RaKyWp",
         "forms_inline_FHzeBN",
+        "custom_liquid_tkgNNr",
         "share_UcWeqQ"
       ],
       "custom_css": [
