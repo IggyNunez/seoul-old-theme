@@ -20,13 +20,6 @@
     "featured_product_GxxJXJ": {
       "type": "featured-product",
       "blocks": {
-        "text_WKKHNi": {
-          "type": "text",
-          "settings": {
-            "text": "{{ section.settings.product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title_KrUbWE": {
           "type": "title",
           "settings": {
@@ -35,7 +28,6 @@
         },
         "price_hAX4wd": {
           "type": "price",
-          "disabled": true,
           "settings": {}
         },
         "forms_inline_FHzeBN": {
@@ -64,7 +56,6 @@
         }
       },
       "block_order": [
-        "text_WKKHNi",
         "title_KrUbWE",
         "price_hAX4wd",
         "forms_inline_FHzeBN",
