@@ -17,50 +17,87 @@
         "padding_bottom": 0
       }
     },
-    "tpt_email_signup_5_TefQwK": {
-      "type": "tpt-email-signup-5",
+    "featured_product_GxxJXJ": {
+      "type": "featured-product",
       "blocks": {
-        "heading_icw3tE": {
-          "type": "heading",
+        "text_WKKHNi": {
+          "type": "text",
           "settings": {
-            "heading": "OUR STORY",
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_KrUbWE": {
+          "type": "title",
+          "settings": {
             "heading_size": "h1"
           }
         },
-        "paragraph_LBGLTp": {
-          "type": "paragraph",
+        "price_hAX4wd": {
+          "type": "price",
+          "settings": {}
+        },
+        "forms_inline_FHzeBN": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
-            "text": "<p>Born from a passion for authentic K-beauty and a desire to make skincare simple, effective, and joyful.</p>"
+            "form_id": "908645",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        },
+        "variant_picker_yNPaVz": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "buy_buttons_UFMRYx": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_UcWeqQ": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
           }
         }
       },
       "block_order": [
-        "heading_icw3tE",
-        "paragraph_LBGLTp"
+        "text_WKKHNi",
+        "title_KrUbWE",
+        "price_hAX4wd",
+        "forms_inline_FHzeBN",
+        "variant_picker_yNPaVz",
+        "buy_buttons_UFMRYx",
+        "share_UcWeqQ"
       ],
-      "disabled": true,
-      "custom_css": [],
-      "name": "Tpt - Email signup #5",
+      "name": "t:sections.featured-product.presets.name",
       "settings": {
-        "image": "shopify://shop_images/section_1.png",
-        "layout": "text_first",
-        "mobile_layout": "image_first",
-        "heading_color": "#000000",
-        "paragraph_color": "#000000",
-        "button_background_color": "#000000",
-        "button_text_color": "#ffffff",
-        "outline_button_color": "#000000",
-        "outline_input_color": "#000000",
-        "success_message": "Thanks for subscribing",
-        "section_full_width": true,
-        "section_max_width": 1600,
-        "content_full_width": false,
-        "content_max_width": 1440,
-        "padding_desktop": 64,
-        "padding_tablet_mobile": 25,
-        "margin_desktop": 40,
-        "margin_tablet_mobile": 10,
-        "section_lazyload": false
+        "product": "",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "tpt_image_with_text_EXEUHe": {
@@ -93,6 +130,7 @@
       ],
       "name": "Tpt - Image with Text #1",
       "settings": {
+        "map_embed": "",
         "heading_color": "#000000",
         "paragraph_color": "#000000",
         "button_background_color": "#000000",
@@ -233,6 +271,7 @@
       "disabled": true,
       "name": "Tpt - Image with Text #1",
       "settings": {
+        "map_embed": "",
         "heading_color": "#000000",
         "paragraph_color": "#000000",
         "button_background_color": "#000000",
@@ -424,6 +463,7 @@
       "disabled": true,
       "name": "Tpt - Image with Text #1",
       "settings": {
+        "map_embed": "",
         "heading_color": "#000000",
         "paragraph_color": "#000000",
         "button_background_color": "#000000",
@@ -452,7 +492,7 @@
   },
   "order": [
     "main",
-    "tpt_email_signup_5_TefQwK",
+    "featured_product_GxxJXJ",
     "tpt_image_with_text_EXEUHe",
     "tpt_badges_two_DYRyqc",
     "tpt_image_with_text_yqaGPi",
