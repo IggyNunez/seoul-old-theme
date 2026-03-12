@@ -37,6 +37,22 @@
             "text_style": "subtitle"
           }
         },
+        "text_TQ7FJM": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "subtitle"
+          }
+        },
+        "collapsible_tab_CzxEAR": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Description",
+            "icon": "eye",
+            "content": "{{ product.description }}",
+            "page": ""
+          }
+        },
         "forms_inline_k33Pei": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
@@ -100,20 +116,11 @@
             "heading_3": "Cruelty-free & EWG verified"
           }
         },
-        "collapsible_tab_CzxEAR": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "icon": "star",
-            "content": "{{ product.description }}",
-            "page": ""
-          }
-        },
         "collapsible_tab_8kED7H": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Booking Policies",
-            "icon": "check_mark",
+            "icon": "star",
             "content": "<p>Booking Policies & Details<br/><br/>* This is a private group booking for up to 4 guests total.<br/>* Pricing is flat and does not change if fewer than 4 guests attend.<br/>* For parties of 2 guests, we recommend booking standard back-to-back appointments instead.<br/><br/>* Each guest receives an individual skin analysis.<br/>* Analyses are conducted one at a time using our in-store diagnostic device.<br/>* Appointment length may vary per guest.<br/><br/>* Experience runs 5:00 PM–7:00 PM sharp.<br/>* Late arrivals may reduce individual consultation time.<br/><br/>* Offered on select Sundays only and must be requested in advance.<br/>* Date is confirmed only after email approval from our team.<br/><br/>* Light refreshments are included.<br/>* Alcohol service (champagne) available for guests 21+.<br/><br/>* 10% discount applies to in-store purchases made during the event only.<br/>* Discount cannot be combined with other promotions.<br/><br/>* Non-refundable once confirmed due to limited after-hours staffing.<br/>* One reschedule permitted with at least 72 hours’ notice.</p>",
             "page": ""
           }
@@ -130,6 +137,8 @@
         "vendor",
         "title",
         "text_xyCExN",
+        "text_TQ7FJM",
+        "collapsible_tab_CzxEAR",
         "forms_inline_k33Pei",
         "description",
         "price",
@@ -137,7 +146,6 @@
         "quantity_selector",
         "buy_buttons",
         "icon_with_text_9TAnRD",
-        "collapsible_tab_CzxEAR",
         "collapsible_tab_8kED7H",
         "share"
       ],
@@ -173,6 +181,7 @@
       "block_order": [
         "judge_me_reviews_review_widget_BEHLtK"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
@@ -269,6 +278,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "custom_css": [],
       "settings": {
         "heading": "You May Also Like",
@@ -318,7 +328,7 @@
       "disabled": true,
       "name": "Tpt - Email signup #1",
       "settings": {
-        "image": "shopify://shop_images/section_3.png",
+        "image": "shopify://shop_images/img_21.png",
         "heading_color": "#ffffff",
         "paragraph_color": "#ffffff",
         "button_background_color": "#ffffff",
