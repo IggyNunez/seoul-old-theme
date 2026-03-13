@@ -53,6 +53,15 @@
             "page": ""
           }
         },
+        "collapsible_tab_8kED7H": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Booking Policies",
+            "icon": "star",
+            "content": "<p>Booking Policies & Details<br/><br/>* This is a private group booking for up to 4 guests total.<br/>* Pricing is flat and does not change if fewer than 4 guests attend.<br/>* For parties of 2 guests, we recommend booking standard back-to-back appointments instead.<br/><br/>* Each guest receives an individual skin analysis.<br/>* Analyses are conducted one at a time using our in-store diagnostic device.<br/>* Appointment length may vary per guest.<br/><br/>* Experience runs 5:00 PM–7:00 PM sharp.<br/>* Late arrivals may reduce individual consultation time.<br/><br/>* Offered on select Sundays only and must be requested in advance.<br/>* Date is confirmed only after email approval from our team.<br/><br/>* Light refreshments are included.<br/>* Alcohol service (champagne) available for guests 21+.<br/><br/>* 10% discount applies to in-store purchases made during the event only.<br/>* Discount cannot be combined with other promotions.<br/><br/>* Non-refundable once confirmed due to limited after-hours staffing.<br/>* One reschedule permitted with at least 72 hours’ notice.</p>",
+            "page": ""
+          }
+        },
         "forms_inline_k33Pei": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
@@ -116,15 +125,6 @@
             "heading_3": "Cruelty-free & EWG verified"
           }
         },
-        "collapsible_tab_8kED7H": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Booking Policies",
-            "icon": "star",
-            "content": "<p>Booking Policies & Details<br/><br/>* This is a private group booking for up to 4 guests total.<br/>* Pricing is flat and does not change if fewer than 4 guests attend.<br/>* For parties of 2 guests, we recommend booking standard back-to-back appointments instead.<br/><br/>* Each guest receives an individual skin analysis.<br/>* Analyses are conducted one at a time using our in-store diagnostic device.<br/>* Appointment length may vary per guest.<br/><br/>* Experience runs 5:00 PM–7:00 PM sharp.<br/>* Late arrivals may reduce individual consultation time.<br/><br/>* Offered on select Sundays only and must be requested in advance.<br/>* Date is confirmed only after email approval from our team.<br/><br/>* Light refreshments are included.<br/>* Alcohol service (champagne) available for guests 21+.<br/><br/>* 10% discount applies to in-store purchases made during the event only.<br/>* Discount cannot be combined with other promotions.<br/><br/>* Non-refundable once confirmed due to limited after-hours staffing.<br/>* One reschedule permitted with at least 72 hours’ notice.</p>",
-            "page": ""
-          }
-        },
         "share": {
           "type": "share",
           "disabled": true,
@@ -139,6 +139,7 @@
         "text_xyCExN",
         "text_TQ7FJM",
         "collapsible_tab_CzxEAR",
+        "collapsible_tab_8kED7H",
         "forms_inline_k33Pei",
         "description",
         "price",
@@ -146,7 +147,6 @@
         "quantity_selector",
         "buy_buttons",
         "icon_with_text_9TAnRD",
-        "collapsible_tab_8kED7H",
         "share"
       ],
       "settings": {
