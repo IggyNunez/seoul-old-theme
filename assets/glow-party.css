@@ -29,67 +29,47 @@
 }
 
 /*
-  The padding-bottom trick — works in every browser, every situation.
-  aspect-ratio alone fails when the container has no content to give it height.
-  padding-bottom as a % of width = guaranteed correct height at all times.
-
-  Default ratios:
-    4/3  → 75%
-    1/1  → 100%
-    3/4  → 133.33%
-    16/9 → 56.25%
-    5/6  → 120%
-
-  We use a CSS var so the Liquid inline style can override it.
+  The clip box. overflow:hidden hides the off-screen slides.
+  No fixed height — height comes from the image inside slide 1.
 */
 .glow-party__carousel-track-wrap {
-  position: relative;
   width: 100%;
-  /* CSS var set per-ratio by inline style on the section */
-  padding-bottom: var(--gp-img-padding, 75%);
-  border-radius: 16px;
   overflow: hidden;
-  /* belt-and-suspenders: also set aspect-ratio for modern browsers */
-  aspect-ratio: var(--gp-img-ratio, 4/3);
+  border-radius: 16px;
 }
 
-/* The sliding track fills the entire track-wrap */
+/*
+  The track: a flex row 300% wide (3 slides × 100%).
+  translateX(-0%) = slide 1, translateX(-33.333%) = slide 2, etc.
+  We calculate the correct translateX in JS as: index * (100 / total) %
+*/
 .glow-party__carousel-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
+  /* width is set inline by JS to (total * 100)% */
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-/* Each slide = same size as track-wrap */
+/*
+  Each slide is 100% of the TRACK-WRAP width (not track width).
+  We set flex-basis in JS to (100 / total)% of the track,
+  which equals 100% of the wrap. Or we just set width via JS too.
+  Simpler: each slide = 100% wrap width, track = slides side by side.
+*/
 .glow-party__slide {
-  position: relative;
-  flex: 0 0 100%;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  flex-shrink: 0;
+  /* width set by JS */
 }
 
-.glow-party__slide-inner {
-  position: absolute;
-  inset: 0;
-}
-
-.glow-party__slide-img {
+.glow-party__slide img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
   display: block;
 }
 
 .glow-party__slide-placeholder {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4/3;
   background: rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
@@ -107,8 +87,6 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  /* arrows live inside .glow-party__carousel, NOT inside track-wrap,
-     so we offset them relative to the track-wrap top */
   z-index: 2;
   width: 40px;
   height: 40px;
