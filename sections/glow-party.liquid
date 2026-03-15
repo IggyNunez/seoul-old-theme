@@ -9,19 +9,6 @@
       assign slide_count = slide_count | plus: 1
     endif
   endfor
-
-  case section.settings.image_aspect_ratio
-    when '1/1'
-      assign img_padding = '100%'
-    when '3/4'
-      assign img_padding = '133.33%'
-    when '16/9'
-      assign img_padding = '56.25%'
-    when '5/6'
-      assign img_padding = '120%'
-    else
-      assign img_padding = '75%'
-  endcase
 -%}
 
 <section
@@ -51,7 +38,7 @@
     {%- if slide_count > 0 -%}
     <div class="gp-carousel" data-gp-carousel>
 
-      <div class="gp-viewport" style="padding-bottom: {{ img_padding }}">
+      <div class="gp-viewport">
         <div class="gp-track" data-gp-track style="--gp-slide-count: {{ slide_count }}">
           {%- for block in section.blocks -%}
             {%- if block.type == 'image_slide' -%}
@@ -72,15 +59,18 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
+
+        {%- if slide_count > 1 -%}
+          <button class="gp-arrow gp-arrow--prev" data-gp-prev type="button" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13.5L6.5 9 11 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="gp-arrow gp-arrow--next" data-gp-next type="button" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4.5L11.5 9 7 13.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        {%- endif -%}
       </div>
 
       {%- if slide_count > 1 -%}
-        <button class="gp-arrow gp-arrow--prev" data-gp-prev type="button" aria-label="Previous">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13.5L6.5 9 11 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="gp-arrow gp-arrow--next" data-gp-next type="button" aria-label="Next">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4.5L11.5 9 7 13.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
         <div class="gp-dots">
           {%- for i in (1..slide_count) -%}
             <button class="gp-dot{% if forloop.first %} active{% endif %}" data-gp-dot="{{ forloop.index0 }}" type="button" aria-label="Slide {{ i }}"></button>
@@ -232,19 +222,6 @@
   "settings": [
     { "type": "header", "content": "Image Carousel" },
     { "type": "paragraph", "content": "Add images via 'Image Slide' blocks in the left panel." },
-    {
-      "type": "select",
-      "id": "image_aspect_ratio",
-      "label": "Image aspect ratio",
-      "options": [
-        { "value": "1/1",  "label": "Square (1:1)" },
-        { "value": "4/3",  "label": "Landscape (4:3)" },
-        { "value": "3/4",  "label": "Portrait (3:4)" },
-        { "value": "16/9", "label": "Wide (16:9)" },
-        { "value": "5/6",  "label": "Tall (5:6)" }
-      ],
-      "default": "4/3"
-    },
     { "type": "header", "content": "Text Content" },
     { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
     { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },
