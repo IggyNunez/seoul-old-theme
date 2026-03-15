@@ -9,9 +9,7 @@
  */
 {
   "order": [
-    "image_banner_VJ6JKc",
     "glow_party_Aw64yf",
-    "17735437403ec524d6",
     "main",
     "17562896073102f54d",
     "psb_reviews_reviews_01_kmhmR4",
@@ -19,28 +17,34 @@
     "tpt_email_signup_1_A8AHDH"
   ],
   "sections": {
-    "image_banner_VJ6JKc": {
-      "type": "image-banner",
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/SeoulGlowLabOpening-03_f75b2e61-37da-48ee-915a-74f410705d45.png",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
     "glow_party_Aw64yf": {
       "type": "glow-party",
+      "blocks": {
+        "forms_inline_peYP7A": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "908661",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_peYP7A"
+      ],
       "name": "Glow Party",
       "settings": {
-        "hero_aspect_ratio": "4/3",
+        "hero_image": "shopify://shop_images/SeoulGlowLabGrandOpening-51-1920.jpg",
+        "hero_aspect_ratio": "3/2",
         "eyebrow": "A Private Skincare Night Out for You + Your Friends",
         "title": "Glow Party",
         "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
@@ -67,34 +71,6 @@
         "subtle_text_color": "#6b6b6b",
         "section_padding_top": 80,
         "section_padding_bottom": 80
-      }
-    },
-    "17735437403ec524d6": {
-      "type": "apps",
-      "blocks": {
-        "forms_inline_i4TgH9": {
-          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
-          "settings": {
-            "form_id": "908661",
-            "text_color": "#202020",
-            "button_background_color": "#202020",
-            "button_label_color": "#FFFFFF",
-            "links_color": "#1878B9",
-            "errors_color": "#E02229",
-            "text_alignment": "center",
-            "form_alignment": "center",
-            "padding_top": 0,
-            "padding_bottom": 24,
-            "padding_right": 0,
-            "padding_left": 0
-          }
-        }
-      },
-      "block_order": [
-        "forms_inline_i4TgH9"
-      ],
-      "settings": {
-        "include_margins": true
       }
     },
     "main": {
