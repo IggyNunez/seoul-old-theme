@@ -1,6 +1,25 @@
-{% comment %} Glow Party — single hero + editorial + form {% endcomment %}
+{% comment %}
+  Glow Party — single hero image + editorial layout + form blocks
+{% endcomment %}
 
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  case section.settings.hero_aspect_ratio
+    when '1/1'
+      assign hero_ratio = '1 / 1'
+    when '4/3'
+      assign hero_ratio = '4 / 3'
+    when '3/2'
+      assign hero_ratio = '3 / 2'
+    when '16/9'
+      assign hero_ratio = '16 / 9'
+    when '3/4'
+      assign hero_ratio = '3 / 4'
+    else
+      assign hero_ratio = '4 / 3'
+  endcase
+-%}
 
 <section
   class="glow-party"
@@ -12,6 +31,7 @@
     --gp-subtle:      {{ section.settings.subtle_text_color }};
     --gp-pt:          {{ section.settings.section_padding_top }}px;
     --gp-pb:          {{ section.settings.section_padding_bottom }}px;
+    --gp-hero-ratio:  {{ hero_ratio }};
     --gp-fs-eyebrow:  {{ section.settings.font_size_eyebrow }}px;
     --gp-fs-title:    {{ section.settings.font_size_title }}px;
     --gp-fs-desc-sub: {{ section.settings.font_size_descriptor }}px;
@@ -52,9 +72,8 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%}── BODY ──{%- endcomment -%}
+    {%- comment -%}── BODY: description left, details right ──{%- endcomment -%}
     <div class="gp-body">
-
       {%- if section.settings.description != blank -%}
         <div class="gp-description">{{ section.settings.description }}</div>
       {%- endif -%}
@@ -88,23 +107,30 @@
           {%- endif -%}
         </div>
       </div>
-
     </div>
 
-    {%- comment -%}── FORM / APP BLOCKS ──{%- endcomment -%}
+    {%- comment -%}── BOOKING NOTE + BLOCKS (app embeds / custom html) ──{%- endcomment -%}
     <div class="gp-form-area">
       {%- if section.settings.booking_note != blank -%}
         <p class="gp-booking-note">{{ section.settings.booking_note }}</p>
       {%- endif -%}
 
+      {%- comment -%}
+        Render all blocks here. @app blocks use {% render block %}.
+        This matches the exact Shopify pattern that the original
+        working section used. Do NOT wrap in case/when.
+      {%- endcomment -%}
       {%- for block in section.blocks -%}
-        <div {{ block.shopify_attributes }}>
-          {%- if block.type == '@app' -%}
+        {%- if block.type == '@app' -%}
+          <div class="gp-app-block" {{ block.shopify_attributes }}>
             {% render block %}
-          {%- elsif block.type == 'custom_html' -%}
+          </div>
+        {%- endif -%}
+        {%- if block.type == 'custom_html' -%}
+          <div class="gp-custom-html-block" {{ block.shopify_attributes }}>
             {{ block.settings.html }}
-          {%- endif -%}
-        </div>
+          </div>
+        {%- endif -%}
       {%- endfor -%}
     </div>
 
@@ -130,6 +156,20 @@
   "settings": [
     { "type": "header", "content": "Hero Image" },
     { "type": "image_picker", "id": "hero_image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "hero_aspect_ratio",
+      "label": "Image crop ratio",
+      "info": "Controls how the image is cropped. Pick the ratio closest to your photo.",
+      "options": [
+        { "value": "1/1",  "label": "Square (1:1)" },
+        { "value": "4/3",  "label": "Landscape (4:3)" },
+        { "value": "3/2",  "label": "Photo (3:2)" },
+        { "value": "16/9", "label": "Wide (16:9)" },
+        { "value": "3/4",  "label": "Portrait (3:4)" }
+      ],
+      "default": "4/3"
+    },
     { "type": "header", "content": "Text Content" },
     { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
     { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },
