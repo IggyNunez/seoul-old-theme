@@ -241,7 +241,7 @@
     {%- if slide_count > 0 -%}
       <div class="gp__media" data-gp-media>
         <div class="gp__slider" data-gp-slider>
-          <div class="gp__track" data-gp-track>
+          <div class="gp__track" data-gp-track style="width: {{ slide_count | times: 100 }}%">
             {%- for block in section.blocks -%}
               {%- if block.type == 'image_slide' -%}
                 {%- liquid
