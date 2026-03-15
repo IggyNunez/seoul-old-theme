@@ -1,6 +1,8 @@
 {% comment %}
   Glow Party Section
-  - 3 image pickers with controlled aspect ratio + fixed height option
+  - Carousel: unlimited images via "Image Slide" blocks
+  - Aspect ratio is rock-solid on mobile (no overflow weirdness)
+  - Vanilla JS swipe + arrow + dot navigation, no dependencies
   - Font size range sliders for every text element
   - App block support for form embeds
   - Collapsible fine print
@@ -10,95 +12,113 @@
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign image_count = 0
-  if section.settings.image_1 != blank
-    assign image_count = image_count | plus: 1
-  endif
-  if section.settings.image_2 != blank
-    assign image_count = image_count | plus: 1
-  endif
-  if section.settings.image_3 != blank
-    assign image_count = image_count | plus: 1
-  endif
+  assign slide_blocks = section.blocks | where: 'type', 'image_slide'
+  assign slide_count  = slide_blocks | size
 -%}
 
 <section
   class="glow-party"
   id="glow-party-{{ section.id }}"
   style="
-    --gp-color-bg: {{ section.settings.background_color }};
-    --gp-color-accent: {{ section.settings.accent_color }};
-    --gp-color-text: {{ section.settings.text_color }};
-    --gp-color-subtle: {{ section.settings.subtle_text_color }};
-    --gp-pt: {{ section.settings.section_padding_top }}px;
-    --gp-pb: {{ section.settings.section_padding_bottom }}px;
-    --gp-img-ratio: {{ section.settings.image_aspect_ratio }};
-    --gp-img-height: {{ section.settings.image_height }}px;
-    --gp-fs-eyebrow: {{ section.settings.font_size_eyebrow }}px;
-    --gp-fs-title: {{ section.settings.font_size_title }}px;
-    --gp-fs-descriptor: {{ section.settings.font_size_descriptor }}px;
+    --gp-color-bg:       {{ section.settings.background_color }};
+    --gp-color-accent:   {{ section.settings.accent_color }};
+    --gp-color-text:     {{ section.settings.text_color }};
+    --gp-color-subtle:   {{ section.settings.subtle_text_color }};
+    --gp-pt:             {{ section.settings.section_padding_top }}px;
+    --gp-pb:             {{ section.settings.section_padding_bottom }}px;
+    --gp-img-ratio:      {{ section.settings.image_aspect_ratio }};
+    --gp-fs-eyebrow:     {{ section.settings.font_size_eyebrow }}px;
+    --gp-fs-title:       {{ section.settings.font_size_title }}px;
+    --gp-fs-descriptor:  {{ section.settings.font_size_descriptor }}px;
     --gp-fs-description: {{ section.settings.font_size_description }}px;
-    --gp-fs-includes: {{ section.settings.font_size_includes }}px;
-    --gp-fs-meta-label: {{ section.settings.font_size_meta_label }}px;
-    --gp-fs-meta-value: {{ section.settings.font_size_meta_value }}px;
-    --gp-fs-booking: {{ section.settings.font_size_booking }}px;
-    --gp-fs-fine-print: {{ section.settings.font_size_fine_print }}px;
+    --gp-fs-includes:    {{ section.settings.font_size_includes }}px;
+    --gp-fs-meta-label:  {{ section.settings.font_size_meta_label }}px;
+    --gp-fs-meta-value:  {{ section.settings.font_size_meta_value }}px;
+    --gp-fs-booking:     {{ section.settings.font_size_booking }}px;
+    --gp-fs-fine-print:  {{ section.settings.font_size_fine_print }}px;
   "
 >
   <div class="glow-party__inner">
 
-    {%- comment -%} ── IMAGES ── {%- endcomment -%}
-    {%- if image_count > 0 -%}
-      <div class="glow-party__gallery glow-party__gallery--{{ image_count }}up">
+    {%- comment -%} ── CAROUSEL ── {%- endcomment -%}
+    {%- if slide_count > 0 -%}
+      <div
+        class="glow-party__carousel"
+        data-carousel
+        data-slide-count="{{ slide_count }}"
+        aria-roledescription="carousel"
+        aria-label="{{ section.settings.title }} images"
+      >
 
-        {%- if section.settings.image_1 != blank -%}
-          <div class="glow-party__gallery-item glow-party__gallery-item--main">
-            <div class="glow-party__img-wrap">
-              {{
-                section.settings.image_1
-                | image_url: width: 1400
-                | image_tag:
-                  loading: 'lazy',
-                  alt: section.settings.image_1.alt | default: section.settings.title,
-                  class: 'glow-party__img',
-                  widths: '400, 600, 800, 1000, 1200, 1400',
-                  sizes: '(max-width: 900px) 100vw, 50vw'
-              }}
-            </div>
+        {%- comment -%} Track {%- endcomment -%}
+        <div class="glow-party__carousel-track-wrap">
+          <div class="glow-party__carousel-track" data-track>
+            {%- for block in slide_blocks -%}
+              <div
+                class="glow-party__slide"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="{{ forloop.index }} of {{ slide_count }}"
+                {{ block.shopify_attributes }}
+              >
+                <div class="glow-party__slide-inner">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1400
+                      | image_tag:
+                        loading: 'lazy',
+                        alt: block.settings.image.alt | default: section.settings.title,
+                        class: 'glow-party__slide-img',
+                        widths: '400, 600, 800, 1000, 1200, 1400',
+                        sizes: '(max-width: 900px) 100vw, 50vw'
+                    }}
+                  {%- else -%}
+                    <div class="glow-party__slide-placeholder">
+                      {{ 'image' | placeholder_svg_tag: 'glow-party__placeholder-svg' }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
           </div>
-        {%- endif -%}
+        </div>
 
-        {%- if section.settings.image_2 != blank -%}
-          <div class="glow-party__gallery-item">
-            <div class="glow-party__img-wrap">
-              {{
-                section.settings.image_2
-                | image_url: width: 800
-                | image_tag:
-                  loading: 'lazy',
-                  alt: section.settings.image_2.alt | default: section.settings.title,
-                  class: 'glow-party__img',
-                  widths: '400, 600, 800',
-                  sizes: '(max-width: 900px) 50vw, 25vw'
-              }}
-            </div>
-          </div>
-        {%- endif -%}
+        {%- comment -%} Arrows (only show if more than 1 slide) {%- endcomment -%}
+        {%- if slide_count > 1 -%}
+          <button
+            class="glow-party__arrow glow-party__arrow--prev"
+            data-prev
+            aria-label="Previous image"
+            type="button"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button
+            class="glow-party__arrow glow-party__arrow--next"
+            data-next
+            aria-label="Next image"
+            type="button"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
 
-        {%- if section.settings.image_3 != blank -%}
-          <div class="glow-party__gallery-item">
-            <div class="glow-party__img-wrap">
-              {{
-                section.settings.image_3
-                | image_url: width: 800
-                | image_tag:
-                  loading: 'lazy',
-                  alt: section.settings.image_3.alt | default: section.settings.title,
-                  class: 'glow-party__img',
-                  widths: '400, 600, 800',
-                  sizes: '(max-width: 900px) 50vw, 25vw'
-              }}
-            </div>
+          {%- comment -%} Dots {%- endcomment -%}
+          <div class="glow-party__dots" role="tablist" aria-label="Slide indicators">
+            {%- for block in slide_blocks -%}
+              <button
+                class="glow-party__dot{% if forloop.first %} is-active{% endif %}"
+                role="tab"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                aria-label="Go to slide {{ forloop.index }}"
+                data-dot="{{ forloop.index0 }}"
+                type="button"
+              ></button>
+            {%- endfor -%}
           </div>
         {%- endif -%}
 
@@ -191,6 +211,77 @@
   </div>
 </section>
 
+<script>
+(function () {
+  function initCarousel(section) {
+    var carousel = section.querySelector('[data-carousel]');
+    if (!carousel) return;
+
+    var track      = carousel.querySelector('[data-track]');
+    var slides     = carousel.querySelectorAll('.glow-party__slide');
+    var dots       = carousel.querySelectorAll('[data-dot]');
+    var prevBtn    = carousel.querySelector('[data-prev]');
+    var nextBtn    = carousel.querySelector('[data-next]');
+    var total      = slides.length;
+    var current    = 0;
+
+    if (total <= 1) return;
+
+    function goTo(index) {
+      // wrap around
+      current = ((index % total) + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === current);
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        goTo(parseInt(dot.getAttribute('data-dot'), 10));
+      });
+    });
+
+    // Touch / swipe
+    var startX = 0;
+    var isDragging = false;
+
+    track.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function (e) {
+      if (!isDragging) return;
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        goTo(diff > 0 ? current + 1 : current - 1);
+      }
+      isDragging = false;
+    }, { passive: true });
+
+    // Keyboard
+    carousel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+  }
+
+  document.querySelectorAll('[id^="glow-party-"]').forEach(initCarousel);
+
+  // Theme editor re-init on section change
+  if (window.Shopify && Shopify.designMode) {
+    document.addEventListener('shopify:section:load', function (e) {
+      initCarousel(e.target);
+    });
+  }
+})();
+</script>
+
 {% schema %}
 {
   "name": "Glow Party",
@@ -198,44 +289,23 @@
   "class": "glow-party-section",
   "settings": [
 
-    { "type": "header", "content": "Images" },
+    { "type": "header", "content": "Image Carousel" },
     {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": "Image 1 (main)"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3",
-      "label": "Image 3"
+      "type": "paragraph",
+      "content": "Add images using the 'Image Slide' blocks below. You can add as many as you want."
     },
     {
       "type": "select",
       "id": "image_aspect_ratio",
       "label": "Image aspect ratio",
       "options": [
-        { "value": "1/1",  "label": "Square (1:1)" },
-        { "value": "4/3",  "label": "Landscape (4:3)" },
-        { "value": "3/4",  "label": "Portrait (3:4)" },
-        { "value": "16/9", "label": "Wide (16:9)" },
-        { "value": "none", "label": "Fixed height (use slider below)" }
+        { "value": "1/1",   "label": "Square (1:1)" },
+        { "value": "4/3",   "label": "Landscape (4:3)" },
+        { "value": "3/4",   "label": "Portrait (3:4)" },
+        { "value": "16/9",  "label": "Wide (16:9)" },
+        { "value": "5/6",   "label": "Tall (5:6)" }
       ],
       "default": "4/3"
-    },
-    {
-      "type": "range",
-      "id": "image_height",
-      "label": "Fixed height (only when aspect ratio = Fixed height)",
-      "min": 200,
-      "max": 900,
-      "step": 20,
-      "unit": "px",
-      "default": 500
     },
 
     { "type": "header", "content": "Text Content" },
@@ -412,6 +482,17 @@
   ],
 
   "blocks": [
+    {
+      "type": "image_slide",
+      "name": "Image Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
     { "type": "@app" },
     {
       "type": "custom_html",
@@ -429,7 +510,12 @@
   "presets": [
     {
       "name": "Glow Party",
-      "category": "Custom"
+      "category": "Custom",
+      "blocks": [
+        { "type": "image_slide" },
+        { "type": "image_slide" },
+        { "type": "image_slide" }
+      ]
     }
   ]
 }
