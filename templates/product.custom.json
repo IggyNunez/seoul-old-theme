@@ -11,6 +11,7 @@
   "order": [
     "image_banner_VJ6JKc",
     "glow_party_Aw64yf",
+    "17735437403ec524d6",
     "main",
     "17562896073102f54d",
     "psb_reviews_reviews_01_kmhmR4",
@@ -61,6 +62,7 @@
       ],
       "name": "Glow Party",
       "settings": {
+        "hero_aspect_ratio": "4/3",
         "eyebrow": "A Private Skincare Night Out for You + Your Friends",
         "title": "Glow Party",
         "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
@@ -87,6 +89,34 @@
         "subtle_text_color": "#6b6b6b",
         "section_padding_top": 80,
         "section_padding_bottom": 80
+      }
+    },
+    "17735437403ec524d6": {
+      "type": "apps",
+      "blocks": {
+        "forms_inline_i4TgH9": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "908661",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_i4TgH9"
+      ],
+      "settings": {
+        "include_margins": true
       }
     },
     "main": {
