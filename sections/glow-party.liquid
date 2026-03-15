@@ -15,7 +15,6 @@
   class="glow-party"
   id="glow-party-{{ section.id }}"
   style="
-    --gp-carousel-mh: {{ section.settings.carousel_max_height }}px;
     --gp-bg:          {{ section.settings.background_color }};
     --gp-accent:      {{ section.settings.accent_color }};
     --gp-text:        {{ section.settings.text_color }};
@@ -40,7 +39,12 @@
     <div class="gp-carousel" data-gp-carousel>
 
       <div class="gp-viewport">
-        <div class="gp-track" data-gp-track style="--gp-slide-count: {{ slide_count }}">
+        {%- comment -%}
+          Track width = slide_count * 100%.
+          Each slide gets flex: 1 0 0% so they split the track evenly.
+          JS shifts track with translateX( -(cur/total)*100 %).
+        {%- endcomment -%}
+        <div class="gp-track" data-gp-track style="width: {{ slide_count | times: 100 }}%">
           {%- for block in section.blocks -%}
             {%- if block.type == 'image_slide' -%}
               <div class="gp-slide" {{ block.shopify_attributes }}>
@@ -161,44 +165,34 @@
     if (!carousel) return;
 
     var track  = carousel.querySelector('[data-gp-track]');
-    var slides = Array.prototype.slice.call(carousel.querySelectorAll('.gp-slide'));
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.gp-slide'));
     var dots   = Array.prototype.slice.call(carousel.querySelectorAll('[data-gp-dot]'));
     var prev   = carousel.querySelector('[data-gp-prev]');
     var next   = carousel.querySelector('[data-gp-next]');
     var total  = slides.length;
     var cur    = 0;
 
-    if (total === 0) return;
+    if (total < 2) return;
 
-    /* Make sure slide count is set (safety net if Liquid var missed) */
-    track.style.setProperty('--gp-slide-count', total);
-
-    /*
-      Track width = total * 100% of viewport (via CSS custom prop).
-      Each slide = flex: 1 0 0% = equal share of track = 1 viewport width.
-      To show slide N, shift track left by (N / total * 100)%.
-      e.g. 3 slides: slide 0 = 0%, slide 1 = 33.33%, slide 2 = 66.66%
-    */
     function go(n) {
       cur = ((n % total) + total) % total;
-      var offset = (cur / total) * 100;
-      track.style.transform = 'translateX(-' + offset + '%)';
-      dots.forEach(function (d, i) {
-        d.classList.toggle('active', i === cur);
-      });
+      /* Track = total*100% wide. One slide = (1/total) of track.
+         To show slide N, shift left by (N/total * 100)% of track. */
+      track.style.transform = 'translateX(' + -(cur / total * 100) + '%)';
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('active', i === cur);
+      }
     }
-
-    go(0);
-
-    if (total === 1) return;
 
     if (prev) prev.addEventListener('click', function () { go(cur - 1); });
     if (next) next.addEventListener('click', function () { go(cur + 1); });
-    dots.forEach(function (d) {
-      d.addEventListener('click', function () { go(+d.getAttribute('data-gp-dot')); });
-    });
+    for (var i = 0; i < dots.length; i++) {
+      (function (idx) {
+        dots[idx].addEventListener('click', function () { go(idx); });
+      })(i);
+    }
 
-    /* Touch swipe */
+    /* Swipe */
     var tx = 0;
     track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', function (e) {
@@ -223,7 +217,6 @@
   "settings": [
     { "type": "header", "content": "Image Carousel" },
     { "type": "paragraph", "content": "Add images via 'Image Slide' blocks in the left panel." },
-    { "type": "range", "id": "carousel_max_height", "label": "Max image height", "min": 300, "max": 800, "step": 25, "unit": "px", "default": 600 },
     { "type": "header", "content": "Text Content" },
     { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
     { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },

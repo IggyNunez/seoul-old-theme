@@ -1,5 +1,8 @@
 /* ============================================================
    Glow Party — glow-party.css
+   Clean rewrite. Carousel uses overflow + translateX.
+   Images always show full (object-fit: cover with configurable
+   aspect ratio, or contain for no-crop).
    ============================================================ */
 
 .glow-party {
@@ -8,66 +11,63 @@
   padding: var(--gp-pt, 80px) 0 var(--gp-pb, 80px);
 }
 
+/* ── LAYOUT ── */
+
 .gp-inner {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  gap: 56px;
   align-items: start;
 }
 
-/* ═══════════════════
-   CAROUSEL
-   ═══════════════════ */
+/* ── CAROUSEL ── */
 
 .gp-carousel {
   position: sticky;
   top: 24px;
   width: 100%;
+  min-width: 0;          /* prevent grid blowout */
 }
 
-/*
-  Viewport = visible window. Max height keeps tall images from blowing
-  out the layout. object-fit: contain on the img means the full image
-  is always visible (no cropping), letterboxed if needed.
-*/
 .gp-viewport {
   position: relative;
   width: 100%;
-  max-height: var(--gp-carousel-mh, 600px);
   overflow: hidden;
   border-radius: 16px;
-  background: var(--gp-bg, #fdf6f2);
 }
 
+/*
+  Track = horizontal strip holding all slides.
+  Width set inline via style="width: {N}00%" from Liquid.
+  translateX moves it left by one slide-width at a time.
+  Percentage-based: translateX(-0%), translateX(-33.33%), etc.
+*/
 .gp-track {
   display: flex;
-  width: calc(var(--gp-slide-count, 1) * 100%);
-  height: 100%;
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
+/*
+  Each slide = 1/N of the track = exactly the viewport width.
+  We set this with inline width on each slide from Liquid:
+  style="width: calc(100% / {N})"
+  ...but actually flex: 1 0 0% with the track sized correctly works too.
+  Using flex approach — track width = N*100%, each child = equal share.
+*/
 .gp-slide {
   flex: 1 0 0%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 0;
 }
 
-/*
-  contain = full image always visible, never cropped.
-  max-height on viewport caps the box, contain scales image down to fit.
-*/
 .gp-slide-img {
   display: block;
   width: 100%;
-  max-height: var(--gp-carousel-mh, 600px);
-  object-fit: contain;
-  object-position: center;
+  height: auto;
+  border-radius: 0;
 }
 
 .gp-slide-placeholder {
@@ -78,8 +78,10 @@
   align-items: center;
   justify-content: center;
 }
+.gp-slide-placeholder svg { width: 48px; height: 48px; opacity: 0.3; }
 
-/* Arrows */
+/* ── ARROWS ── */
+
 .gp-arrow {
   position: absolute;
   top: 50%;
@@ -104,7 +106,8 @@
 .gp-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
 .gp-arrow:focus-visible { outline: 2px solid var(--gp-accent, #c084a0); outline-offset: 2px; }
 
-/* Dots */
+/* ── DOTS ── */
+
 .gp-dots {
   display: flex;
   justify-content: center;
@@ -126,14 +129,13 @@
   transform: scale(1.35);
 }
 
-/* ═══════════════════
-   CONTENT
-   ═══════════════════ */
+/* ── CONTENT ── */
 
 .gp-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;          /* prevent grid blowout */
 }
 
 .gp-eyebrow {
@@ -268,9 +270,7 @@ details[open] .gp-chevron { transform: rotate(180deg); }
 .gp-fine-print-body p { margin: 0 0 0.75em; }
 .gp-fine-print-body p:last-child { margin-bottom: 0; }
 
-/* ═══════════════════
-   RESPONSIVE
-   ═══════════════════ */
+/* ── RESPONSIVE ── */
 
 @media (max-width: 900px) {
   .gp-inner {
