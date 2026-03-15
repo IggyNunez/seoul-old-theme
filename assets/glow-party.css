@@ -3,12 +3,12 @@
    ============================================================ */
 
 .glow-party {
-  background-color: var(--gp-color-bg, #fdf6f2);
-  color: var(--gp-color-text, #1a1a1a);
+  background-color: var(--gp-bg, #fdf6f2);
+  color: var(--gp-text, #1a1a1a);
   padding: var(--gp-pt, 80px) 0 var(--gp-pb, 80px);
 }
 
-.glow-party__inner {
+.gp-inner {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
@@ -18,72 +18,87 @@
   align-items: start;
 }
 
-/* ═══════════════════════════════════════════
+/* ═══════════════════
    CAROUSEL
-   ═══════════════════════════════════════════ */
+   ═══════════════════ */
 
-.glow-party__carousel {
+.gp-carousel {
   position: sticky;
   top: 24px;
   width: 100%;
 }
 
 /*
-  The clip box. overflow:hidden hides the off-screen slides.
-  No fixed height — height comes from the image inside slide 1.
+  Viewport = the visible window.
+  - overflow: hidden clips the slides that are off-screen.
+  - padding-bottom = aspect ratio (e.g. 75% = 4:3).
+    This gives the box its height BEFORE any content loads.
+  - position: relative so the track can be position: absolute inside.
 */
-.glow-party__carousel-track-wrap {
+.gp-viewport {
+  position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 16px;
+  padding-bottom: var(--pad, 75%); /* set inline from Liquid */
 }
 
 /*
-  The track: a flex row 300% wide (3 slides × 100%).
-  translateX(-0%) = slide 1, translateX(-33.333%) = slide 2, etc.
-  We calculate the correct translateX in JS as: index * (100 / total) %
+  Track = all slides in a horizontal row.
+  - position: absolute + full inset fills the viewport exactly.
+  - display: flex puts slides side by side.
+  - width: (total * 100%) is NOT needed — flex handles it.
+  - translateX(-N * 100%) where 100% = viewport width (because
+    the track is position:absolute and same width as viewport).
+    So slide 1 = 0%, slide 2 = -100%, slide 3 = -200%, etc.
 */
-.glow-party__carousel-track {
+.gp-track {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
   display: flex;
-  /* width is set inline by JS to (total * 100)% */
+  width: 100%;
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
 }
 
 /*
-  Each slide is 100% of the TRACK-WRAP width (not track width).
-  We set flex-basis in JS to (100 / total)% of the track,
-  which equals 100% of the wrap. Or we just set width via JS too.
-  Simpler: each slide = 100% wrap width, track = slides side by side.
+  Each slide = same width as viewport (100% of the absolute parent).
+  flex: 0 0 100% — never shrinks, never grows, always 100%.
+  The track stretches naturally to fit all slides.
 */
-.glow-party__slide {
-  flex-shrink: 0;
-  /* width set by JS */
+.gp-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-.glow-party__slide img {
+/*
+  Image fills the slide completely.
+  object-fit: cover with no height: 100% would collapse.
+  Since the slide has no explicit height (it's in an abs-positioned track),
+  we need the image to fill via position: absolute.
+*/
+.gp-slide-img {
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
-.glow-party__slide-placeholder {
-  width: 100%;
-  aspect-ratio: 4/3;
-  background: rgba(0, 0, 0, 0.06);
+.gp-slide-placeholder {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.glow-party__placeholder-svg {
-  width: 60px;
-  height: 60px;
-  opacity: 0.3;
-}
-
-/* ── Arrows ── */
-.glow-party__arrow {
+/* Arrows */
+.gp-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -91,198 +106,160 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255,255,255,0.9);
   backdrop-filter: blur(4px);
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gp-color-text, #1a1a1a);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+  color: var(--gp-text, #1a1a1a);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.14);
   transition: background 0.18s, transform 0.18s;
 }
+.gp-arrow--prev { left: 12px; }
+.gp-arrow--next { right: 12px; }
+.gp-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+.gp-arrow:focus-visible { outline: 2px solid var(--gp-accent, #c084a0); outline-offset: 2px; }
 
-.glow-party__arrow--prev { left: 12px; }
-.glow-party__arrow--next { right: 12px; }
-
-.glow-party__arrow:hover {
-  background: #fff;
-  transform: translateY(-50%) scale(1.08);
-}
-
-.glow-party__arrow:focus-visible {
-  outline: 2px solid var(--gp-color-accent, #c084a0);
-  outline-offset: 2px;
-}
-
-/* ── Dots ── */
-.glow-party__dots {
+/* Dots */
+.gp-dots {
   display: flex;
   justify-content: center;
   gap: 6px;
   margin-top: 12px;
 }
-
-.glow-party__dot {
+.gp-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0,0,0,0.2);
   border: none;
   padding: 0;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
-
-.glow-party__dot.is-active {
-  background: var(--gp-color-accent, #c084a0);
+.gp-dot.active {
+  background: var(--gp-accent, #c084a0);
   transform: scale(1.35);
 }
 
-.glow-party__dot:focus-visible {
-  outline: 2px solid var(--gp-color-accent, #c084a0);
-  outline-offset: 2px;
-}
+/* ═══════════════════
+   CONTENT
+   ═══════════════════ */
 
-/* ═══════════════════════════════════════════
-   CONTENT COLUMN
-   ═══════════════════════════════════════════ */
-
-.glow-party__content {
+.gp-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.glow-party__eyebrow {
+.gp-eyebrow {
   margin: 0;
   font-size: var(--gp-fs-eyebrow, 11px);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gp-color-accent, #c084a0);
-  line-height: 1.4;
+  color: var(--gp-accent, #c084a0);
 }
 
-.glow-party__title {
+.gp-title {
   margin: 0;
   font-size: var(--gp-fs-title, 56px);
   font-weight: 700;
   line-height: 1.05;
-  color: var(--gp-color-text, #1a1a1a);
+  color: var(--gp-text, #1a1a1a);
 }
 
-.glow-party__descriptor {
+.gp-descriptor {
   margin: 0;
-  font-size: var(--gp-fs-descriptor, 14px);
-  color: var(--gp-color-subtle, #6b6b6b);
-  border-left: 2px solid var(--gp-color-accent, #c084a0);
+  font-size: var(--gp-fs-desc-sub, 14px);
+  color: var(--gp-subtle, #6b6b6b);
+  border-left: 2px solid var(--gp-accent, #c084a0);
   padding-left: 12px;
   line-height: 1.65;
 }
 
-.glow-party__description {
-  font-size: var(--gp-fs-description, 16px);
+.gp-description {
+  font-size: var(--gp-fs-body, 16px);
   line-height: 1.75;
-  color: var(--gp-color-text, #1a1a1a);
+  color: var(--gp-text, #1a1a1a);
 }
-.glow-party__description p { margin: 0 0 0.85em; }
-.glow-party__description p:last-child { margin-bottom: 0; }
+.gp-description p { margin: 0 0 0.85em; }
+.gp-description p:last-child { margin-bottom: 0; }
 
-.glow-party__includes {
-  background: rgba(0, 0, 0, 0.035);
+.gp-includes {
+  background: rgba(0,0,0,0.035);
   border-radius: 12px;
   padding: 20px 22px;
 }
-
-.glow-party__includes-heading {
+.gp-includes-label {
   margin: 0 0 12px;
-  font-size: calc(var(--gp-fs-includes, 15px) * 0.73);
+  font-size: calc(var(--gp-fs-list, 15px) * 0.73);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gp-color-accent, #c084a0);
+  color: var(--gp-accent, #c084a0);
 }
-
-.glow-party__includes-list {
+.gp-includes-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   display: flex;
   flex-direction: column;
   gap: 9px;
 }
-
-.glow-party__includes-list li {
+.gp-includes-list li {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: var(--gp-fs-includes, 15px);
+  font-size: var(--gp-fs-list, 15px);
   line-height: 1.5;
-  color: var(--gp-color-text, #1a1a1a);
 }
-
-.glow-party__includes-list li::before {
+.gp-includes-list li::before {
   content: '';
   flex-shrink: 0;
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--gp-color-accent, #c084a0);
-  margin-top: calc(var(--gp-fs-includes, 15px) * 0.44);
+  background: var(--gp-accent, #c084a0);
+  margin-top: calc(var(--gp-fs-list, 15px) * 0.44);
 }
 
-.glow-party__meta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.glow-party__meta-item {
+.gp-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+.gp-meta-item {
   flex: 1;
   min-width: 140px;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  background: rgba(0, 0, 0, 0.035);
+  background: rgba(0,0,0,0.035);
   border-radius: 10px;
   padding: 14px 16px;
 }
-
-.glow-party__meta-label {
-  font-size: var(--gp-fs-meta-label, 11px);
+.gp-meta-label {
+  font-size: var(--gp-fs-ml, 11px);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gp-color-accent, #c084a0);
+  color: var(--gp-accent, #c084a0);
 }
-
-.glow-party__meta-value {
-  font-size: var(--gp-fs-meta-value, 15px);
+.gp-meta-value {
+  font-size: var(--gp-fs-mv, 15px);
   font-weight: 500;
   line-height: 1.4;
-  color: var(--gp-color-text, #1a1a1a);
 }
 
-.glow-party__booking-note {
+.gp-booking-note {
   margin: 0;
-  font-size: var(--gp-fs-booking, 14px);
-  color: var(--gp-color-subtle, #6b6b6b);
+  font-size: var(--gp-fs-note, 14px);
+  color: var(--gp-subtle, #6b6b6b);
   line-height: 1.6;
 }
 
-.glow-party__app-block,
-.glow-party__custom-html {
-  width: 100%;
-}
+.gp-app-block { width: 100%; }
 
-.glow-party__fine-print {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding-top: 14px;
-}
-
-.glow-party__fine-print-toggle {
+/* Fine print */
+.gp-fine-print { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 14px; }
+.gp-fine-print-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -290,73 +267,40 @@
   list-style: none;
   cursor: pointer;
   user-select: none;
-  font-size: var(--gp-fs-fine-print, 13px);
+  font-size: var(--gp-fs-fp, 13px);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--gp-color-subtle, #6b6b6b);
+  color: var(--gp-subtle, #6b6b6b);
   padding: 4px 0;
 }
-
-.glow-party__fine-print-toggle::-webkit-details-marker { display: none; }
-
-.glow-party__fine-print-icon {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  transition: transform 0.22s ease;
-  color: var(--gp-color-subtle, #6b6b6b);
-}
-
-details[open] .glow-party__fine-print-icon {
-  transform: rotate(180deg);
-}
-
-.glow-party__fine-print-body {
+.gp-fine-print-toggle::-webkit-details-marker { display: none; }
+.gp-chevron { transition: transform 0.22s ease; flex-shrink: 0; }
+details[open] .gp-chevron { transform: rotate(180deg); }
+.gp-fine-print-body {
   padding: 14px 0 4px;
-  font-size: var(--gp-fs-fine-print, 13px);
+  font-size: var(--gp-fs-fp, 13px);
   line-height: 1.7;
-  color: var(--gp-color-subtle, #6b6b6b);
+  color: var(--gp-subtle, #6b6b6b);
 }
+.gp-fine-print-body p { margin: 0 0 0.75em; }
+.gp-fine-print-body p:last-child { margin-bottom: 0; }
 
-.glow-party__fine-print-body p { margin: 0 0 0.75em; }
-.glow-party__fine-print-body p:last-child { margin-bottom: 0; }
-
-/* ═══════════════════════════════════════════
+/* ═══════════════════
    RESPONSIVE
-   ═══════════════════════════════════════════ */
+   ═══════════════════ */
 
-@media screen and (max-width: 900px) {
-  .glow-party__inner {
+@media (max-width: 900px) {
+  .gp-inner {
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 0 20px;
   }
-
-  .glow-party__carousel {
-    position: static;
-  }
-
-  .glow-party__title {
-    font-size: min(var(--gp-fs-title, 56px), 12vw);
-  }
+  .gp-carousel { position: static; }
+  .gp-title { font-size: min(var(--gp-fs-title, 56px), 12vw); }
 }
 
-@media screen and (max-width: 480px) {
-  .glow-party__inner {
-    padding: 0 16px;
-  }
-
-  .glow-party__meta-item {
-    min-width: unset;
-    flex: 1 1 calc(50% - 6px);
-  }
-
-  .glow-party__includes {
-    padding: 16px 18px;
-  }
-
-  .glow-party__arrow {
-    width: 34px;
-    height: 34px;
-  }
+@media (max-width: 480px) {
+  .gp-inner { padding: 0 16px; }
+  .gp-meta-item { min-width: unset; flex: 1 1 calc(50% - 6px); }
+  .gp-arrow { width: 34px; height: 34px; }
 }

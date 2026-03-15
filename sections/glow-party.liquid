@@ -1,13 +1,4 @@
-{% comment %}
-  Glow Party Section
-  - Carousel: unlimited images via "Image Slide" blocks
-  - Aspect ratio locked via track-wrap, bulletproof on mobile
-  - Vanilla JS swipe + arrow + dot nav, zero dependencies
-  - Font size range sliders for every text element
-  - App block support for form embeds
-  - Collapsible fine print
-  - No CTA button
-{% endcomment %}
+{% comment %} Glow Party — clean rewrite {% endcomment %}
 
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
 
@@ -37,186 +28,138 @@
   class="glow-party"
   id="glow-party-{{ section.id }}"
   style="
-    --gp-color-bg:       {{ section.settings.background_color }};
-    --gp-color-accent:   {{ section.settings.accent_color }};
-    --gp-color-text:     {{ section.settings.text_color }};
-    --gp-color-subtle:   {{ section.settings.subtle_text_color }};
-    --gp-pt:             {{ section.settings.section_padding_top }}px;
-    --gp-pb:             {{ section.settings.section_padding_bottom }}px;
-    --gp-img-ratio:      {{ section.settings.image_aspect_ratio }};
-    --gp-img-padding:    {{ img_padding }};
-    --gp-fs-eyebrow:     {{ section.settings.font_size_eyebrow }}px;
-    --gp-fs-title:       {{ section.settings.font_size_title }}px;
-    --gp-fs-descriptor:  {{ section.settings.font_size_descriptor }}px;
-    --gp-fs-description: {{ section.settings.font_size_description }}px;
-    --gp-fs-includes:    {{ section.settings.font_size_includes }}px;
-    --gp-fs-meta-label:  {{ section.settings.font_size_meta_label }}px;
-    --gp-fs-meta-value:  {{ section.settings.font_size_meta_value }}px;
-    --gp-fs-booking:     {{ section.settings.font_size_booking }}px;
-    --gp-fs-fine-print:  {{ section.settings.font_size_fine_print }}px;
+    --gp-bg:          {{ section.settings.background_color }};
+    --gp-accent:      {{ section.settings.accent_color }};
+    --gp-text:        {{ section.settings.text_color }};
+    --gp-subtle:      {{ section.settings.subtle_text_color }};
+    --gp-pt:          {{ section.settings.section_padding_top }}px;
+    --gp-pb:          {{ section.settings.section_padding_bottom }}px;
+    --gp-fs-eyebrow:  {{ section.settings.font_size_eyebrow }}px;
+    --gp-fs-title:    {{ section.settings.font_size_title }}px;
+    --gp-fs-desc-sub: {{ section.settings.font_size_descriptor }}px;
+    --gp-fs-body:     {{ section.settings.font_size_description }}px;
+    --gp-fs-list:     {{ section.settings.font_size_includes }}px;
+    --gp-fs-ml:       {{ section.settings.font_size_meta_label }}px;
+    --gp-fs-mv:       {{ section.settings.font_size_meta_value }}px;
+    --gp-fs-note:     {{ section.settings.font_size_booking }}px;
+    --gp-fs-fp:       {{ section.settings.font_size_fine_print }}px;
   "
 >
-  <div class="glow-party__inner">
+  <div class="gp-inner">
 
-    {%- comment -%} ── CAROUSEL ── {%- endcomment -%}
+    {%- comment -%}── CAROUSEL ──{%- endcomment -%}
     {%- if slide_count > 0 -%}
-      <div
-        class="glow-party__carousel"
-        data-carousel
-        aria-roledescription="carousel"
-        aria-label="{{ section.settings.title }} images"
-      >
-        <div class="glow-party__carousel-track-wrap">
-          <div class="glow-party__carousel-track" data-track>
+    <div class="gp-carousel" data-gp-carousel>
 
-            {%- assign slide_index = 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'image_slide' -%}
-                {%- assign slide_index = slide_index | plus: 1 -%}
-                <div
-                  class="glow-party__slide"
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label="{{ slide_index }} of {{ slide_count }}"
-                  {{ block.shopify_attributes }}
-                >
-                  <div class="glow-party__slide-inner">
-                    {%- if block.settings.image != blank -%}
-                      {{
-                        block.settings.image
-                        | image_url: width: 1400
-                        | image_tag:
-                          loading: 'lazy',
-                          alt: block.settings.image.alt | default: section.settings.title,
-                          class: 'glow-party__slide-img',
-                          widths: '400, 600, 800, 1000, 1200, 1400',
-                          sizes: '(max-width: 900px) 100vw, 50vw'
-                      }}
-                    {%- else -%}
-                      <div class="glow-party__slide-placeholder">
-                        {{ 'image' | placeholder_svg_tag: 'glow-party__placeholder-svg' }}
-                      </div>
-                    {%- endif -%}
-                  </div>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
+      {%- comment -%} Viewport: clips everything outside current slide {%- endcomment -%}
+      <div class="gp-viewport" style="--pad: {{ img_padding }}">
 
-          </div>
+        {%- comment -%} Track: all slides in a row, translateX moves it {%- endcomment -%}
+        <div class="gp-track" data-gp-track>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'image_slide' -%}
+              <div class="gp-slide" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      alt: block.settings.image.alt | default: section.settings.title,
+                      class: 'gp-slide-img'
+                  }}
+                {%- else -%}
+                  <div class="gp-slide-placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
 
-        {%- if slide_count > 1 -%}
-          <button class="glow-party__arrow glow-party__arrow--prev" data-prev aria-label="Previous image" type="button">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="glow-party__arrow glow-party__arrow--next" data-next aria-label="Next image" type="button">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
-          <div class="glow-party__dots" role="tablist" aria-label="Slide indicators">
-            {%- assign dot_index = 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'image_slide' -%}
-                <button
-                  class="glow-party__dot{% if dot_index == 0 %} is-active{% endif %}"
-                  role="tab"
-                  aria-selected="{% if dot_index == 0 %}true{% else %}false{% endif %}"
-                  aria-label="Go to slide {{ dot_index | plus: 1 }}"
-                  data-dot="{{ dot_index }}"
-                  type="button"
-                ></button>
-                {%- assign dot_index = dot_index | plus: 1 -%}
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-
       </div>
-    {%- endif -%}
 
-    {%- comment -%} ── CONTENT ── {%- endcomment -%}
-    <div class="glow-party__content">
-
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="glow-party__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- if slide_count > 1 -%}
+        <button class="gp-arrow gp-arrow--prev" data-gp-prev type="button" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 13.5L6.5 9 11 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="gp-arrow gp-arrow--next" data-gp-next type="button" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4.5L11.5 9 7 13.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gp-dots">
+          {%- for i in (1..slide_count) -%}
+            <button class="gp-dot{% if forloop.first %} active{% endif %}" data-gp-dot="{{ forloop.index0 }}" type="button" aria-label="Slide {{ i }}"></button>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
 
-      <h2 class="glow-party__title">{{ section.settings.title }}</h2>
+    </div>
+    {%- endif -%}
+
+    {%- comment -%}── CONTENT ──{%- endcomment -%}
+    <div class="gp-content">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="gp-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <h2 class="gp-title">{{ section.settings.title }}</h2>
 
       {%- if section.settings.descriptor != blank -%}
-        <p class="glow-party__descriptor">{{ section.settings.descriptor }}</p>
+        <p class="gp-descriptor">{{ section.settings.descriptor }}</p>
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
-        <div class="glow-party__description">{{ section.settings.description }}</div>
+        <div class="gp-description">{{ section.settings.description }}</div>
       {%- endif -%}
 
       {%- if section.settings.whats_included != blank -%}
-        <div class="glow-party__includes">
-          <p class="glow-party__includes-heading">{{ section.settings.includes_heading | default: "What's Included" }}</p>
-          <ul class="glow-party__includes-list">
+        <div class="gp-includes">
+          <p class="gp-includes-label">{{ section.settings.includes_heading | default: "What's Included" }}</p>
+          <ul class="gp-includes-list">
             {%- assign items = section.settings.whats_included | newline_to_br | split: '<br />' -%}
             {%- for item in items -%}
               {%- assign clean = item | strip | remove: '* ' | remove: '- ' -%}
-              {%- if clean != blank -%}
-                <li>{{ clean }}</li>
-              {%- endif -%}
+              {%- if clean != blank -%}<li>{{ clean }}</li>{%- endif -%}
             {%- endfor -%}
           </ul>
         </div>
       {%- endif -%}
 
-      <div class="glow-party__meta">
+      <div class="gp-meta">
         {%- if section.settings.when != blank -%}
-          <div class="glow-party__meta-item">
-            <span class="glow-party__meta-label">When</span>
-            <span class="glow-party__meta-value">{{ section.settings.when }}</span>
+          <div class="gp-meta-item">
+            <span class="gp-meta-label">When</span>
+            <span class="gp-meta-value">{{ section.settings.when }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.price != blank -%}
-          <div class="glow-party__meta-item">
-            <span class="glow-party__meta-label">Price</span>
-            <span class="glow-party__meta-value">{{ section.settings.price }}</span>
+          <div class="gp-meta-item">
+            <span class="gp-meta-label">Price</span>
+            <span class="gp-meta-value">{{ section.settings.price }}</span>
           </div>
         {%- endif -%}
       </div>
 
       {%- if section.settings.booking_note != blank -%}
-        <p class="glow-party__booking-note">{{ section.settings.booking_note }}</p>
+        <p class="gp-booking-note">{{ section.settings.booking_note }}</p>
       {%- endif -%}
 
-      {%- comment -%} ── APP / CUSTOM BLOCKS ── {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when '@app' -%}
-            <div class="glow-party__app-block" {{ block.shopify_attributes }}>
-              {% render block %}
-            </div>
+            <div class="gp-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
           {%- when 'custom_html' -%}
-            <div class="glow-party__custom-html" {{ block.shopify_attributes }}>
-              {{ block.settings.html }}
-            </div>
+            <div {{ block.shopify_attributes }}>{{ block.settings.html }}</div>
         {%- endcase -%}
       {%- endfor -%}
 
-      {%- comment -%} ── FINE PRINT COLLAPSIBLE ── {%- endcomment -%}
       {%- if section.settings.fine_print != blank -%}
-        <details class="glow-party__fine-print">
-          <summary class="glow-party__fine-print-toggle">
+        <details class="gp-fine-print">
+          <summary class="gp-fine-print-toggle">
             {{ section.settings.fine_print_label | default: 'Fine Print' }}
-            <span class="glow-party__fine-print-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
+            <svg class="gp-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </summary>
-          <div class="glow-party__fine-print-body">
-            {{ section.settings.fine_print }}
-          </div>
+          <div class="gp-fine-print-body">{{ section.settings.fine_print }}</div>
         </details>
       {%- endif -%}
 
@@ -226,64 +169,56 @@
 
 <script>
 (function () {
-  function initCarousel(section) {
-    var carousel = section.querySelector('[data-carousel]');
+  function init(root) {
+    var carousel = root.querySelector('[data-gp-carousel]');
     if (!carousel) return;
 
-    var track   = carousel.querySelector('[data-track]');
-    var slides  = carousel.querySelectorAll('.glow-party__slide');
-    var dots    = carousel.querySelectorAll('[data-dot]');
-    var prevBtn = carousel.querySelector('[data-prev]');
-    var nextBtn = carousel.querySelector('[data-next]');
+    var track   = carousel.querySelector('[data-gp-track]');
+    var slides  = Array.prototype.slice.call(carousel.querySelectorAll('.gp-slide'));
+    var dots    = Array.prototype.slice.call(carousel.querySelectorAll('[data-gp-dot]'));
+    var prev    = carousel.querySelector('[data-gp-prev]');
+    var next    = carousel.querySelector('[data-gp-next]');
     var total   = slides.length;
-    var current = 0;
+    var cur     = 0;
 
-    if (total <= 1) return;
+    if (total === 0) return;
 
-    function goTo(index) {
-      current = ((index % total) + total) % total;
-      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    // Each slide is 100% of viewport width.
+    // Track is (total * 100%) wide — slides sit side by side.
+    // We move track by -(cur * 100%) to show the right slide.
+    // This is pure CSS percentage — no JS sizing needed.
+    // Works because slide width = viewport width = 100% each.
+
+    function go(n) {
+      cur = ((n % total) + total) % total;
+      track.style.transform = 'translateX(-' + cur + '00%)';
       dots.forEach(function (d, i) {
-        d.classList.toggle('is-active', i === current);
-        d.setAttribute('aria-selected', String(i === current));
+        d.classList.toggle('active', i === cur);
       });
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    go(0);
 
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        goTo(parseInt(dot.getAttribute('data-dot'), 10));
-      });
+    if (total === 1) return;
+
+    if (prev) prev.addEventListener('click', function () { go(cur - 1); });
+    if (next) next.addEventListener('click', function () { go(cur + 1); });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { go(+d.getAttribute('data-gp-dot')); });
     });
 
-    // Swipe
-    var startX = 0;
-    track.addEventListener('touchstart', function (e) {
-      startX = e.touches[0].clientX;
+    var tx = 0;
+    track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   function (e) {
+      var dx = tx - e.changedTouches[0].clientX;
+      if (Math.abs(dx) > 40) go(dx > 0 ? cur + 1 : cur - 1);
     }, { passive: true });
-    track.addEventListener('touchend', function (e) {
-      var diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-    }, { passive: true });
-
-    // Keyboard
-    carousel.setAttribute('tabindex', '0');
-    carousel.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft')  goTo(current - 1);
-      if (e.key === 'ArrowRight') goTo(current + 1);
-    });
   }
 
-  // Init all instances on page
-  document.querySelectorAll('[id^="glow-party-"]').forEach(initCarousel);
+  document.querySelectorAll('[id^="glow-party-"]').forEach(init);
 
-  // Re-init after theme editor section reload
   if (window.Shopify && Shopify.designMode) {
-    document.addEventListener('shopify:section:load', function (e) {
-      initCarousel(e.target);
-    });
+    document.addEventListener('shopify:section:load', function (e) { init(e.target); });
   }
 })();
 </script>
@@ -294,12 +229,8 @@
   "tag": "section",
   "class": "glow-party-section",
   "settings": [
-
     { "type": "header", "content": "Image Carousel" },
-    {
-      "type": "paragraph",
-      "content": "Add images using the 'Image Slide' blocks in the left panel. You can add as many as you want."
-    },
+    { "type": "paragraph", "content": "Add images via 'Image Slide' blocks in the left panel." },
     {
       "type": "select",
       "id": "image_aspect_ratio",
@@ -313,115 +244,47 @@
       ],
       "default": "4/3"
     },
-
     { "type": "header", "content": "Text Content" },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "A Private Skincare Night Out for You + Your Friends"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Glow Party"
-    },
-    {
-      "type": "text",
-      "id": "descriptor",
-      "label": "Descriptor (under title)",
-      "default": "Private Skin Analysis + After-Hours Shopping \u00b7 Available on select Sundays only. Limited private bookings each month."
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>"
-    },
-
+    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
+    { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },
+    { "type": "text",     "id": "descriptor",   "label": "Descriptor",       "default": "Private Skin Analysis + After-Hours Shopping \u00b7 Available on select Sundays only. Limited private bookings each month." },
+    { "type": "richtext", "id": "description",  "label": "Description",      "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>" },
     { "type": "header", "content": "What's Included" },
-    {
-      "type": "text",
-      "id": "includes_heading",
-      "label": "Heading",
-      "default": "What's Included"
-    },
-    {
-      "type": "textarea",
-      "id": "whats_included",
-      "label": "Items (one per line, optionally prefix with * or -)",
-      "default": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit"
-    },
-
+    { "type": "text",     "id": "includes_heading", "label": "Heading", "default": "What's Included" },
+    { "type": "textarea", "id": "whats_included",   "label": "Items (one per line)", "default": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit" },
     { "type": "header", "content": "When & Price" },
-    {
-      "type": "text",
-      "id": "when",
-      "label": "When",
-      "default": "Select Sundays \u00b7 5:00\u20137:00 PM (after closing)"
-    },
-    {
-      "type": "text",
-      "id": "price",
-      "label": "Price",
-      "default": "$495 per group (up to 4 guests)"
-    },
-
+    { "type": "text", "id": "when",  "label": "When",  "default": "Select Sundays \u00b7 5:00\u20137:00 PM (after closing)" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$495 per group (up to 4 guests)" },
     { "type": "header", "content": "Booking Note" },
-    {
-      "type": "textarea",
-      "id": "booking_note",
-      "label": "Note above form",
-      "default": "Submit the request form below and our team will follow up to confirm your date."
-    },
-
+    { "type": "textarea", "id": "booking_note", "label": "Note above form", "default": "Submit the request form below and our team will follow up to confirm your date." },
     { "type": "header", "content": "Fine Print" },
-    {
-      "type": "text",
-      "id": "fine_print_label",
-      "label": "Collapsible label",
-      "default": "Fine Print"
-    },
-    {
-      "type": "richtext",
-      "id": "fine_print",
-      "label": "Fine print content",
-      "default": "<p>Add your cancellation policy, booking terms, and any other details here.</p>"
-    },
-
+    { "type": "text",     "id": "fine_print_label", "label": "Collapsible label",  "default": "Fine Print" },
+    { "type": "richtext", "id": "fine_print",        "label": "Fine print content", "default": "<p>Add your cancellation policy, booking terms, and any other details here.</p>" },
     { "type": "header", "content": "Font Sizes" },
-    { "type": "range", "id": "font_size_eyebrow",     "label": "Eyebrow",           "min": 10, "max": 24, "step": 1, "unit": "px", "default": 11 },
-    { "type": "range", "id": "font_size_title",        "label": "Title",             "min": 24, "max": 96, "step": 2, "unit": "px", "default": 56 },
-    { "type": "range", "id": "font_size_descriptor",   "label": "Descriptor",        "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "font_size_description",  "label": "Description body",  "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
-    { "type": "range", "id": "font_size_includes",     "label": "Included items",    "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
-    { "type": "range", "id": "font_size_meta_label",   "label": "When/Price label",  "min": 9,  "max": 18, "step": 1, "unit": "px", "default": 11 },
-    { "type": "range", "id": "font_size_meta_value",   "label": "When/Price value",  "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
-    { "type": "range", "id": "font_size_booking",      "label": "Booking note",      "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "font_size_fine_print",   "label": "Fine print body",   "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
-
+    { "type": "range", "id": "font_size_eyebrow",    "label": "Eyebrow",          "min": 10, "max": 24, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_title",       "label": "Title",            "min": 24, "max": 96, "step": 2, "unit": "px", "default": 56 },
+    { "type": "range", "id": "font_size_descriptor",  "label": "Descriptor",       "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "font_size_description", "label": "Description body", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "font_size_includes",    "label": "Included items",   "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "font_size_meta_label",  "label": "When/Price label", "min": 9,  "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_meta_value",  "label": "When/Price value", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "font_size_booking",     "label": "Booking note",     "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "font_size_fine_print",  "label": "Fine print body",  "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background",           "default": "#fdf6f2" },
-    { "type": "color", "id": "accent_color",      "label": "Accent",               "default": "#c084a0" },
-    { "type": "color", "id": "text_color",         "label": "Text",                 "default": "#1a1a1a" },
-    { "type": "color", "id": "subtle_text_color",  "label": "Subtle / secondary",   "default": "#6b6b6b" },
-
+    { "type": "color", "id": "background_color", "label": "Background",         "default": "#fdf6f2" },
+    { "type": "color", "id": "accent_color",      "label": "Accent",             "default": "#c084a0" },
+    { "type": "color", "id": "text_color",         "label": "Text",               "default": "#1a1a1a" },
+    { "type": "color", "id": "subtle_text_color",  "label": "Subtle text",        "default": "#6b6b6b" },
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "section_padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 },
     { "type": "range", "id": "section_padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 }
   ],
-
   "blocks": [
     {
       "type": "image_slide",
       "name": "Image Slide",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        }
+        { "type": "image_picker", "id": "image", "label": "Image" }
       ]
     },
     { "type": "@app" },
@@ -433,7 +296,6 @@
       ]
     }
   ],
-
   "presets": [
     {
       "name": "Glow Party",
