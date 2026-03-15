@@ -29,55 +29,47 @@
 }
 
 /*
-  Viewport = the visible window. padding-bottom sets height via aspect ratio.
-  overflow: hidden clips slides that are off-screen.
+  Viewport = visible window. No fixed aspect ratio — images display
+  at their natural size. overflow: hidden clips off-screen slides.
 */
 .gp-viewport {
   position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 16px;
-  padding-bottom: 75%; /* fallback, overridden by inline style */
 }
 
 /*
-  Track holds all slides in a horizontal row inside the viewport box.
-  --gp-slide-count is set by JS on init. Track width = N * 100% of viewport.
-  translateX shifts by one "viewport width" per slide.
+  Track holds all slides side by side. Width = N * 100% of viewport.
+  translateX shifts by (cur/total * 100)% to show the right slide.
 */
 .gp-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(var(--gp-slide-count, 1) * 100%);
-  height: 100%;
   display: flex;
+  width: calc(var(--gp-slide-count, 1) * 100%);
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
 /*
-  Each slide = equal fraction of the track.
-  3 slides, track = 300%, each slide = 33.33% of track = 100% of viewport.
+  Each slide = equal fraction of the track = 100% of viewport width.
 */
 .gp-slide {
   flex: 1 0 0%;
-  height: 100%;
   position: relative;
   overflow: hidden;
 }
 
+/* Image displays at natural aspect ratio, fills slide width, no cropping */
 .gp-slide-img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
+  height: auto;
+  border-radius: 0;
 }
 
 .gp-slide-placeholder {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  aspect-ratio: 4 / 3;
   background: rgba(0,0,0,0.06);
   display: flex;
   align-items: center;
