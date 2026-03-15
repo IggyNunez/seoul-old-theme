@@ -9,7 +9,7 @@
  */
 {
   "order": [
-    "glow_party_KVGjeW",
+    "glow_party_QFRGRw",
     "main",
     "17562896073102f54d",
     "psb_reviews_reviews_01_kmhmR4",
@@ -17,49 +17,29 @@
     "tpt_email_signup_1_A8AHDH"
   ],
   "sections": {
-    "glow_party_KVGjeW": {
+    "glow_party_QFRGRw": {
       "type": "glow-party",
       "blocks": {
-        "image_slide_kPfC6d": {
+        "image_slide_CKqepd": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabOpening-03_7cf58aaf-ceea-428d-8d22-b8a0e38dbd29.png",
-            "aspect_ratio": "auto",
-            "object_fit": "contain",
-            "object_position": "bottom right"
-          }
-        },
-        "image_slide_kb4eam": {
-          "type": "image_slide",
-          "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-042700.jpg",
-            "aspect_ratio": "auto",
-            "object_fit": "contain",
+            "aspect_ratio": "4/5",
+            "object_fit": "cover",
             "object_position": "center"
           }
         },
-        "forms_inline_gDXxkr": {
-          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+        "image_slide_fCKbyc": {
+          "type": "image_slide",
           "settings": {
-            "form_id": "908661",
-            "text_color": "#202020",
-            "button_background_color": "#202020",
-            "button_label_color": "#FFFFFF",
-            "links_color": "#1878B9",
-            "errors_color": "#E02229",
-            "text_alignment": "center",
-            "form_alignment": "center",
-            "padding_top": 0,
-            "padding_bottom": 24,
-            "padding_right": 0,
-            "padding_left": 0
+            "aspect_ratio": "4/5",
+            "object_fit": "cover",
+            "object_position": "center"
           }
         }
       },
       "block_order": [
-        "image_slide_kPfC6d",
-        "image_slide_kb4eam",
-        "forms_inline_gDXxkr"
+        "image_slide_CKqepd",
+        "image_slide_fCKbyc"
       ],
       "name": "Glow Party",
       "settings": {
