@@ -1,6 +1,6 @@
 /* ============================================================
    Glow Party — glow-party.css
-   Single image hero + content. No carousel.
+   Single hero image + editorial content + form area.
    ============================================================ */
 
 .glow-party {
@@ -9,21 +9,18 @@
   padding: var(--gp-pt, 80px) 0 var(--gp-pb, 80px);
 }
 
-/* ── LAYOUT ──
-   Full-width hero image on top, content below in a centered column.
-   Clean, editorial, no fighting with grid columns.
-*/
-
 .gp-inner {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 40px;
+  box-sizing: border-box;
 }
 
 /* ── HERO IMAGE ── */
 
 .gp-hero {
   width: 100%;
+  max-width: 100%;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 48px;
@@ -32,10 +29,11 @@
 .gp-hero-img {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
 }
 
-/* ── HEADER AREA ── */
+/* ── HEADER ── */
 
 .gp-header {
   text-align: center;
@@ -67,9 +65,7 @@
   line-height: 1.65;
 }
 
-/* ── BODY ──
-   Two-column below the header: description left, details right.
-*/
+/* ── BODY ── */
 
 .gp-body {
   display: grid;
@@ -155,7 +151,7 @@
   line-height: 1.4;
 }
 
-/* ── BOOKING / FORM AREA ── */
+/* ── FORM / BOOKING ── */
 
 .gp-form-area {
   max-width: 720px;
@@ -170,11 +166,8 @@
   text-align: center;
 }
 
-.gp-app-block {
-  width: 100%;
-}
-
-.gp-custom-html {
+/* App blocks and custom HTML get full width of form area */
+.gp-form-area > div {
   width: 100%;
 }
 

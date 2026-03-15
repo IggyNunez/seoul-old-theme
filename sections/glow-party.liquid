@@ -1,4 +1,4 @@
-{% comment %} Glow Party — single image hero + editorial layout {% endcomment %}
+{% comment %} Glow Party — single hero + editorial + form {% endcomment %}
 
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
 
@@ -52,7 +52,7 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%}── BODY: description + details side by side ──{%- endcomment -%}
+    {%- comment -%}── BODY ──{%- endcomment -%}
     <div class="gp-body">
 
       {%- if section.settings.description != blank -%}
@@ -98,12 +98,13 @@
       {%- endif -%}
 
       {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when '@app' -%}
-            <div class="gp-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
-          {%- when 'custom_html' -%}
-            <div class="gp-custom-html" {{ block.shopify_attributes }}>{{ block.settings.html }}</div>
-        {%- endcase -%}
+        <div {{ block.shopify_attributes }}>
+          {%- if block.type == '@app' -%}
+            {% render block %}
+          {%- elsif block.type == 'custom_html' -%}
+            {{ block.settings.html }}
+          {%- endif -%}
+        </div>
       {%- endfor -%}
     </div>
 
