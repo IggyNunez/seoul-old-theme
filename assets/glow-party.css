@@ -1,0 +1,317 @@
+/* ============================================================
+   Glow Party — glow-party.css
+   All font sizes + image sizing driven by CSS vars from schema
+   ============================================================ */
+
+/* ── Section shell ── */
+.glow-party {
+  background-color: var(--gp-color-bg, #fdf6f2);
+  color: var(--gp-color-text, #1a1a1a);
+  padding: var(--gp-pt, 80px) 0 var(--gp-pb, 80px);
+}
+
+/* ── Two-column layout ── */
+.glow-party__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── Gallery ── */
+.glow-party__gallery {
+  display: grid;
+  gap: 10px;
+  position: sticky;
+  top: 24px;
+}
+
+/* 1 image: full width */
+.glow-party__gallery--1up {
+  grid-template-columns: 1fr;
+}
+
+/* 2 images: hero top, one below */
+.glow-party__gallery--2up {
+  grid-template-columns: 1fr 1fr;
+}
+.glow-party__gallery--2up .glow-party__gallery-item--main {
+  grid-column: 1 / -1;
+}
+
+/* 3 images: hero top, two below */
+.glow-party__gallery--3up {
+  grid-template-columns: 1fr 1fr;
+}
+.glow-party__gallery--3up .glow-party__gallery-item--main {
+  grid-column: 1 / -1;
+}
+
+/* Image item */
+.glow-party__gallery-item {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Image wrap — this is the key fix.
+   Uses aspect-ratio var from schema.
+   When ratio is "none", falls back to fixed height var. */
+.glow-party__img-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  aspect-ratio: var(--gp-img-ratio, 4/3);
+}
+
+/* When fixed height mode is selected (ratio = none) */
+.glow-party__gallery--1up .glow-party__img-wrap,
+.glow-party__gallery--2up .glow-party__gallery-item--main .glow-party__img-wrap,
+.glow-party__gallery--3up .glow-party__gallery-item--main .glow-party__img-wrap {
+  /* aspect-ratio: none from CSS var disables itself; height takes over */
+}
+
+/* Secondary images always use a square aspect ratio for tidy grid */
+.glow-party__gallery--2up .glow-party__gallery-item:not(.glow-party__gallery-item--main) .glow-party__img-wrap,
+.glow-party__gallery--3up .glow-party__gallery-item:not(.glow-party__gallery-item--main) .glow-party__img-wrap {
+  aspect-ratio: 1 / 1;
+}
+
+.glow-party__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.glow-party__gallery-item:hover .glow-party__img {
+  transform: scale(1.04);
+}
+
+/* ── Content column ── */
+.glow-party__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Eyebrow */
+.glow-party__eyebrow {
+  margin: 0;
+  font-size: var(--gp-fs-eyebrow, 11px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gp-color-accent, #c084a0);
+  line-height: 1.4;
+}
+
+/* Title */
+.glow-party__title {
+  margin: 0;
+  font-size: var(--gp-fs-title, 56px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--gp-color-text, #1a1a1a);
+}
+
+/* Descriptor */
+.glow-party__descriptor {
+  margin: 0;
+  font-size: var(--gp-fs-descriptor, 14px);
+  color: var(--gp-color-subtle, #6b6b6b);
+  border-left: 2px solid var(--gp-color-accent, #c084a0);
+  padding-left: 12px;
+  line-height: 1.65;
+}
+
+/* Description */
+.glow-party__description {
+  font-size: var(--gp-fs-description, 16px);
+  line-height: 1.75;
+  color: var(--gp-color-text, #1a1a1a);
+}
+.glow-party__description p {
+  margin: 0 0 0.85em;
+}
+.glow-party__description p:last-child {
+  margin-bottom: 0;
+}
+
+/* What's Included box */
+.glow-party__includes {
+  background: rgba(0, 0, 0, 0.035);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+
+.glow-party__includes-heading {
+  margin: 0 0 14px;
+  font-size: calc(var(--gp-fs-includes, 15px) * 0.73);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gp-color-accent, #c084a0);
+}
+
+.glow-party__includes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.glow-party__includes-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: var(--gp-fs-includes, 15px);
+  line-height: 1.5;
+  color: var(--gp-color-text, #1a1a1a);
+}
+
+.glow-party__includes-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gp-color-accent, #c084a0);
+  margin-top: calc(var(--gp-fs-includes, 15px) * 0.45);
+}
+
+/* Meta (When / Price) */
+.glow-party__meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.glow-party__meta-item {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.035);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.glow-party__meta-label {
+  font-size: var(--gp-fs-meta-label, 11px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gp-color-accent, #c084a0);
+}
+
+.glow-party__meta-value {
+  font-size: var(--gp-fs-meta-value, 15px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--gp-color-text, #1a1a1a);
+}
+
+/* Booking note */
+.glow-party__booking-note {
+  margin: 0;
+  font-size: var(--gp-fs-booking, 14px);
+  color: var(--gp-color-subtle, #6b6b6b);
+  line-height: 1.6;
+}
+
+/* App / HTML blocks */
+.glow-party__app-block,
+.glow-party__custom-html {
+  width: 100%;
+}
+
+/* Fine Print collapsible */
+.glow-party__fine-print {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 14px;
+}
+
+.glow-party__fine-print-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  font-size: var(--gp-fs-fine-print, 13px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gp-color-subtle, #6b6b6b);
+  padding: 4px 0;
+}
+
+.glow-party__fine-print-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.glow-party__fine-print-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: transform 0.22s ease;
+  color: var(--gp-color-subtle, #6b6b6b);
+}
+
+details[open] .glow-party__fine-print-icon {
+  transform: rotate(180deg);
+}
+
+.glow-party__fine-print-body {
+  padding: 14px 0 4px;
+  font-size: var(--gp-fs-fine-print, 13px);
+  line-height: 1.7;
+  color: var(--gp-color-subtle, #6b6b6b);
+}
+
+.glow-party__fine-print-body p {
+  margin: 0 0 0.75em;
+}
+.glow-party__fine-print-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 900px) {
+  .glow-party__inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 20px;
+  }
+
+  .glow-party__gallery {
+    position: static;
+  }
+
+  .glow-party__title {
+    font-size: clamp(32px, 8vw, var(--gp-fs-title, 56px));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .glow-party__inner {
+    padding: 0 16px;
+  }
+
+  .glow-party__meta-item {
+    min-width: unset;
+    flex: 1 1 calc(50% - 6px);
+  }
+
+  .glow-party__includes {
+    padding: 16px 18px;
+  }
+}
