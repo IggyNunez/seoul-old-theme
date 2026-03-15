@@ -29,15 +29,6 @@
             "object_position": "center"
           }
         },
-        "image_slide_bRByXr": {
-          "type": "image_slide",
-          "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-51-1920.jpg",
-            "aspect_ratio": "4/3",
-            "object_fit": "contain",
-            "object_position": "center"
-          }
-        },
         "forms_inline_tcTz6g": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
@@ -58,7 +49,6 @@
       },
       "block_order": [
         "image_slide_k3khRy",
-        "image_slide_bRByXr",
         "forms_inline_tcTz6g"
       ],
       "name": "Glow Party",
