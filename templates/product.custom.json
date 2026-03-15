@@ -23,10 +23,10 @@
         "image_slide_CyPJUD": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-042700.jpg",
-            "aspect_ratio": "3/4",
-            "object_fit": "cover",
-            "object_position": "bottom"
+            "image": "shopify://shop_images/SeoulGlowLabOpening-46_4d40ef25-ce01-463a-9d06-689862c72721.png",
+            "aspect_ratio": "auto",
+            "object_fit": "contain",
+            "object_position": "bottom right"
           }
         },
         "forms_inline_peYP7A": {
