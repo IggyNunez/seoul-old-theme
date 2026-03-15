@@ -42,18 +42,19 @@
 .gp-slider__slide {
   flex: 0 0 100%;
   min-width: 0;
+  overflow: hidden;
+  /* aspect-ratio set inline per slide */
 }
 
 .gp-slider__img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center;
+  height: 100%;
+  /* object-fit and object-position set inline per slide */
 }
 
 .gp-slider__placeholder {
+  width: 100%;
   aspect-ratio: 4 / 5;
   background: rgba(0,0,0,0.04);
   display: flex;
@@ -285,14 +286,6 @@ details[open] .gp-fine-print__chevron { transform: rotate(180deg); }
   .gp-content {
     flex: 1 1 0%;
     gap: 22px;
-  }
-
-  .gp-slider__img {
-    aspect-ratio: 3 / 4;
-  }
-
-  .gp-slider__placeholder {
-    aspect-ratio: 3 / 4;
   }
 }
 
