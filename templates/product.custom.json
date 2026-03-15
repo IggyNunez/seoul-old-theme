@@ -20,10 +20,28 @@
     "glow_party_36dWcY": {
       "type": "glow-party",
       "blocks": {
+        "forms_inline_tcTz6g": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        },
         "image_slide_k3khRy": {
           "type": "image_slide",
           "settings": {
-            "aspect_ratio": "4/5",
+            "image": "shopify://shop_images/SeoulGlowLabOpening-03_7cf58aaf-ceea-428d-8d22-b8a0e38dbd29.png",
+            "aspect_ratio": "auto",
             "object_fit": "cover",
             "object_position": "center"
           }
@@ -31,13 +49,15 @@
         "image_slide_ajn3Yx": {
           "type": "image_slide",
           "settings": {
-            "aspect_ratio": "4/5",
+            "image": "shopify://shop_images/SeoulGlowLabOpening-46_4d40ef25-ce01-463a-9d06-689862c72721.png",
+            "aspect_ratio": "auto",
             "object_fit": "cover",
             "object_position": "center"
           }
         }
       },
       "block_order": [
+        "forms_inline_tcTz6g",
         "image_slide_k3khRy",
         "image_slide_ajn3Yx"
       ],
