@@ -1,8 +1,7 @@
 /* ============================================================
    Glow Party — glow-party.css
-   Clean rewrite. Carousel uses overflow + translateX.
-   Images always show full (object-fit: cover with configurable
-   aspect ratio, or contain for no-crop).
+   Fade carousel. No translateX, no overflow clipping.
+   Images display at natural ratio, full and uncropped.
    ============================================================ */
 
 .glow-party {
@@ -10,8 +9,6 @@
   color: var(--gp-text, #1a1a1a);
   padding: var(--gp-pt, 80px) 0 var(--gp-pb, 80px);
 }
-
-/* ── LAYOUT ── */
 
 .gp-inner {
   max-width: 1280px;
@@ -23,51 +20,42 @@
   align-items: start;
 }
 
-/* ── CAROUSEL ── */
+/* ── CAROUSEL (fade) ── */
 
 .gp-carousel {
   position: sticky;
   top: 24px;
   width: 100%;
-  min-width: 0;          /* prevent grid blowout */
-}
-
-.gp-viewport {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 16px;
-}
-
-/*
-  Track = horizontal strip holding all slides.
-  Width set inline via style="width: {N}00%" from Liquid.
-  translateX moves it left by one slide-width at a time.
-  Percentage-based: translateX(-0%), translateX(-33.33%), etc.
-*/
-.gp-track {
-  display: flex;
-  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-/*
-  Each slide = 1/N of the track = exactly the viewport width.
-  We set this with inline width on each slide from Liquid:
-  style="width: calc(100% / {N})"
-  ...but actually flex: 1 0 0% with the track sized correctly works too.
-  Using flex approach — track width = N*100%, each child = equal share.
-*/
-.gp-slide {
-  flex: 1 0 0%;
   min-width: 0;
+}
+
+/*
+  Stack all slides on top of each other via grid.
+  Only the active one is visible (opacity 1). The rest are hidden.
+  The tallest slide (first one) sets the height naturally.
+*/
+.gp-stack {
+  display: grid;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gp-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.gp-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .gp-slide-img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 0;
 }
 
 .gp-slide-placeholder {
@@ -82,11 +70,18 @@
 
 /* ── ARROWS ── */
 
+.gp-arrows {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .gp-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2;
+  pointer-events: auto;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -135,7 +130,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-width: 0;          /* prevent grid blowout */
+  min-width: 0;
 }
 
 .gp-eyebrow {
