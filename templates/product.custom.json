@@ -64,7 +64,7 @@
       ],
       "name": "Glow Party",
       "settings": {
-        "image_aspect_ratio": "5/6",
+        "image_aspect_ratio": "3/4",
         "eyebrow": "A Private Skincare Night Out for You + Your Friends",
         "title": "Glow Party",
         "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
@@ -75,7 +75,7 @@
         "price": "$495 per group (up to 4 guests)",
         "booking_note": "Submit the request form below and our team will follow up to confirm your date.",
         "fine_print_label": "Fine Print",
-        "fine_print": "<p>Add your cancellation policy, booking terms, and any other fine print here. This content lives in a collapsible tab.</p>",
+        "fine_print": "<p>Booking Policies & Details<br/><br/>* This is a private group booking for up to 4 guests total.<br/>* Pricing is flat and does not change if fewer than 4 guests attend.<br/>* For parties of 2 guests, we recommend booking standard back-to-back appointments instead.<br/><br/>* Each guest receives an individual skin analysis.<br/>* Analyses are conducted one at a time using our in-store diagnostic device.<br/>* Appointment length may vary per guest.<br/><br/>* Experience runs 5:00 PM–7:00 PM sharp.<br/>* Late arrivals may reduce individual consultation time.<br/><br/>* Offered on select Sundays only and must be requested in advance.<br/>* Date is confirmed only after email approval from our team.<br/><br/>* Light refreshments are included.<br/>* Alcohol service (champagne) available for guests 21+.<br/><br/>* 10% discount applies to in-store purchases made during the event only.<br/>* Discount cannot be combined with other promotions.<br/><br/>* Non-refundable once confirmed due to limited after-hours staffing.<br/>* One reschedule permitted with at least 72 hours’ notice.</p>",
         "font_size_eyebrow": 11,
         "font_size_title": 56,
         "font_size_descriptor": 14,
