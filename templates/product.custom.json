@@ -44,6 +44,8 @@
       "name": "Glow Party",
       "settings": {
         "image_1": "shopify://shop_images/SeoulGlowLabOpening-03.png",
+        "image_2": "shopify://shop_images/SeoulGlowLabGrandOpening-51-1920.jpg",
+        "image_3": "shopify://shop_images/SeoulGlowLabOpening-33.png",
         "eyebrow": "A Private Skincare Night Out for You + Your Friends",
         "title": "Glow Party",
         "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
