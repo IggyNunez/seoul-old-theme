@@ -1,6 +1,4 @@
-{% comment %}
-  Glow Party — single hero image + editorial layout + form blocks
-{% endcomment %}
+{% comment %} Glow Party {% endcomment %}
 
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
 
@@ -45,7 +43,6 @@
 >
   <div class="gp-inner">
 
-    {%- comment -%}── HERO IMAGE ──{%- endcomment -%}
     {%- if section.settings.hero_image != blank -%}
       <div class="gp-hero">
         {{
@@ -59,7 +56,6 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%}── HEADER ──{%- endcomment -%}
     <div class="gp-header">
       {%- if section.settings.eyebrow != blank -%}
         <p class="gp-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -72,7 +68,6 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%}── BODY: description left, details right ──{%- endcomment -%}
     <div class="gp-body">
       {%- if section.settings.description != blank -%}
         <div class="gp-description">{{ section.settings.description }}</div>
@@ -109,23 +104,19 @@
       </div>
     </div>
 
-    {%- comment -%}── BOOKING NOTE + BLOCKS (app embeds / custom html) ──{%- endcomment -%}
-    <div class="gp-form-area">
-      {%- if section.settings.booking_note != blank -%}
-        <p class="gp-booking-note">{{ section.settings.booking_note }}</p>
-      {%- endif -%}
+    {%- if section.settings.booking_note != blank -%}
+      <p class="gp-booking-note">{{ section.settings.booking_note }}</p>
+    {%- endif -%}
 
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when '@app' -%}
           <div class="gp-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
-        {%- endif -%}
-        {%- if block.type == 'custom_html' -%}
+        {%- when 'custom_html' -%}
           <div class="gp-custom-html-block" {{ block.shopify_attributes }}>{{ block.settings.html }}</div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
+      {%- endcase -%}
+    {%- endfor -%}
 
-    {%- comment -%}── FINE PRINT ──{%- endcomment -%}
     {%- if section.settings.fine_print != blank -%}
       <details class="gp-fine-print">
         <summary class="gp-fine-print-toggle">
