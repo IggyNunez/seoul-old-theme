@@ -1,8 +1,8 @@
 {% comment %}
   Glow Party Section
   - Carousel: unlimited images via "Image Slide" blocks
-  - Aspect ratio is rock-solid on mobile (no overflow weirdness)
-  - Vanilla JS swipe + arrow + dot navigation, no dependencies
+  - Aspect ratio locked via track-wrap, bulletproof on mobile
+  - Vanilla JS swipe + arrow + dot nav, zero dependencies
   - Font size range sliders for every text element
   - App block support for form embeds
   - Collapsible fine print
@@ -12,8 +12,12 @@
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign slide_blocks = section.blocks | where: 'type', 'image_slide'
-  assign slide_count  = slide_blocks | size
+  assign slide_count = 0
+  for block in section.blocks
+    if block.type == 'image_slide'
+      assign slide_count = slide_count | plus: 1
+    endif
+  endfor
 -%}
 
 <section
@@ -45,79 +49,74 @@
       <div
         class="glow-party__carousel"
         data-carousel
-        data-slide-count="{{ slide_count }}"
         aria-roledescription="carousel"
         aria-label="{{ section.settings.title }} images"
       >
-
-        {%- comment -%} Track {%- endcomment -%}
         <div class="glow-party__carousel-track-wrap">
           <div class="glow-party__carousel-track" data-track>
-            {%- for block in slide_blocks -%}
-              <div
-                class="glow-party__slide"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="{{ forloop.index }} of {{ slide_count }}"
-                {{ block.shopify_attributes }}
-              >
-                <div class="glow-party__slide-inner">
-                  {%- if block.settings.image != blank -%}
-                    {{
-                      block.settings.image
-                      | image_url: width: 1400
-                      | image_tag:
-                        loading: 'lazy',
-                        alt: block.settings.image.alt | default: section.settings.title,
-                        class: 'glow-party__slide-img',
-                        widths: '400, 600, 800, 1000, 1200, 1400',
-                        sizes: '(max-width: 900px) 100vw, 50vw'
-                    }}
-                  {%- else -%}
-                    <div class="glow-party__slide-placeholder">
-                      {{ 'image' | placeholder_svg_tag: 'glow-party__placeholder-svg' }}
-                    </div>
-                  {%- endif -%}
+
+            {%- assign slide_index = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'image_slide' -%}
+                {%- assign slide_index = slide_index | plus: 1 -%}
+                <div
+                  class="glow-party__slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="{{ slide_index }} of {{ slide_count }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="glow-party__slide-inner">
+                    {%- if block.settings.image != blank -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1400
+                        | image_tag:
+                          loading: 'lazy',
+                          alt: block.settings.image.alt | default: section.settings.title,
+                          class: 'glow-party__slide-img',
+                          widths: '400, 600, 800, 1000, 1200, 1400',
+                          sizes: '(max-width: 900px) 100vw, 50vw'
+                      }}
+                    {%- else -%}
+                      <div class="glow-party__slide-placeholder">
+                        {{ 'image' | placeholder_svg_tag: 'glow-party__placeholder-svg' }}
+                      </div>
+                    {%- endif -%}
+                  </div>
                 </div>
-              </div>
+              {%- endif -%}
             {%- endfor -%}
+
           </div>
         </div>
 
-        {%- comment -%} Arrows (only show if more than 1 slide) {%- endcomment -%}
         {%- if slide_count > 1 -%}
-          <button
-            class="glow-party__arrow glow-party__arrow--prev"
-            data-prev
-            aria-label="Previous image"
-            type="button"
-          >
+          <button class="glow-party__arrow glow-party__arrow--prev" data-prev aria-label="Previous image" type="button">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button
-            class="glow-party__arrow glow-party__arrow--next"
-            data-next
-            aria-label="Next image"
-            type="button"
-          >
+          <button class="glow-party__arrow glow-party__arrow--next" data-next aria-label="Next image" type="button">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
 
-          {%- comment -%} Dots {%- endcomment -%}
           <div class="glow-party__dots" role="tablist" aria-label="Slide indicators">
-            {%- for block in slide_blocks -%}
-              <button
-                class="glow-party__dot{% if forloop.first %} is-active{% endif %}"
-                role="tab"
-                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                aria-label="Go to slide {{ forloop.index }}"
-                data-dot="{{ forloop.index0 }}"
-                type="button"
-              ></button>
+            {%- assign dot_index = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'image_slide' -%}
+                <button
+                  class="glow-party__dot{% if dot_index == 0 %} is-active{% endif %}"
+                  role="tab"
+                  aria-selected="{% if dot_index == 0 %}true{% else %}false{% endif %}"
+                  aria-label="Go to slide {{ dot_index | plus: 1 }}"
+                  data-dot="{{ dot_index }}"
+                  type="button"
+                ></button>
+                {%- assign dot_index = dot_index | plus: 1 -%}
+              {%- endif -%}
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -217,23 +216,22 @@
     var carousel = section.querySelector('[data-carousel]');
     if (!carousel) return;
 
-    var track      = carousel.querySelector('[data-track]');
-    var slides     = carousel.querySelectorAll('.glow-party__slide');
-    var dots       = carousel.querySelectorAll('[data-dot]');
-    var prevBtn    = carousel.querySelector('[data-prev]');
-    var nextBtn    = carousel.querySelector('[data-next]');
-    var total      = slides.length;
-    var current    = 0;
+    var track   = carousel.querySelector('[data-track]');
+    var slides  = carousel.querySelectorAll('.glow-party__slide');
+    var dots    = carousel.querySelectorAll('[data-dot]');
+    var prevBtn = carousel.querySelector('[data-prev]');
+    var nextBtn = carousel.querySelector('[data-next]');
+    var total   = slides.length;
+    var current = 0;
 
     if (total <= 1) return;
 
     function goTo(index) {
-      // wrap around
       current = ((index % total) + total) % total;
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
       dots.forEach(function (d, i) {
         d.classList.toggle('is-active', i === current);
-        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+        d.setAttribute('aria-selected', String(i === current));
       });
     }
 
@@ -246,34 +244,28 @@
       });
     });
 
-    // Touch / swipe
+    // Swipe
     var startX = 0;
-    var isDragging = false;
-
     track.addEventListener('touchstart', function (e) {
       startX = e.touches[0].clientX;
-      isDragging = true;
     }, { passive: true });
-
     track.addEventListener('touchend', function (e) {
-      if (!isDragging) return;
       var diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) {
-        goTo(diff > 0 ? current + 1 : current - 1);
-      }
-      isDragging = false;
+      if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
     }, { passive: true });
 
     // Keyboard
+    carousel.setAttribute('tabindex', '0');
     carousel.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft')  goTo(current - 1);
       if (e.key === 'ArrowRight') goTo(current + 1);
     });
   }
 
+  // Init all instances on page
   document.querySelectorAll('[id^="glow-party-"]').forEach(initCarousel);
 
-  // Theme editor re-init on section change
+  // Re-init after theme editor section reload
   if (window.Shopify && Shopify.designMode) {
     document.addEventListener('shopify:section:load', function (e) {
       initCarousel(e.target);
@@ -292,18 +284,18 @@
     { "type": "header", "content": "Image Carousel" },
     {
       "type": "paragraph",
-      "content": "Add images using the 'Image Slide' blocks below. You can add as many as you want."
+      "content": "Add images using the 'Image Slide' blocks in the left panel. You can add as many as you want."
     },
     {
       "type": "select",
       "id": "image_aspect_ratio",
       "label": "Image aspect ratio",
       "options": [
-        { "value": "1/1",   "label": "Square (1:1)" },
-        { "value": "4/3",   "label": "Landscape (4:3)" },
-        { "value": "3/4",   "label": "Portrait (3:4)" },
-        { "value": "16/9",  "label": "Wide (16:9)" },
-        { "value": "5/6",   "label": "Tall (5:6)" }
+        { "value": "1/1",  "label": "Square (1:1)" },
+        { "value": "4/3",  "label": "Landscape (4:3)" },
+        { "value": "3/4",  "label": "Portrait (3:4)" },
+        { "value": "16/9", "label": "Wide (16:9)" },
+        { "value": "5/6",  "label": "Tall (5:6)" }
       ],
       "default": "4/3"
     },
@@ -325,7 +317,7 @@
       "type": "text",
       "id": "descriptor",
       "label": "Descriptor (under title)",
-      "default": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month."
+      "default": "Private Skin Analysis + After-Hours Shopping \u00b7 Available on select Sundays only. Limited private bookings each month."
     },
     {
       "type": "richtext",
@@ -353,7 +345,7 @@
       "type": "text",
       "id": "when",
       "label": "When",
-      "default": "Select Sundays · 5:00\u20137:00 PM (after closing)"
+      "default": "Select Sundays \u00b7 5:00\u20137:00 PM (after closing)"
     },
     {
       "type": "text",
@@ -385,100 +377,25 @@
     },
 
     { "type": "header", "content": "Font Sizes" },
-    {
-      "type": "range",
-      "id": "font_size_eyebrow",
-      "label": "Eyebrow",
-      "min": 10, "max": 24, "step": 1, "unit": "px", "default": 11
-    },
-    {
-      "type": "range",
-      "id": "font_size_title",
-      "label": "Title",
-      "min": 24, "max": 96, "step": 2, "unit": "px", "default": 56
-    },
-    {
-      "type": "range",
-      "id": "font_size_descriptor",
-      "label": "Descriptor",
-      "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14
-    },
-    {
-      "type": "range",
-      "id": "font_size_description",
-      "label": "Description body",
-      "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16
-    },
-    {
-      "type": "range",
-      "id": "font_size_includes",
-      "label": "Included items",
-      "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15
-    },
-    {
-      "type": "range",
-      "id": "font_size_meta_label",
-      "label": "When / Price label",
-      "min": 9, "max": 18, "step": 1, "unit": "px", "default": 11
-    },
-    {
-      "type": "range",
-      "id": "font_size_meta_value",
-      "label": "When / Price value",
-      "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15
-    },
-    {
-      "type": "range",
-      "id": "font_size_booking",
-      "label": "Booking note",
-      "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14
-    },
-    {
-      "type": "range",
-      "id": "font_size_fine_print",
-      "label": "Fine print body",
-      "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13
-    },
+    { "type": "range", "id": "font_size_eyebrow",     "label": "Eyebrow",           "min": 10, "max": 24, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_title",        "label": "Title",             "min": 24, "max": 96, "step": 2, "unit": "px", "default": 56 },
+    { "type": "range", "id": "font_size_descriptor",   "label": "Descriptor",        "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "font_size_description",  "label": "Description body",  "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "font_size_includes",     "label": "Included items",    "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "font_size_meta_label",   "label": "When/Price label",  "min": 9,  "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_meta_value",   "label": "When/Price value",  "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "font_size_booking",      "label": "Booking note",      "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "font_size_fine_print",   "label": "Fine print body",   "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
 
     { "type": "header", "content": "Colors" },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background",
-      "default": "#fdf6f2"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent",
-      "default": "#c084a0"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "color",
-      "id": "subtle_text_color",
-      "label": "Subtle / secondary text",
-      "default": "#6b6b6b"
-    },
+    { "type": "color", "id": "background_color", "label": "Background",           "default": "#fdf6f2" },
+    { "type": "color", "id": "accent_color",      "label": "Accent",               "default": "#c084a0" },
+    { "type": "color", "id": "text_color",         "label": "Text",                 "default": "#1a1a1a" },
+    { "type": "color", "id": "subtle_text_color",  "label": "Subtle / secondary",   "default": "#6b6b6b" },
 
     { "type": "header", "content": "Spacing" },
-    {
-      "type": "range",
-      "id": "section_padding_top",
-      "label": "Padding top",
-      "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80
-    },
-    {
-      "type": "range",
-      "id": "section_padding_bottom",
-      "label": "Padding bottom",
-      "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80
-    }
+    { "type": "range", "id": "section_padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 },
+    { "type": "range", "id": "section_padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 }
   ],
 
   "blocks": [
@@ -498,11 +415,7 @@
       "type": "custom_html",
       "name": "Custom HTML",
       "settings": [
-        {
-          "type": "html",
-          "id": "html",
-          "label": "HTML"
-        }
+        { "type": "html", "id": "html", "label": "HTML" }
       ]
     }
   ],
