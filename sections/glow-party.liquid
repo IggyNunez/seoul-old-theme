@@ -52,7 +52,7 @@
     <div class="gp-carousel" data-gp-carousel>
 
       <div class="gp-viewport" style="padding-bottom: {{ img_padding }}">
-        <div class="gp-track" data-gp-track>
+        <div class="gp-track" data-gp-track style="--gp-slide-count: {{ slide_count }}">
           {%- for block in section.blocks -%}
             {%- if block.type == 'image_slide' -%}
               <div class="gp-slide" {{ block.shopify_attributes }}>
@@ -169,25 +169,29 @@
     var carousel = root.querySelector('[data-gp-carousel]');
     if (!carousel) return;
 
-    var track   = carousel.querySelector('[data-gp-track]');
-    var slides  = Array.prototype.slice.call(carousel.querySelectorAll('.gp-slide'));
-    var dots    = Array.prototype.slice.call(carousel.querySelectorAll('[data-gp-dot]'));
-    var prev    = carousel.querySelector('[data-gp-prev]');
-    var next    = carousel.querySelector('[data-gp-next]');
-    var total   = slides.length;
-    var cur     = 0;
+    var track  = carousel.querySelector('[data-gp-track]');
+    var slides = Array.prototype.slice.call(carousel.querySelectorAll('.gp-slide'));
+    var dots   = Array.prototype.slice.call(carousel.querySelectorAll('[data-gp-dot]'));
+    var prev   = carousel.querySelector('[data-gp-prev]');
+    var next   = carousel.querySelector('[data-gp-next]');
+    var total  = slides.length;
+    var cur    = 0;
 
     if (total === 0) return;
 
-    // Each slide is 100% of viewport width.
-    // Track is (total * 100%) wide — slides sit side by side.
-    // We move track by -(cur * 100%) to show the right slide.
-    // This is pure CSS percentage — no JS sizing needed.
-    // Works because slide width = viewport width = 100% each.
+    /* Make sure slide count is set (safety net if Liquid var missed) */
+    track.style.setProperty('--gp-slide-count', total);
 
+    /*
+      Track width = total * 100% of viewport (via CSS custom prop).
+      Each slide = flex: 1 0 0% = equal share of track = 1 viewport width.
+      To show slide N, shift track left by (N / total * 100)%.
+      e.g. 3 slides: slide 0 = 0%, slide 1 = 33.33%, slide 2 = 66.66%
+    */
     function go(n) {
       cur = ((n % total) + total) % total;
-      track.style.transform = 'translateX(-' + cur + '00%)';
+      var offset = (cur / total) * 100;
+      track.style.transform = 'translateX(-' + offset + '%)';
       dots.forEach(function (d, i) {
         d.classList.toggle('active', i === cur);
       });
@@ -203,9 +207,10 @@
       d.addEventListener('click', function () { go(+d.getAttribute('data-gp-dot')); });
     });
 
+    /* Touch swipe */
     var tx = 0;
     track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
-    track.addEventListener('touchend',   function (e) {
+    track.addEventListener('touchend', function (e) {
       var dx = tx - e.changedTouches[0].clientX;
       if (Math.abs(dx) > 40) go(dx > 0 ? cur + 1 : cur - 1);
     }, { passive: true });
@@ -243,13 +248,13 @@
     { "type": "header", "content": "Text Content" },
     { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
     { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },
-    { "type": "text",     "id": "descriptor",   "label": "Descriptor",       "default": "Private Skin Analysis + After-Hours Shopping \u00b7 Available on select Sundays only. Limited private bookings each month." },
+    { "type": "text",     "id": "descriptor",   "label": "Descriptor",       "default": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month." },
     { "type": "richtext", "id": "description",  "label": "Description",      "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>" },
     { "type": "header", "content": "What's Included" },
     { "type": "text",     "id": "includes_heading", "label": "Heading", "default": "What's Included" },
     { "type": "textarea", "id": "whats_included",   "label": "Items (one per line)", "default": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit" },
     { "type": "header", "content": "When & Price" },
-    { "type": "text", "id": "when",  "label": "When",  "default": "Select Sundays \u00b7 5:00\u20137:00 PM (after closing)" },
+    { "type": "text", "id": "when",  "label": "When",  "default": "Select Sundays · 5:00–7:00 PM (after closing)" },
     { "type": "text", "id": "price", "label": "Price", "default": "$495 per group (up to 4 guests)" },
     { "type": "header", "content": "Booking Note" },
     { "type": "textarea", "id": "booking_note", "label": "Note above form", "default": "Submit the request form below and our team will follow up to confirm your date." },

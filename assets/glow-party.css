@@ -29,63 +29,50 @@
 }
 
 /*
-  Viewport = the visible window.
-  - overflow: hidden clips the slides that are off-screen.
-  - padding-bottom = aspect ratio (e.g. 75% = 4:3).
-    This gives the box its height BEFORE any content loads.
-  - position: relative so the track can be position: absolute inside.
+  Viewport = the visible window. padding-bottom sets height via aspect ratio.
+  overflow: hidden clips slides that are off-screen.
 */
 .gp-viewport {
   position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 16px;
-  padding-bottom: var(--pad, 75%); /* set inline from Liquid */
+  padding-bottom: 75%; /* fallback, overridden by inline style */
 }
 
 /*
-  Track = all slides in a horizontal row.
-  - position: absolute + full inset fills the viewport exactly.
-  - display: flex puts slides side by side.
-  - width: (total * 100%) is NOT needed — flex handles it.
-  - translateX(-N * 100%) where 100% = viewport width (because
-    the track is position:absolute and same width as viewport).
-    So slide 1 = 0%, slide 2 = -100%, slide 3 = -200%, etc.
+  Track holds all slides in a horizontal row inside the viewport box.
+  --gp-slide-count is set by JS on init. Track width = N * 100% of viewport.
+  translateX shifts by one "viewport width" per slide.
 */
 .gp-track {
   position: absolute;
-  top: 0; left: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  width: calc(var(--gp-slide-count, 1) * 100%);
+  height: 100%;
   display: flex;
-  width: 100%;
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 /*
-  Each slide = same width as viewport (100% of the absolute parent).
-  flex: 0 0 100% — never shrinks, never grows, always 100%.
-  The track stretches naturally to fit all slides.
+  Each slide = equal fraction of the track.
+  3 slides, track = 300%, each slide = 33.33% of track = 100% of viewport.
 */
 .gp-slide {
-  flex: 0 0 100%;
-  width: 100%;
+  flex: 1 0 0%;
+  height: 100%;
   position: relative;
   overflow: hidden;
 }
 
-/*
-  Image fills the slide completely.
-  object-fit: cover with no height: 100% would collapse.
-  Since the slide has no explicit height (it's in an abs-positioned track),
-  we need the image to fill via position: absolute.
-*/
 .gp-slide-img {
-  position: absolute;
-  top: 0; left: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  display: block;
 }
 
 .gp-slide-placeholder {
@@ -97,40 +84,7 @@
   justify-content: center;
 }
 
-/* ── Auto mode: natural image height, no fixed ratio ── */
-
-/*
-  In auto mode the viewport has no padding-bottom — it's just overflow:hidden.
-  The track is position:static so it sizes to the tallest slide naturally.
-  The image is width:100% height:auto — shows the whole image, no crop ever.
-*/
-.gp-viewport--auto {
-  padding-bottom: 0 !important;
-}
-
-.gp-viewport--auto .gp-track {
-  position: static;
-  display: flex;
-  align-items: flex-start;
-}
-
-.gp-viewport--auto .gp-slide--auto {
-  flex: 0 0 100%;
-  width: 100%;
-  position: static;
-}
-
-.gp-viewport--auto .gp-slide--auto .gp-slide-img {
-  position: static;
-  width: 100%;
-  height: auto;
-  object-fit: unset;
-}
-
-/* Arrows in auto mode: position relative to the carousel wrapper, not viewport */
-.gp-viewport--auto ~ .gp-arrow {
-  top: 50%;
-}
+/* Arrows */
 .gp-arrow {
   position: absolute;
   top: 50%;
@@ -236,7 +190,8 @@
 }
 .gp-includes-list {
   list-style: none;
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -251,7 +206,8 @@
 .gp-includes-list li::before {
   content: '';
   flex-shrink: 0;
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--gp-accent, #c084a0);
   margin-top: calc(var(--gp-fs-list, 15px) * 0.44);
@@ -290,7 +246,6 @@
 
 .gp-app-block { width: 100%; }
 
-/* Fine print */
 .gp-fine-print { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 14px; }
 .gp-fine-print-toggle {
   display: flex;
