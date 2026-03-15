@@ -9,14 +9,60 @@
  */
 {
   "order": [
-    "main",
     "glow_party_Aw64yf",
+    "main",
     "17562896073102f54d",
     "psb_reviews_reviews_01_kmhmR4",
     "related-products",
     "tpt_email_signup_1_A8AHDH"
   ],
   "sections": {
+    "glow_party_Aw64yf": {
+      "type": "glow-party",
+      "blocks": {
+        "forms_inline_FqXdXt": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "908661",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_FqXdXt"
+      ],
+      "name": "Glow Party",
+      "settings": {
+        "image_1": "shopify://shop_images/SeoulGlowLabOpening-03.png",
+        "eyebrow": "A Private Skincare Night Out for You + Your Friends",
+        "title": "Glow Party",
+        "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
+        "description": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>",
+        "includes_heading": "What's Included",
+        "whats_included": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit",
+        "when": "Select Sundays · 5:00–7:00 PM (after closing)",
+        "price": "$495 per group (up to 4 guests)",
+        "booking_note": "Submit the request form below and our team will follow up to confirm your date.",
+        "fine_print_label": "Fine Print",
+        "fine_print": "<p>Add your cancellation policy, booking terms, and any other fine print here. This content lives in a collapsible tab.</p>",
+        "background_color": "#fdf6f2",
+        "accent_color": "#c084a0",
+        "text_color": "#1a1a1a",
+        "subtle_text_color": "#6b6b6b",
+        "section_padding_top": 80,
+        "section_padding_bottom": 80
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -166,52 +212,6 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
-      }
-    },
-    "glow_party_Aw64yf": {
-      "type": "glow-party",
-      "blocks": {
-        "forms_inline_FqXdXt": {
-          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
-          "settings": {
-            "form_id": "908661",
-            "text_color": "#202020",
-            "button_background_color": "#202020",
-            "button_label_color": "#FFFFFF",
-            "links_color": "#1878B9",
-            "errors_color": "#E02229",
-            "text_alignment": "center",
-            "form_alignment": "center",
-            "padding_top": 0,
-            "padding_bottom": 24,
-            "padding_right": 0,
-            "padding_left": 0
-          }
-        }
-      },
-      "block_order": [
-        "forms_inline_FqXdXt"
-      ],
-      "name": "Glow Party",
-      "settings": {
-        "image_1": "shopify://shop_images/SeoulGlowLabOpening-03.png",
-        "eyebrow": "A Private Skincare Night Out for You + Your Friends",
-        "title": "Glow Party",
-        "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
-        "description": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>",
-        "includes_heading": "What's Included",
-        "whats_included": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit",
-        "when": "Select Sundays · 5:00–7:00 PM (after closing)",
-        "price": "$495 per group (up to 4 guests)",
-        "booking_note": "Submit the request form below and our team will follow up to confirm your date.",
-        "fine_print_label": "Fine Print",
-        "fine_print": "<p>Add your cancellation policy, booking terms, and any other fine print here. This content lives in a collapsible tab.</p>",
-        "background_color": "#fdf6f2",
-        "accent_color": "#c084a0",
-        "text_color": "#1a1a1a",
-        "subtle_text_color": "#6b6b6b",
-        "section_padding_top": 80,
-        "section_padding_bottom": 80
       }
     },
     "17562896073102f54d": {
