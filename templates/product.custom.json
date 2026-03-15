@@ -25,7 +25,7 @@
           "settings": {
             "image": "shopify://shop_images/SeoulGlowLabGrandOpening-30_1.jpg",
             "aspect_ratio": "4/3",
-            "object_fit": "contain",
+            "object_fit": "cover",
             "object_position": "center"
           }
         },
@@ -34,7 +34,7 @@
           "settings": {
             "image": "shopify://shop_images/SeoulGlowLabGrandOpening-51-1920.jpg",
             "aspect_ratio": "4/3",
-            "object_fit": "contain",
+            "object_fit": "cover",
             "object_position": "center"
           }
         },
