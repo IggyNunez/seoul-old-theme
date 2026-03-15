@@ -20,6 +20,24 @@
     "glow_party_Aw64yf": {
       "type": "glow-party",
       "blocks": {
+        "image_slide_PjQcdw": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/SeoulGlowLabOpening-03_016a62d5-c153-47a3-9e78-827c4d01c5d5.png"
+          }
+        },
+        "image_slide_K6nXyW": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-042700.jpg"
+          }
+        },
+        "image_slide_jpg8Mx": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-51-1920.jpg"
+          }
+        },
         "forms_inline_FqXdXt": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
@@ -39,15 +57,14 @@
         }
       },
       "block_order": [
+        "image_slide_PjQcdw",
+        "image_slide_K6nXyW",
+        "image_slide_jpg8Mx",
         "forms_inline_FqXdXt"
       ],
       "name": "Glow Party",
       "settings": {
-        "image_1": "shopify://shop_images/SeoulGlowLabOpening-03_016a62d5-c153-47a3-9e78-827c4d01c5d5.png",
-        "image_2": "shopify://shop_images/SeoulGlowLabGrandOpening-042700.jpg",
-        "image_3": "shopify://shop_images/seoul_lab.jpg",
         "image_aspect_ratio": "none",
-        "image_height": 420,
         "eyebrow": "A Private Skincare Night Out for You + Your Friends",
         "title": "Glow Party",
         "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
