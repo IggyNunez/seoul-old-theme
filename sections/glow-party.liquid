@@ -1,175 +1,131 @@
-{% comment %}
-  Glow Party Section
-  - Custom image picker (up to 3 images)
-  - App block support (for form apps like EmbedForms, TypeForm embed, etc.)
-  - Collapsible fine print tab
-  - No hardcoded CTA button
-{% endcomment %}
+{% comment %} Glow Party {% endcomment %}
 
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  case section.settings.hero_aspect_ratio
+    when '1/1'
+      assign hero_ratio = '1 / 1'
+    when '4/3'
+      assign hero_ratio = '4 / 3'
+    when '3/2'
+      assign hero_ratio = '3 / 2'
+    when '16/9'
+      assign hero_ratio = '16 / 9'
+    when '3/4'
+      assign hero_ratio = '3 / 4'
+    else
+      assign hero_ratio = '4 / 3'
+  endcase
+-%}
 
 <section
   class="glow-party"
   id="glow-party-{{ section.id }}"
   style="
-    --color-bg: {{ section.settings.background_color }};
-    --color-accent: {{ section.settings.accent_color }};
-    --color-text: {{ section.settings.text_color }};
-    --color-subtle: {{ section.settings.subtle_text_color }};
+    --gp-bg:          {{ section.settings.background_color }};
+    --gp-accent:      {{ section.settings.accent_color }};
+    --gp-text:        {{ section.settings.text_color }};
+    --gp-subtle:      {{ section.settings.subtle_text_color }};
+    --gp-pt:          {{ section.settings.section_padding_top }}px;
+    --gp-pb:          {{ section.settings.section_padding_bottom }}px;
+    --gp-hero-ratio:  {{ hero_ratio }};
+    --gp-fs-eyebrow:  {{ section.settings.font_size_eyebrow }}px;
+    --gp-fs-title:    {{ section.settings.font_size_title }}px;
+    --gp-fs-desc-sub: {{ section.settings.font_size_descriptor }}px;
+    --gp-fs-body:     {{ section.settings.font_size_description }}px;
+    --gp-fs-list:     {{ section.settings.font_size_includes }}px;
+    --gp-fs-ml:       {{ section.settings.font_size_meta_label }}px;
+    --gp-fs-mv:       {{ section.settings.font_size_meta_value }}px;
+    --gp-fs-note:     {{ section.settings.font_size_booking }}px;
+    --gp-fs-fp:       {{ section.settings.font_size_fine_print }}px;
   "
 >
-  <div class="glow-party__inner">
+  <div class="gp-inner">
 
-    {%- comment -%} ── IMAGE GALLERY ── {%- endcomment -%}
-    {%- assign image_count = 0 -%}
-    {%- if section.settings.image_1 != blank -%}{%- assign image_count = image_count | plus: 1 -%}{%- endif -%}
-    {%- if section.settings.image_2 != blank -%}{%- assign image_count = image_count | plus: 1 -%}{%- endif -%}
-    {%- if section.settings.image_3 != blank -%}{%- assign image_count = image_count | plus: 1 -%}{%- endif -%}
-
-    {%- if image_count > 0 -%}
-    <div class="glow-party__gallery glow-party__gallery--{{ image_count }}up">
-      {%- if section.settings.image_1 != blank -%}
-        <div class="glow-party__gallery-item glow-party__gallery-item--main">
-          {{
-            section.settings.image_1
-            | image_url: width: 1200
-            | image_tag:
-              loading: 'lazy',
-              alt: section.settings.image_1.alt | default: section.settings.title,
-              class: 'glow-party__img'
-          }}
-        </div>
-      {%- endif -%}
-      {%- if section.settings.image_2 != blank -%}
-        <div class="glow-party__gallery-item">
-          {{
-            section.settings.image_2
-            | image_url: width: 800
-            | image_tag:
-              loading: 'lazy',
-              alt: section.settings.image_2.alt | default: section.settings.title,
-              class: 'glow-party__img'
-          }}
-        </div>
-      {%- endif -%}
-      {%- if section.settings.image_3 != blank -%}
-        <div class="glow-party__gallery-item">
-          {{
-            section.settings.image_3
-            | image_url: width: 800
-            | image_tag:
-              loading: 'lazy',
-              alt: section.settings.image_3.alt | default: section.settings.title,
-              class: 'glow-party__img'
-          }}
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if section.settings.hero_image != blank -%}
+      <div class="gp-hero">
+        {{
+          section.settings.hero_image
+          | image_url: width: 1400
+          | image_tag:
+            loading: 'lazy',
+            alt: section.settings.hero_image.alt | default: section.settings.title,
+            class: 'gp-hero-img'
+        }}
+      </div>
     {%- endif -%}
 
-    {%- comment -%} ── CONTENT COLUMN ── {%- endcomment -%}
-    <div class="glow-party__content">
+    <div class="gp-content">
 
-      {%- comment -%} Eyebrow / kicker {%- endcomment -%}
       {%- if section.settings.eyebrow != blank -%}
-        <p class="glow-party__eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="gp-eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
-      {%- comment -%} Title {%- endcomment -%}
-      <h2 class="glow-party__title">{{ section.settings.title }}</h2>
+      <h2 class="gp-title">{{ section.settings.title }}</h2>
 
-      {%- comment -%} Descriptor {%- endcomment -%}
       {%- if section.settings.descriptor != blank -%}
-        <p class="glow-party__descriptor">{{ section.settings.descriptor }}</p>
+        <p class="gp-descriptor">{{ section.settings.descriptor }}</p>
       {%- endif -%}
 
-      {%- comment -%} Description {%- endcomment -%}
       {%- if section.settings.description != blank -%}
-        <div class="glow-party__description">{{ section.settings.description }}</div>
+        <div class="gp-description">{{ section.settings.description }}</div>
       {%- endif -%}
 
-      {%- comment -%} What's Included {%- endcomment -%}
       {%- if section.settings.whats_included != blank -%}
-        <div class="glow-party__includes">
-          <h3 class="glow-party__includes-heading">{{ section.settings.includes_heading | default: "What's Included" }}</h3>
-          <ul class="glow-party__includes-list">
+        <div class="gp-includes">
+          <p class="gp-includes-label">{{ section.settings.includes_heading | default: "What's Included" }}</p>
+          <ul class="gp-includes-list">
             {%- assign items = section.settings.whats_included | newline_to_br | split: '<br />' -%}
             {%- for item in items -%}
               {%- assign clean = item | strip | remove: '* ' | remove: '- ' -%}
-              {%- if clean != blank -%}
-                <li>{{ clean }}</li>
-              {%- endif -%}
+              {%- if clean != blank -%}<li>{{ clean }}</li>{%- endif -%}
             {%- endfor -%}
           </ul>
         </div>
       {%- endif -%}
 
-      {%- comment -%} Meta pills: When + Price {%- endcomment -%}
-      <div class="glow-party__meta">
+      <div class="gp-meta">
         {%- if section.settings.when != blank -%}
-          <div class="glow-party__meta-item">
-            <span class="glow-party__meta-label">When</span>
-            <span class="glow-party__meta-value">{{ section.settings.when }}</span>
+          <div class="gp-meta-item">
+            <span class="gp-meta-label">When</span>
+            <span class="gp-meta-value">{{ section.settings.when }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.price != blank -%}
-          <div class="glow-party__meta-item">
-            <span class="glow-party__meta-label">Price</span>
-            <span class="glow-party__meta-value">{{ section.settings.price }}</span>
+          <div class="gp-meta-item">
+            <span class="gp-meta-label">Price</span>
+            <span class="gp-meta-value">{{ section.settings.price }}</span>
           </div>
         {%- endif -%}
       </div>
 
-      {%- comment -%} Booking note {%- endcomment -%}
       {%- if section.settings.booking_note != blank -%}
-        <p class="glow-party__booking-note">{{ section.settings.booking_note }}</p>
+        <p class="gp-booking-note">{{ section.settings.booking_note }}</p>
       {%- endif -%}
 
-      {%- comment -%} ── APP BLOCKS (form apps, etc.) ── {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
-
           {%- when '@app' -%}
-            <div class="glow-party__app-block" {{ block.shopify_attributes }}>
-              {% render block %}
-            </div>
-
+            <div class="gp-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
           {%- when 'custom_html' -%}
-            <div class="glow-party__custom-html" {{ block.shopify_attributes }}>
-              {{ block.settings.html }}
-            </div>
-
+            <div {{ block.shopify_attributes }}>{{ block.settings.html }}</div>
         {%- endcase -%}
       {%- endfor -%}
 
-      {%- comment -%} ── FINE PRINT COLLAPSIBLE ── {%- endcomment -%}
       {%- if section.settings.fine_print != blank -%}
-        <details class="glow-party__fine-print">
-          <summary class="glow-party__fine-print-toggle">
+        <details class="gp-fine-print">
+          <summary class="gp-fine-print-toggle">
             {{ section.settings.fine_print_label | default: 'Fine Print' }}
-            <span class="glow-party__fine-print-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
+            <svg class="gp-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </summary>
-          <div class="glow-party__fine-print-body">
-            {{ section.settings.fine_print }}
-          </div>
+          <div class="gp-fine-print-body">{{ section.settings.fine_print }}</div>
         </details>
       {%- endif -%}
 
-    </div>{%- comment -%} end .glow-party__content {%- endcomment -%}
+    </div>
   </div>
 </section>
-
-<style>
-  #glow-party-{{ section.id }} {
-    background-color: var(--color-bg, #fdf6f2);
-    color: var(--color-text, #1a1a1a);
-    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
-  }
-</style>
 
 {% schema %}
 {
@@ -177,177 +133,64 @@
   "tag": "section",
   "class": "glow-party-section",
   "settings": [
+    { "type": "header", "content": "Hero Image" },
+    { "type": "image_picker", "id": "hero_image", "label": "Image" },
     {
-      "type": "header",
-      "content": "Images"
+      "type": "select",
+      "id": "hero_aspect_ratio",
+      "label": "Image crop ratio",
+      "info": "Controls how the image is cropped.",
+      "options": [
+        { "value": "1/1",  "label": "Square (1:1)" },
+        { "value": "4/3",  "label": "Landscape (4:3)" },
+        { "value": "3/2",  "label": "Photo (3:2)" },
+        { "value": "16/9", "label": "Wide (16:9)" },
+        { "value": "3/4",  "label": "Portrait (3:4)" }
+      ],
+      "default": "4/3"
     },
-    {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": "Image 1 (main / hero)"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": "Image 2"
-    },
-    {
-      "type": "image_picker",
-      "id": "image_3",
-      "label": "Image 3"
-    },
-    {
-      "type": "header",
-      "content": "Text Content"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow / Kicker",
-      "default": "A Private Skincare Night Out for You + Your Friends"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Glow Party"
-    },
-    {
-      "type": "text",
-      "id": "descriptor",
-      "label": "Descriptor (under title)",
-      "default": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month."
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>"
-    },
-    {
-      "type": "header",
-      "content": "What's Included"
-    },
-    {
-      "type": "text",
-      "id": "includes_heading",
-      "label": "Section heading",
-      "default": "What's Included"
-    },
-    {
-      "type": "textarea",
-      "id": "whats_included",
-      "label": "Included items (one per line, prefix with * or -)",
-      "default": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit"
-    },
-    {
-      "type": "header",
-      "content": "When & Price"
-    },
-    {
-      "type": "text",
-      "id": "when",
-      "label": "When",
-      "default": "Select Sundays · 5:00–7:00 PM (after closing)"
-    },
-    {
-      "type": "text",
-      "id": "price",
-      "label": "Price",
-      "default": "$495 per group (up to 4 guests)"
-    },
-    {
-      "type": "header",
-      "content": "Booking Note"
-    },
-    {
-      "type": "textarea",
-      "id": "booking_note",
-      "label": "Booking note (above form)",
-      "default": "Submit the request form below and our team will follow up to confirm your date."
-    },
-    {
-      "type": "header",
-      "content": "Fine Print"
-    },
-    {
-      "type": "text",
-      "id": "fine_print_label",
-      "label": "Collapsible tab label",
-      "default": "Fine Print"
-    },
-    {
-      "type": "richtext",
-      "id": "fine_print",
-      "label": "Fine print content",
-      "default": "<p>Add your cancellation policy, booking terms, and any other fine print here. This content lives in a collapsible tab.</p>"
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background",
-      "default": "#fdf6f2"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent",
-      "default": "#c084a0"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text",
-      "default": "#1a1a1a"
-    },
-    {
-      "type": "color",
-      "id": "subtle_text_color",
-      "label": "Subtle text",
-      "default": "#6b6b6b"
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "section_padding_top",
-      "label": "Padding top",
-      "min": 0,
-      "max": 120,
-      "step": 8,
-      "unit": "px",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "section_padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 120,
-      "step": 8,
-      "unit": "px",
-      "default": 80
-    }
+    { "type": "header", "content": "Text Content" },
+    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
+    { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },
+    { "type": "text",     "id": "descriptor",   "label": "Descriptor",       "default": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month." },
+    { "type": "richtext", "id": "description",  "label": "Description",      "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>" },
+    { "type": "header", "content": "What's Included" },
+    { "type": "text",     "id": "includes_heading", "label": "Heading", "default": "What's Included" },
+    { "type": "textarea", "id": "whats_included",   "label": "Items (one per line)", "default": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit" },
+    { "type": "header", "content": "When & Price" },
+    { "type": "text", "id": "when",  "label": "When",  "default": "Select Sundays · 5:00–7:00 PM (after closing)" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$495 per group (up to 4 guests)" },
+    { "type": "header", "content": "Booking Note" },
+    { "type": "textarea", "id": "booking_note", "label": "Note above form", "default": "Submit the request form below and our team will follow up to confirm your date." },
+    { "type": "header", "content": "Fine Print" },
+    { "type": "text",     "id": "fine_print_label", "label": "Collapsible label",  "default": "Fine Print" },
+    { "type": "richtext", "id": "fine_print",        "label": "Fine print content", "default": "<p>Add your cancellation policy, booking terms, and any other details here.</p>" },
+    { "type": "header", "content": "Font Sizes" },
+    { "type": "range", "id": "font_size_eyebrow",    "label": "Eyebrow",          "min": 10, "max": 24, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_title",       "label": "Title",            "min": 24, "max": 96, "step": 2, "unit": "px", "default": 56 },
+    { "type": "range", "id": "font_size_descriptor",  "label": "Descriptor",       "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "font_size_description", "label": "Description body", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "font_size_includes",    "label": "Included items",   "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "font_size_meta_label",  "label": "When/Price label", "min": 9,  "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "font_size_meta_value",  "label": "When/Price value", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "font_size_booking",     "label": "Booking note",     "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "font_size_fine_print",  "label": "Fine print body",  "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background_color", "label": "Background",         "default": "#fdf6f2" },
+    { "type": "color", "id": "accent_color",      "label": "Accent",             "default": "#c084a0" },
+    { "type": "color", "id": "text_color",         "label": "Text",               "default": "#1a1a1a" },
+    { "type": "color", "id": "subtle_text_color",  "label": "Subtle text",        "default": "#6b6b6b" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "section_padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 },
+    { "type": "range", "id": "section_padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 }
   ],
   "blocks": [
-    {
-      "type": "@app"
-    },
+    { "type": "@app" },
     {
       "type": "custom_html",
       "name": "Custom HTML",
       "settings": [
-        {
-          "type": "html",
-          "id": "html",
-          "label": "HTML"
-        }
+        { "type": "html", "id": "html", "label": "HTML" }
       ]
     }
   ],
