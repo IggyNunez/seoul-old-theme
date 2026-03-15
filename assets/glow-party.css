@@ -29,42 +29,45 @@
 }
 
 /*
-  Viewport = visible window. No fixed aspect ratio — images display
-  at their natural size. overflow: hidden clips off-screen slides.
+  Viewport = visible window. Max height keeps tall images from blowing
+  out the layout. object-fit: contain on the img means the full image
+  is always visible (no cropping), letterboxed if needed.
 */
 .gp-viewport {
   position: relative;
   width: 100%;
+  max-height: var(--gp-carousel-mh, 600px);
   overflow: hidden;
   border-radius: 16px;
+  background: var(--gp-bg, #fdf6f2);
 }
 
-/*
-  Track holds all slides side by side. Width = N * 100% of viewport.
-  translateX shifts by (cur/total * 100)% to show the right slide.
-*/
 .gp-track {
   display: flex;
   width: calc(var(--gp-slide-count, 1) * 100%);
+  height: 100%;
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-/*
-  Each slide = equal fraction of the track = 100% of viewport width.
-*/
 .gp-slide {
   flex: 1 0 0%;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Image displays at natural aspect ratio, fills slide width, no cropping */
+/*
+  contain = full image always visible, never cropped.
+  max-height on viewport caps the box, contain scales image down to fit.
+*/
 .gp-slide-img {
   display: block;
   width: 100%;
-  height: auto;
-  border-radius: 0;
+  max-height: var(--gp-carousel-mh, 600px);
+  object-fit: contain;
+  object-position: center;
 }
 
 .gp-slide-placeholder {
