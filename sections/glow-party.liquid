@@ -10,10 +10,7 @@
     endif
   endfor
 
-  assign img_auto = false
   case section.settings.image_aspect_ratio
-    when 'auto'
-      assign img_auto = true
     when '1/1'
       assign img_padding = '100%'
     when '3/4'
@@ -54,13 +51,11 @@
     {%- if slide_count > 0 -%}
     <div class="gp-carousel" data-gp-carousel>
 
-      {%- comment -%} Viewport: clips off-screen slides {%- endcomment -%}
-      <div class="gp-viewport{% if img_auto %} gp-viewport--auto{% endif %}" style="--pad: {{ img_padding }}">
-
+      <div class="gp-viewport" style="padding-bottom: {{ img_padding }}">
         <div class="gp-track" data-gp-track>
           {%- for block in section.blocks -%}
             {%- if block.type == 'image_slide' -%}
-              <div class="gp-slide{% if img_auto %} gp-slide--auto{% endif %}" {{ block.shopify_attributes }}>
+              <div class="gp-slide" {{ block.shopify_attributes }}>
                 {%- if block.settings.image != blank -%}
                   {{
                     block.settings.image
@@ -77,7 +72,6 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
-
       </div>
 
       {%- if slide_count > 1 -%}
@@ -238,14 +232,13 @@
       "id": "image_aspect_ratio",
       "label": "Image aspect ratio",
       "options": [
-        { "value": "auto", "label": "Auto (natural image height)" },
         { "value": "1/1",  "label": "Square (1:1)" },
         { "value": "4/3",  "label": "Landscape (4:3)" },
         { "value": "3/4",  "label": "Portrait (3:4)" },
         { "value": "16/9", "label": "Wide (16:9)" },
         { "value": "5/6",  "label": "Tall (5:6)" }
       ],
-      "default": "auto"
+      "default": "4/3"
     },
     { "type": "header", "content": "Text Content" },
     { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
