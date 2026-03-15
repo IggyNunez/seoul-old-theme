@@ -20,10 +20,10 @@
     "glow_party_Aw64yf": {
       "type": "glow-party",
       "blocks": {
-        "image_slide_PjQcdw": {
+        "image_slide_ypphGK": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabOpening-03_016a62d5-c153-47a3-9e78-827c4d01c5d5.png"
+            "image": "shopify://shop_images/SeoulGlowLabOpening-46.png"
           }
         },
         "image_slide_K6nXyW": {
@@ -57,7 +57,7 @@
         }
       },
       "block_order": [
-        "image_slide_PjQcdw",
+        "image_slide_ypphGK",
         "image_slide_K6nXyW",
         "image_slide_jpg8Mx",
         "forms_inline_FqXdXt"
