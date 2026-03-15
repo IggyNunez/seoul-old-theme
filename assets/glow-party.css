@@ -97,7 +97,40 @@
   justify-content: center;
 }
 
-/* Arrows */
+/* ── Auto mode: natural image height, no fixed ratio ── */
+
+/*
+  In auto mode the viewport has no padding-bottom — it's just overflow:hidden.
+  The track is position:static so it sizes to the tallest slide naturally.
+  The image is width:100% height:auto — shows the whole image, no crop ever.
+*/
+.gp-viewport--auto {
+  padding-bottom: 0 !important;
+}
+
+.gp-viewport--auto .gp-track {
+  position: static;
+  display: flex;
+  align-items: flex-start;
+}
+
+.gp-viewport--auto .gp-slide--auto {
+  flex: 0 0 100%;
+  width: 100%;
+  position: static;
+}
+
+.gp-viewport--auto .gp-slide--auto .gp-slide-img {
+  position: static;
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+}
+
+/* Arrows in auto mode: position relative to the carousel wrapper, not viewport */
+.gp-viewport--auto ~ .gp-arrow {
+  top: 50%;
+}
 .gp-arrow {
   position: absolute;
   top: 50%;
