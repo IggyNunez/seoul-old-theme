@@ -9,7 +9,6 @@
  */
 {
   "order": [
-    "glow_party_QFRGRw",
     "main",
     "17562896073102f54d",
     "psb_reviews_reviews_01_kmhmR4",
@@ -17,60 +16,6 @@
     "tpt_email_signup_1_A8AHDH"
   ],
   "sections": {
-    "glow_party_QFRGRw": {
-      "type": "glow-party",
-      "blocks": {
-        "image_slide_CKqepd": {
-          "type": "image_slide",
-          "settings": {
-            "aspect_ratio": "4/5",
-            "object_fit": "cover",
-            "object_position": "center"
-          }
-        },
-        "image_slide_fCKbyc": {
-          "type": "image_slide",
-          "settings": {
-            "aspect_ratio": "4/5",
-            "object_fit": "cover",
-            "object_position": "center"
-          }
-        }
-      },
-      "block_order": [
-        "image_slide_CKqepd",
-        "image_slide_fCKbyc"
-      ],
-      "name": "Glow Party",
-      "settings": {
-        "eyebrow": "A Private Skincare Night Out for You + Your Friends",
-        "title": "Glow Party",
-        "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
-        "description": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>",
-        "includes_heading": "What's Included",
-        "whats_included": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit",
-        "when": "Select Sundays · 5:00–7:00 PM (after closing)",
-        "price": "$495 per group (up to 4 guests)",
-        "booking_note": "Submit the request form below and our team will follow up to confirm your date.",
-        "fine_print_label": "Fine Print",
-        "fine_print": "<p>Add your cancellation policy, booking terms, and any other details here.</p>",
-        "font_size_eyebrow": 11,
-        "font_size_title": 48,
-        "font_size_descriptor": 14,
-        "font_size_description": 15,
-        "font_size_includes": 14,
-        "font_size_meta_label": 10,
-        "font_size_meta_value": 14,
-        "font_size_booking": 13,
-        "font_size_fine_print": 12,
-        "background_color": "#fdf6f2",
-        "accent_color": "#c084a0",
-        "text_color": "#1a1a1a",
-        "subtle_text_color": "#6b6b6b",
-        "section_padding_top": 64,
-        "section_padding_bottom": 64
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
