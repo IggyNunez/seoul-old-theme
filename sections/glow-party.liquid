@@ -1,4 +1,4 @@
-{% comment %} Glow Party — redesign {% endcomment %}
+{% comment %} Glow Party {% endcomment %}
 
 {{ 'glow-party.css' | asset_url | stylesheet_tag }}
 
@@ -12,127 +12,137 @@
 -%}
 
 <section
-  class="glow-party"
+  class="gp"
   id="glow-party-{{ section.id }}"
   style="
-    --gp-bg:          {{ section.settings.background_color }};
-    --gp-accent:      {{ section.settings.accent_color }};
-    --gp-text:        {{ section.settings.text_color }};
-    --gp-subtle:      {{ section.settings.subtle_text_color }};
-    --gp-pt:          {{ section.settings.section_padding_top }}px;
-    --gp-pb:          {{ section.settings.section_padding_bottom }}px;
-    --gp-fs-eyebrow:  {{ section.settings.font_size_eyebrow }}px;
-    --gp-fs-title:    {{ section.settings.font_size_title }}px;
-    --gp-fs-desc-sub: {{ section.settings.font_size_descriptor }}px;
-    --gp-fs-body:     {{ section.settings.font_size_description }}px;
-    --gp-fs-list:     {{ section.settings.font_size_includes }}px;
-    --gp-fs-ml:       {{ section.settings.font_size_meta_label }}px;
-    --gp-fs-mv:       {{ section.settings.font_size_meta_value }}px;
-    --gp-fs-note:     {{ section.settings.font_size_booking }}px;
-    --gp-fs-fp:       {{ section.settings.font_size_fine_print }}px;
+    --gp-bg: {{ section.settings.background_color }};
+    --gp-accent: {{ section.settings.accent_color }};
+    --gp-text: {{ section.settings.text_color }};
+    --gp-subtle: {{ section.settings.subtle_text_color }};
+    --gp-pt: {{ section.settings.section_padding_top }}px;
+    --gp-pb: {{ section.settings.section_padding_bottom }}px;
   "
 >
-  <div class="gp-wrap">
+  <div class="gp__layout">
 
-    {%- comment -%}── IMAGE COLUMN ──{%- endcomment -%}
-    <div class="gp-media" data-gp-media>
-      {%- if slide_count > 0 -%}
-        <div class="gp-slider" data-gp-slider>
-          <div class="gp-slider__track" data-gp-track>
+    {%- comment -%} IMAGE {%- endcomment -%}
+    {%- if slide_count > 0 -%}
+      <div class="gp__media" data-gp-media>
+        <div class="gp__slider" data-gp-slider>
+          <div class="gp__track" data-gp-track>
             {%- for block in section.blocks -%}
               {%- if block.type == 'image_slide' -%}
                 {%- liquid
-                  assign ar = block.settings.aspect_ratio | default: '4/5'
-                  assign of = block.settings.object_fit | default: 'cover'
-                  assign op = block.settings.object_position | default: 'center'
-                  assign img_style = 'object-fit:' | append: of | append: ';object-position:' | append: op | append: ';'
+                  assign s_ar  = block.settings.aspect_ratio | default: '4/5'
+                  assign s_fit = block.settings.object_fit | default: 'cover'
+                  assign s_pos = block.settings.object_position | default: 'center center'
                 -%}
-                <div class="gp-slider__slide" {{ block.shopify_attributes }} style="{% if ar != 'auto' %}aspect-ratio: {{ ar | replace: '/', ' / ' }};{% endif %}">
+                <div
+                  class="gp__slide"
+                  {{ block.shopify_attributes }}
+                  {% if s_ar != 'auto' %}style="--slide-ar: {{ s_ar | replace: '/', ' / ' }};"{% endif %}
+                >
                   {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.image.alt | default: section.settings.title, class: 'gp-slider__img', style: img_style }}
+                    <img
+                      class="gp__slide-img"
+                      src="{{ block.settings.image | image_url: width: 1000 }}"
+                      alt="{{ block.settings.image.alt | default: section.settings.title | escape }}"
+                      loading="lazy"
+                      width="{{ block.settings.image.width }}"
+                      height="{{ block.settings.image.height }}"
+                      style="object-fit: {{ s_fit }}; object-position: {{ s_pos }};"
+                    >
                   {%- else -%}
-                    <div class="gp-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
+                    <div class="gp__slide-placeholder">{{ 'image' | placeholder_svg_tag }}</div>
                   {%- endif -%}
                 </div>
               {%- endif -%}
             {%- endfor -%}
           </div>
           {%- if slide_count > 1 -%}
-            <div class="gp-slider__dots" data-gp-dots>
+            <div class="gp__dots" data-gp-dots>
               {%- for i in (1..slide_count) -%}
-                <button class="gp-slider__dot{% if forloop.first %} is-active{% endif %}" data-gp-dot="{{ forloop.index0 }}" type="button" aria-label="Slide {{ i }}"></button>
+                <button
+                  class="gp__dot{% if forloop.first %} gp__dot--active{% endif %}"
+                  data-gp-dot="{{ forloop.index0 }}"
+                  type="button"
+                  aria-label="Slide {{ i }}"
+                ></button>
               {%- endfor -%}
             </div>
           {%- endif -%}
         </div>
-      {%- endif -%}
-    </div>
+      </div>
+    {%- endif -%}
 
-    {%- comment -%}── CONTENT COLUMN ──{%- endcomment -%}
-    <div class="gp-content">
+    {%- comment -%} CONTENT {%- endcomment -%}
+    <div class="gp__content">
 
       {%- if section.settings.eyebrow != blank -%}
-        <p class="gp-eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="gp__eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
-      <h2 class="gp-title">{{ section.settings.title }}</h2>
+      <h2 class="gp__title">{{ section.settings.title }}</h2>
 
       {%- if section.settings.descriptor != blank -%}
-        <p class="gp-descriptor">{{ section.settings.descriptor }}</p>
+        <p class="gp__descriptor">{{ section.settings.descriptor }}</p>
       {%- endif -%}
 
       {%- if section.settings.description != blank -%}
-        <div class="gp-body">{{ section.settings.description }}</div>
+        <div class="gp__body">{{ section.settings.description }}</div>
       {%- endif -%}
 
       {%- if section.settings.whats_included != blank -%}
-        <div class="gp-includes">
-          <p class="gp-includes__heading">{{ section.settings.includes_heading | default: "What's Included" }}</p>
-          <ul class="gp-includes__list">
+        <div class="gp__includes">
+          <p class="gp__includes-heading">{{ section.settings.includes_heading | default: "What's Included" }}</p>
+          <ul class="gp__includes-list">
             {%- assign items = section.settings.whats_included | newline_to_br | split: '<br />' -%}
             {%- for item in items -%}
               {%- assign clean = item | strip | remove: '* ' | remove: '- ' -%}
-              {%- if clean != blank -%}<li>{{ clean }}</li>{%- endif -%}
+              {%- if clean != blank -%}
+                <li class="gp__includes-item">{{ clean }}</li>
+              {%- endif -%}
             {%- endfor -%}
           </ul>
         </div>
       {%- endif -%}
 
-      <div class="gp-meta">
+      <div class="gp__meta">
         {%- if section.settings.when != blank -%}
-          <div class="gp-meta__card">
-            <span class="gp-meta__label">When</span>
-            <span class="gp-meta__value">{{ section.settings.when }}</span>
+          <div class="gp__meta-card">
+            <span class="gp__meta-label">When</span>
+            <span class="gp__meta-value">{{ section.settings.when }}</span>
           </div>
         {%- endif -%}
         {%- if section.settings.price != blank -%}
-          <div class="gp-meta__card">
-            <span class="gp-meta__label">Price</span>
-            <span class="gp-meta__value">{{ section.settings.price }}</span>
+          <div class="gp__meta-card">
+            <span class="gp__meta-label">Price</span>
+            <span class="gp__meta-value">{{ section.settings.price }}</span>
           </div>
         {%- endif -%}
       </div>
 
       {%- if section.settings.booking_note != blank -%}
-        <p class="gp-note">{{ section.settings.booking_note }}</p>
+        <p class="gp__note">{{ section.settings.booking_note }}</p>
       {%- endif -%}
 
+      {%- comment -%} BLOCKS: app + custom html {%- endcomment -%}
       {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when '@app' -%}
-            <div class="gp-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
-          {%- when 'custom_html' -%}
-            <div {{ block.shopify_attributes }}>{{ block.settings.html }}</div>
-        {%- endcase -%}
+        {%- if block.type == '@app' -%}
+          <div class="gp__app-block" {{ block.shopify_attributes }}>{% render block %}</div>
+        {%- endif -%}
+        {%- if block.type == 'custom_html' -%}
+          <div class="gp__html-block" {{ block.shopify_attributes }}>{{ block.settings.html }}</div>
+        {%- endif -%}
       {%- endfor -%}
 
       {%- if section.settings.fine_print != blank -%}
-        <details class="gp-fine-print">
-          <summary class="gp-fine-print__toggle">
-            {{ section.settings.fine_print_label | default: 'Fine Print' }}
-            <svg class="gp-fine-print__chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <details class="gp__fine-print">
+          <summary class="gp__fine-print-toggle">
+            <span class="gp__fine-print-label">{{ section.settings.fine_print_label | default: 'Fine Print' }}</span>
+            <svg class="gp__fine-print-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </summary>
-          <div class="gp-fine-print__body">{{ section.settings.fine_print }}</div>
+          <div class="gp__fine-print-body">{{ section.settings.fine_print }}</div>
         </details>
       {%- endif -%}
 
@@ -142,17 +152,17 @@
 
 <script>
 (function(){
-  function init(root){
-    var track=root.querySelector('[data-gp-track]');
+  function init(el){
+    var track=el.querySelector('[data-gp-track]');
     if(!track)return;
-    var slides=track.querySelectorAll('.gp-slider__slide');
-    var dots=root.querySelectorAll('[data-gp-dot]');
-    var n=slides.length,cur=0;
+    var slides=track.querySelectorAll('.gp__slide');
+    var dots=el.querySelectorAll('[data-gp-dot]');
+    var n=slides.length, cur=0;
     if(n<2)return;
     function go(i){
       cur=((i%n)+n)%n;
-      track.style.transform='translateX(-'+cur*(100/n)+'%)';
-      dots.forEach(function(d,j){d.classList.toggle('is-active',j===cur);});
+      track.style.transform='translateX(-'+(cur*100/n)+'%)';
+      dots.forEach(function(d,j){d.classList.toggle('gp__dot--active',j===cur);});
     }
     dots.forEach(function(d){d.addEventListener('click',function(){go(+d.dataset.gpDot);});});
     var tx=0;
@@ -169,88 +179,75 @@
   "name": "Glow Party",
   "tag": "section",
   "class": "glow-party-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
-    { "type": "header", "content": "Text Content" },
-    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",          "default": "A Private Skincare Night Out for You + Your Friends" },
-    { "type": "text",     "id": "title",        "label": "Title",            "default": "Glow Party" },
-    { "type": "text",     "id": "descriptor",   "label": "Descriptor",       "default": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month." },
-    { "type": "richtext", "id": "description",  "label": "Description",      "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>" },
+    { "type": "header", "content": "Text" },
+    { "type": "text",     "id": "eyebrow",     "label": "Eyebrow",     "default": "A Private Skincare Night Out for You + Your Friends" },
+    { "type": "text",     "id": "title",        "label": "Title",       "default": "Glow Party" },
+    { "type": "text",     "id": "descriptor",   "label": "Descriptor",  "default": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month." },
+    { "type": "richtext", "id": "description",  "label": "Description", "default": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>" },
     { "type": "header", "content": "What's Included" },
     { "type": "text",     "id": "includes_heading", "label": "Heading", "default": "What's Included" },
     { "type": "textarea", "id": "whats_included",   "label": "Items (one per line)", "default": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit" },
     { "type": "header", "content": "When & Price" },
     { "type": "text", "id": "when",  "label": "When",  "default": "Select Sundays · 5:00–7:00 PM (after closing)" },
     { "type": "text", "id": "price", "label": "Price", "default": "$495 per group (up to 4 guests)" },
-    { "type": "header", "content": "Booking Note" },
+    { "type": "header", "content": "Booking" },
     { "type": "textarea", "id": "booking_note", "label": "Note above form", "default": "Submit the request form below and our team will follow up to confirm your date." },
     { "type": "header", "content": "Fine Print" },
-    { "type": "text",     "id": "fine_print_label", "label": "Collapsible label",  "default": "Fine Print" },
-    { "type": "richtext", "id": "fine_print",        "label": "Fine print content", "default": "<p>Add your cancellation policy, booking terms, and any other details here.</p>" },
-    { "type": "header", "content": "Font Sizes" },
-    { "type": "range", "id": "font_size_eyebrow",    "label": "Eyebrow",          "min": 10, "max": 24, "step": 1, "unit": "px", "default": 11 },
-    { "type": "range", "id": "font_size_title",       "label": "Title",            "min": 24, "max": 96, "step": 2, "unit": "px", "default": 48 },
-    { "type": "range", "id": "font_size_descriptor",  "label": "Descriptor",       "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "font_size_description", "label": "Description body", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
-    { "type": "range", "id": "font_size_includes",    "label": "Included items",   "min": 12, "max": 22, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "font_size_meta_label",  "label": "When/Price label", "min": 9,  "max": 18, "step": 1, "unit": "px", "default": 10 },
-    { "type": "range", "id": "font_size_meta_value",  "label": "When/Price value", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "font_size_booking",     "label": "Booking note",     "min": 12, "max": 22, "step": 1, "unit": "px", "default": 13 },
-    { "type": "range", "id": "font_size_fine_print",  "label": "Fine print body",  "min": 10, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "text",     "id": "fine_print_label", "label": "Label",   "default": "Fine Print" },
+    { "type": "richtext", "id": "fine_print",        "label": "Content", "default": "<p>Add your cancellation policy, booking terms, and any other details here.</p>" },
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "background_color", "label": "Background",         "default": "#fdf6f2" },
-    { "type": "color", "id": "accent_color",      "label": "Accent",             "default": "#c084a0" },
-    { "type": "color", "id": "text_color",         "label": "Text",               "default": "#1a1a1a" },
-    { "type": "color", "id": "subtle_text_color",  "label": "Subtle text",        "default": "#6b6b6b" },
+    { "type": "color", "id": "background_color",  "label": "Background",  "default": "#fdf6f2" },
+    { "type": "color", "id": "accent_color",      "label": "Accent",      "default": "#c084a0" },
+    { "type": "color", "id": "text_color",         "label": "Text",        "default": "#1a1a1a" },
+    { "type": "color", "id": "subtle_text_color",  "label": "Subtle text", "default": "#6b6b6b" },
     { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "section_padding_top",    "label": "Padding top",    "min": 0, "max": 120, "step": 8, "unit": "px", "default": 64 },
-    { "type": "range", "id": "section_padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 64 }
+    { "type": "range", "id": "section_padding_top",    "label": "Top",    "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "section_padding_bottom", "label": "Bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
   ],
   "blocks": [
     {
       "type": "image_slide",
-      "name": "Image Slide",
+      "name": "Image",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
         {
-          "type": "select",
-          "id": "aspect_ratio",
-          "label": "Crop ratio",
+          "type": "select", "id": "aspect_ratio", "label": "Crop",
           "options": [
-            { "value": "auto",  "label": "Natural (no crop)" },
-            { "value": "1/1",   "label": "Square (1:1)" },
-            { "value": "4/5",   "label": "Portrait (4:5)" },
-            { "value": "3/4",   "label": "Tall (3:4)" },
-            { "value": "4/3",   "label": "Landscape (4:3)" },
-            { "value": "16/9",  "label": "Wide (16:9)" }
+            { "value": "auto",  "label": "Natural" },
+            { "value": "1/1",   "label": "Square" },
+            { "value": "4/5",   "label": "Portrait 4:5" },
+            { "value": "3/4",   "label": "Tall 3:4" },
+            { "value": "4/3",   "label": "Landscape 4:3" },
+            { "value": "16/9",  "label": "Wide 16:9" }
           ],
           "default": "4/5"
         },
         {
-          "type": "select",
-          "id": "object_fit",
-          "label": "Image fit",
+          "type": "select", "id": "object_fit", "label": "Fit",
           "options": [
-            { "value": "cover",   "label": "Fill (crop edges)" },
-            { "value": "contain", "label": "Fit (show all)" }
+            { "value": "cover",   "label": "Fill (crop)" },
+            { "value": "contain", "label": "Fit (no crop)" }
           ],
           "default": "cover"
         },
         {
-          "type": "select",
-          "id": "object_position",
-          "label": "Focus point",
+          "type": "select", "id": "object_position", "label": "Focus",
           "options": [
-            { "value": "center",       "label": "Center" },
-            { "value": "top",          "label": "Top" },
-            { "value": "bottom",       "label": "Bottom" },
-            { "value": "left",         "label": "Left" },
-            { "value": "right",        "label": "Right" },
-            { "value": "top left",     "label": "Top left" },
-            { "value": "top right",    "label": "Top right" },
-            { "value": "bottom left",  "label": "Bottom left" },
-            { "value": "bottom right", "label": "Bottom right" }
+            { "value": "center center",  "label": "Center" },
+            { "value": "top center",     "label": "Top" },
+            { "value": "bottom center",  "label": "Bottom" },
+            { "value": "center left",    "label": "Left" },
+            { "value": "center right",   "label": "Right" },
+            { "value": "top left",       "label": "Top left" },
+            { "value": "top right",      "label": "Top right" },
+            { "value": "bottom left",    "label": "Bottom left" },
+            { "value": "bottom right",   "label": "Bottom right" }
           ],
-          "default": "center"
+          "default": "center center"
         }
       ]
     },
@@ -266,9 +263,7 @@
   "presets": [
     {
       "name": "Glow Party",
-      "category": "Custom",
       "blocks": [
-        { "type": "image_slide" },
         { "type": "image_slide" }
       ]
     }
