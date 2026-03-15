@@ -1,6 +1,5 @@
 /* ============================================================
    Glow Party — glow-party.css
-   Single hero image + editorial content + form area.
    ============================================================ */
 
 .glow-party {
@@ -10,27 +9,40 @@
 }
 
 .gp-inner {
+  width: 100%;
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 40px;
   box-sizing: border-box;
 }
+.gp-inner *,
+.gp-inner *::before,
+.gp-inner *::after {
+  box-sizing: border-box;
+}
 
-/* ── HERO IMAGE ── */
-
+/* ── HERO IMAGE ──
+   Aspect ratio box with object-fit cover.
+   Image fills the box, crops if needed, always looks good.
+   Aspect ratio adjustable via --gp-hero-ratio setting.
+*/
 .gp-hero {
+  position: relative;
   width: 100%;
-  max-width: 100%;
+  aspect-ratio: var(--gp-hero-ratio, 16 / 9);
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 48px;
 }
 
 .gp-hero-img {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 /* ── HEADER ── */
@@ -166,9 +178,14 @@
   text-align: center;
 }
 
-/* App blocks and custom HTML get full width of form area */
-.gp-form-area > div {
+.gp-app-block {
   width: 100%;
+  margin-bottom: 16px;
+}
+
+.gp-custom-html-block {
+  width: 100%;
+  margin-bottom: 16px;
 }
 
 /* ── FINE PRINT ── */
