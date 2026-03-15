@@ -9,7 +9,7 @@
  */
 {
   "order": [
-    "glow_party_Aw64yf",
+    "glow_party_KVGjeW",
     "main",
     "17562896073102f54d",
     "psb_reviews_reviews_01_kmhmR4",
@@ -17,36 +17,36 @@
     "tpt_email_signup_1_A8AHDH"
   ],
   "sections": {
-    "glow_party_Aw64yf": {
+    "glow_party_KVGjeW": {
       "type": "glow-party",
       "blocks": {
-        "image_slide_CyPJUD": {
+        "image_slide_kPfC6d": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabOpening-46_4d40ef25-ce01-463a-9d06-689862c72721.png",
+            "image": "shopify://shop_images/SeoulGlowLabOpening-03_7cf58aaf-ceea-428d-8d22-b8a0e38dbd29.png",
             "aspect_ratio": "auto",
             "object_fit": "contain",
             "object_position": "bottom right"
           }
         },
-        "image_slide_368gDb": {
+        "image_slide_kb4eam": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-30_1.jpg",
+            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-042700.jpg",
             "aspect_ratio": "auto",
-            "object_fit": "cover",
+            "object_fit": "contain",
             "object_position": "center"
           }
         },
-        "forms_inline_peYP7A": {
+        "forms_inline_gDXxkr": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
             "form_id": "908661",
             "text_color": "#202020",
             "button_background_color": "#202020",
-            "button_label_color": "#ffffff",
-            "links_color": "#1878b9",
-            "errors_color": "#e02229",
+            "button_label_color": "#FFFFFF",
+            "links_color": "#1878B9",
+            "errors_color": "#E02229",
             "text_alignment": "center",
             "form_alignment": "center",
             "padding_top": 0,
@@ -57,9 +57,9 @@
         }
       },
       "block_order": [
-        "image_slide_CyPJUD",
-        "image_slide_368gDb",
-        "forms_inline_peYP7A"
+        "image_slide_kPfC6d",
+        "image_slide_kb4eam",
+        "forms_inline_gDXxkr"
       ],
       "name": "Glow Party",
       "settings": {
@@ -73,22 +73,22 @@
         "price": "$495 per group (up to 4 guests)",
         "booking_note": "Submit the request form below and our team will follow up to confirm your date.",
         "fine_print_label": "Fine Print",
-        "fine_print": "<p>Booking Policies & Details<br/><br/>* This is a private group booking for up to 4 guests total.<br/>* Pricing is flat and does not change if fewer than 4 guests attend.<br/>* For parties of 2 guests, we recommend booking standard back-to-back appointments instead.<br/><br/>* Each guest receives an individual skin analysis.<br/>* Analyses are conducted one at a time using our in-store diagnostic device.<br/>* Appointment length may vary per guest.<br/><br/>* Experience runs 5:00 PM–7:00 PM sharp.<br/>* Late arrivals may reduce individual consultation time.<br/><br/>* Offered on select Sundays only and must be requested in advance.<br/>* Date is confirmed only after email approval from our team.<br/><br/>* Light refreshments are included.<br/>* Alcohol service (champagne) available for guests 21+.<br/><br/>* 10% discount applies to in-store purchases made during the event only.<br/>* Discount cannot be combined with other promotions.<br/><br/>* Non-refundable once confirmed due to limited after-hours staffing.<br/>* One reschedule permitted with at least 72 hours’ notice.</p>",
+        "fine_print": "<p>Add your cancellation policy, booking terms, and any other details here.</p>",
         "font_size_eyebrow": 11,
-        "font_size_title": 56,
+        "font_size_title": 48,
         "font_size_descriptor": 14,
-        "font_size_description": 16,
-        "font_size_includes": 15,
-        "font_size_meta_label": 11,
-        "font_size_meta_value": 15,
-        "font_size_booking": 14,
-        "font_size_fine_print": 13,
+        "font_size_description": 15,
+        "font_size_includes": 14,
+        "font_size_meta_label": 10,
+        "font_size_meta_value": 14,
+        "font_size_booking": 13,
+        "font_size_fine_print": 12,
         "background_color": "#fdf6f2",
         "accent_color": "#c084a0",
         "text_color": "#1a1a1a",
         "subtle_text_color": "#6b6b6b",
-        "section_padding_top": 80,
-        "section_padding_bottom": 80
+        "section_padding_top": 64,
+        "section_padding_bottom": 64
       }
     },
     "main": {
