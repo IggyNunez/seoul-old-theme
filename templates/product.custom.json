@@ -23,7 +23,7 @@
         "image_slide_k3khRy": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/SeoulGlowLabGrandOpening-30_1.jpg",
+            "image": "shopify://shop_images/SeoulGlowLabOpening-03.png",
             "aspect_ratio": "4/3",
             "object_fit": "cover",
             "object_position": "center"
