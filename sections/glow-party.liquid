@@ -45,10 +45,11 @@
                   assign ar = block.settings.aspect_ratio | default: '4/5'
                   assign of = block.settings.object_fit | default: 'cover'
                   assign op = block.settings.object_position | default: 'center'
+                  assign img_style = 'object-fit:' | append: of | append: ';object-position:' | append: op | append: ';'
                 -%}
                 <div class="gp-slider__slide" {{ block.shopify_attributes }} style="{% if ar != 'auto' %}aspect-ratio: {{ ar | replace: '/', ' / ' }};{% endif %}">
                   {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.image.alt | default: section.settings.title, class: 'gp-slider__img', style: 'object-fit:OFVAL;object-position:OPVAL;' | replace: 'OFVAL', of | replace: 'OPVAL', op }}
+                    {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.image.alt | default: section.settings.title, class: 'gp-slider__img', style: img_style }}
                   {%- else -%}
                     <div class="gp-slider__placeholder">{{ 'image' | placeholder_svg_tag }}</div>
                   {%- endif -%}
