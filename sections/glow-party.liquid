@@ -18,6 +18,19 @@
       assign slide_count = slide_count | plus: 1
     endif
   endfor
+
+  case section.settings.image_aspect_ratio
+    when '1/1'
+      assign img_padding = '100%'
+    when '3/4'
+      assign img_padding = '133.33%'
+    when '16/9'
+      assign img_padding = '56.25%'
+    when '5/6'
+      assign img_padding = '120%'
+    else
+      assign img_padding = '75%'
+  endcase
 -%}
 
 <section
@@ -31,6 +44,7 @@
     --gp-pt:             {{ section.settings.section_padding_top }}px;
     --gp-pb:             {{ section.settings.section_padding_bottom }}px;
     --gp-img-ratio:      {{ section.settings.image_aspect_ratio }};
+    --gp-img-padding:    {{ img_padding }};
     --gp-fs-eyebrow:     {{ section.settings.font_size_eyebrow }}px;
     --gp-fs-title:       {{ section.settings.font_size_title }}px;
     --gp-fs-descriptor:  {{ section.settings.font_size_descriptor }}px;
