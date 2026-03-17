@@ -17,22 +17,19 @@
         "padding_bottom": 0
       }
     },
-    "featured_product_GxxJXJ": {
-      "type": "featured-product",
+    "glow_party_YhBVEH": {
+      "type": "glow-party",
       "blocks": {
-        "title_KrUbWE": {
-          "type": "title",
+        "image_slide_e3gh3H": {
+          "type": "image_slide",
           "settings": {
-            "heading_size": "h2"
+            "image": "shopify://shop_images/SeoulGlowLabOpening-11.jpg",
+            "aspect_ratio": "4/3",
+            "object_fit": "contain",
+            "object_position": "center"
           }
         },
-        "custom_liquid_RaKyWp": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<h2>Turn your skincare visit into a private night out.</h2>\n<p>The Glow Lab Private Group Experience is an intimate, after-hours booking designed for small groups who want dedicated time, personalized skin guidance, and a relaxed space to explore skincare together.</p>\n<p>Perfect for birthdays, bridal parties, friend nights, and meaningful catch-ups.</p>\n<p>What’s Included</p>\n<ul>\n<li>Private access to Seoul Glow Lab (store closed to the public)<br>\n</li>\n<li>Up to 4 guests total<br>\n</li>\n<li>Individual professional skin analysis for each guest<br>\n</li>\n<li>Personalized routine recommendations<br>\n</li>\n<li>Private shopping experience<br>\n</li>\n<li>Light refreshments (mocktails + champagne)<br>\n</li>\n<li>10% off in-store purchases during your visit</li>\n</ul>\n<p>Experience Details</p>\n<p><em><strong>Select Sundays only</strong></em><br><strong>5:00 PM – 7:00 PM (after closing)</strong><br>Unhurried, one-on-one rotations for a thoughtful experience</p>\n<p>Investment</p>\n<p><strong>$495 per private group (up to 4 guests)</strong></p>\n<p> </p>"
-          }
-        },
-        "forms_inline_FHzeBN": {
+        "forms_inline_UmA3WA": {
           "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
           "settings": {
             "form_id": "908661",
@@ -48,46 +45,31 @@
             "padding_right": 0,
             "padding_left": 0
           }
-        },
-        "custom_liquid_tkgNNr": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<p><strong>Booking</strong></p>\n<p>This experience is offered on select dates only.</p>\n<p>Tap Request Booking and our team will follow up to confirm availability.</p>"
-          }
-        },
-        "share_UcWeqQ": {
-          "type": "share",
-          "disabled": true,
-          "settings": {
-            "share_label": "Share"
-          }
         }
       },
       "block_order": [
-        "title_KrUbWE",
-        "custom_liquid_RaKyWp",
-        "forms_inline_FHzeBN",
-        "custom_liquid_tkgNNr",
-        "share_UcWeqQ"
+        "image_slide_e3gh3H",
+        "forms_inline_UmA3WA"
       ],
-      "custom_css": [
-        "shopify-payment-terms {display: none;}",
-        "a.link.product__view-details.animate-arrow {display: none;}"
-      ],
-      "name": "t:sections.featured-product.presets.name",
+      "name": "Glow Party",
       "settings": {
-        "product": "skin-analysis-session-selected-sundays",
-        "color_scheme": "scheme-1",
-        "secondary_background": true,
-        "media_size": "small",
-        "constrain_to_viewport": true,
-        "media_fit": "cover",
-        "media_position": "left",
-        "image_zoom": "none",
-        "hide_variants": false,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "eyebrow": "A Private Skincare Night Out for You + Your Friends",
+        "title": "Glow Party",
+        "descriptor": "Private Skin Analysis + After-Hours Shopping · Available on select Sundays only. Limited private bookings each month.",
+        "description": "<p>Celebrate, catch up, and glow together.</p><p>Glow Party is a private after-hours skincare experience for small groups at Seoul Glow Lab. Bring your friends and enjoy personalized skin analysis, routine guidance, and private shopping while the store is closed just for you.</p><p>Perfect for birthdays, girls' nights, or a unique skincare outing.</p>",
+        "includes_heading": "What's Included",
+        "whats_included": "* Private access to Seoul Glow Lab\n* Up to 4 guests\n* Individual professional skin analysis for each guest\n* Personalized routine recommendations\n* Private shopping experience\n* Mocktails + champagne\n* 10% off purchases during your visit",
+        "when": "Select Sundays · 5:00–7:00 PM (after closing)",
+        "price": "$495 per group (up to 4 guests)",
+        "booking_note": "Submit the request form below and our team will follow up to confirm your date.",
+        "fine_print_label": "Fine Print",
+        "fine_print": "<p>Booking Policies & Details<br/><br/>* This is a private group booking for up to 4 guests total.<br/>* Pricing is flat and does not change if fewer than 4 guests attend.<br/>* For parties of 2 guests, we recommend booking standard back-to-back appointments instead.<br/><br/>* Each guest receives an individual skin analysis.<br/>* Analyses are conducted one at a time using our in-store diagnostic device.<br/>* Appointment length may vary per guest.<br/><br/>* Experience runs 5:00 PM–7:00 PM sharp.<br/>* Late arrivals may reduce individual consultation time.<br/><br/>* Offered on select Sundays only and must be requested in advance.<br/>* Date is confirmed only after email approval from our team.<br/><br/>* Light refreshments are included.<br/>* Alcohol service (champagne) available for guests 21+.<br/><br/>* 10% discount applies to in-store purchases made during the event only.<br/>* Discount cannot be combined with other promotions.<br/><br/>* Non-refundable once confirmed due to limited after-hours staffing.<br/>* One reschedule permitted with at least 72 hours’ notice.</p>",
+        "background_color": "#fdf6f2",
+        "accent_color": "#c084a0",
+        "text_color": "#1a1a1a",
+        "subtle_text_color": "#6b6b6b",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64
       }
     },
     "tpt_image_with_text_EXEUHe": {
@@ -482,7 +464,7 @@
   },
   "order": [
     "main",
-    "featured_product_GxxJXJ",
+    "glow_party_YhBVEH",
     "tpt_image_with_text_EXEUHe",
     "tpt_badges_two_DYRyqc",
     "tpt_image_with_text_yqaGPi",
