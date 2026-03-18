@@ -254,6 +254,7 @@
     },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "custom_css": [],
       "settings": {
         "heading": "You May Also Like",
